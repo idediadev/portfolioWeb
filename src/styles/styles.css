@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+
+body {
+  background-image: linear-gradient(to top right, #0d0d0d 0%, rgba(0, 100, 50, 0.5) 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'DotGothic16', sans-serif;
+}
+
+.navbar-gradient {
+  background: linear-gradient(180deg, #4F4A4A 85%, rgba(79, 74, 74, 0) 100%);
+}
+
+@keyframes pulse-custom {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(224, 123, 224, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(224, 123, 224, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(224, 123, 224, 0);
+  }
+}
+
+.pulse-animation {
+  animation: pulse-custom 2s infinite;
+}
+
+.pulse-animation:hover {
+  animation: none;
+}
+
+@keyframes slideInFade {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-section {
+  animation: slideInFade 1.5s ease-out forwards;
+}
+
+.slide-in-section h1 {
+  opacity: 0;
+  animation: slideInFade 1.5s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+.slide-in-section p {
+  opacity: 0;
+  animation: slideInFade 1.5s ease-out forwards;
+  animation-delay: 1s;
+}
+
+@keyframes dealCard {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px) translateX(-50px) rotate(-20deg);
+  }
+  60% {
+    transform: translateY(20px) translateX(10px) rotate(5deg);
+  }
+  80% {
+    transform: translateY(-10px) translateX(-5px) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) rotate(0);
+  }
+}
+
+.card-trigger {
+  opacity: 0;
+}
+
+.card-animate {
+  animation: dealCard 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.floating-element {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes gradient-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animated-circle {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(45deg, #00ff7f, #4F4A4A);
+  border-radius: 50%;
+  animation: gradient-spin 8s linear infinite;
+}
+
+.animated-triangle {
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 173.2px solid #00ff7f;
+  position: relative;
+  animation: gradient-spin 8s linear infinite;
+}
+
+.animated-square {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(45deg, #00ff7f, #4F4A4A);
+  animation: gradient-spin 8s linear infinite;
+}
+
+.footer-gradient {
+  background: linear-gradient(0deg, #059669 85%, rgba(5, 150, 105, 0) 100%);
+}
