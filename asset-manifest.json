@@ -1,13 +1,15 @@
 {
   "files": {
-    "main.css": "/portfolioWeb/static/css/main.a0e60656.css",
-    "main.js": "/portfolioWeb/static/js/main.341938eb.js",
+    "main.css": "/portfolioWeb/static/css/main.71ca0441.css",
+    "main.js": "/portfolioWeb/static/js/main.c2ee6d02.js",
+    "static/media/herosection01.jpg": "/portfolioWeb/static/media/herosection01.0ff84b6650279d860956.jpg",
+    "static/media/logoDavideTaddia.jpeg": "/portfolioWeb/static/media/logoDavideTaddia.ed12037ac024a95dd99b.jpeg",
     "index.html": "/portfolioWeb/index.html",
-    "main.a0e60656.css.map": "/portfolioWeb/static/css/main.a0e60656.css.map",
-    "main.341938eb.js.map": "/portfolioWeb/static/js/main.341938eb.js.map"
+    "main.71ca0441.css.map": "/portfolioWeb/static/css/main.71ca0441.css.map",
+    "main.c2ee6d02.js.map": "/portfolioWeb/static/js/main.c2ee6d02.js.map"
   },
   "entrypoints": [
-    "static/css/main.a0e60656.css",
-    "static/js/main.341938eb.js"
+    "static/css/main.71ca0441.css",
+    "static/js/main.c2ee6d02.js"
   ]
 }
