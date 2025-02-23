@@ -1,7 +1,7 @@
 {
   "name": "portfolioweb_davidetaddia",
   "version": "1.0.0",
-  "homepage": "https://idediadev.github.io/davidetaddia.it",
+  "homepage": "https://idediadev.github.io/portfolioWeb",
   "description": "",
   "main": "App.js",
   "scripts": {
@@ -18,10 +18,10 @@
     "react-scripts": "5.0.1"
   },
   "devDependencies": {
-    "tailwindcss": "^3.3.0",
-    "postcss": "^8.4.31",
     "autoprefixer": "^10.4.16",
-    "gh-pages": "^6.0.0"
+    "gh-pages": "^6.3.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.0"
   },
   "browserslist": {
     "production": [
