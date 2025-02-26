@@ -1,12 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import Card from './components/Card';
 import Footer from './components/Footer';
 import useCardAnimation from './components/AnimatioHandler';
 import './styles/styles.css';
+import DarkLightModeToggle from './components/DarkLightModeToggle';
 
 const App = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Controllo delle preferenze di sistema al caricamento iniziale
+  useEffect(() => {
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setIsDarkMode(prefersDarkMode);
+    updateTheme(prefersDarkMode);
+  }, []);
+
+  // Applica il tema al documento
+  const updateTheme = (dark) => {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    }
+  };
+
+  // Funzione per cambiare modalità
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    updateTheme(newMode);
+  };
 
   useCardAnimation();
 
@@ -35,7 +62,13 @@ const App = () => {
   ];
 
   return (
-    <>
+    <div className={`transition-colors duration-300 ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}>
+      <div className="absolute bottom-4 right-4 z-50">
+        <DarkLightModeToggle 
+          isDarkMode={isDarkMode} 
+          toggleDarkMode={toggleDarkMode} 
+        />
+      </div>
       <Navbar />
       <HeroSection />
       {cards.map((card, index) => (
@@ -46,7 +79,7 @@ const App = () => {
         />
       ))}
       <Footer />
-    </>
+    </div>
   );
 };
 
