@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import useCardAnimation from './components/AnimatioHandler';
 import './styles/styles.css';
 import DarkLightModeToggle from './components/DarkLightModeToggle';
+import MatrixEffect from './components/MatrixEffect';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -63,6 +64,7 @@ const App = () => {
 
   return (
     <div className={`transition-colors duration-300 ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}>
+      <MatrixEffect />
       <div className="absolute bottom-4 right-4 z-50">
         <DarkLightModeToggle 
           isDarkMode={isDarkMode} 
