@@ -7,18 +7,20 @@ import useCardAnimation from './components/AnimatioHandler';
 import './styles/styles.css';
 import DarkLightModeToggle from './components/DarkLightModeToggle';
 import MatrixEffect from './components/MatrixEffect';
+import ContactForm from './components/ContactForm';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
 
-  // Controllo delle preferenze di sistema al caricamento iniziale
+  // Check system preferences on initial load
   useEffect(() => {
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     setIsDarkMode(prefersDarkMode);
     updateTheme(prefersDarkMode);
   }, []);
 
-  // Applica il tema al documento
+  // Apply theme to document
   const updateTheme = (dark) => {
     if (dark) {
       document.documentElement.classList.add('dark');
@@ -29,11 +31,25 @@ const App = () => {
     }
   };
 
-  // Funzione per cambiare modalità
+  // Function to toggle dark mode
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     updateTheme(newMode);
+  };
+
+  // Function to handle hire me button click
+  const handleHireMeClick = () => {
+    setShowContactForm(true);
+    // Prevent body scrolling when form is open
+    document.body.style.overflow = 'hidden';
+  };
+
+  // Function to close contact form
+  const closeContactForm = () => {
+    setShowContactForm(false);
+    // Re-enable body scrolling
+    document.body.style.overflow = 'auto';
   };
 
   useCardAnimation();
@@ -63,28 +79,29 @@ const App = () => {
   ];
 
   return (
-    <div className={`transition-colors duration-300 min-h-screen ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}>
-      <div className="relative">
-        <MatrixEffect />
-        <div className="absolute bottom-4 right-4 z-50">
-          <DarkLightModeToggle 
-            isDarkMode={isDarkMode} 
-            toggleDarkMode={toggleDarkMode} 
-          />
-        </div>
-        <Navbar />
-        <HeroSection />
-        <div className="mt-8 md:mt-16">
-          {cards.map((card, index) => (
-            <Card 
-              key={card.id}
-              {...card}
-              className={index === 0 ? "mt-8" : ""}
-            />
-          ))}
-        </div>
-        <Footer />
+    <div className={`transition-colors duration-300 ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}>
+      <MatrixEffect />
+      <div className="absolute bottom-4 right-4 z-50">
+        <DarkLightModeToggle 
+          isDarkMode={isDarkMode} 
+          toggleDarkMode={toggleDarkMode} 
+        />
       </div>
+      <Navbar onHireMeClick={handleHireMeClick} />
+      <HeroSection />
+      {cards.map((card, index) => (
+        <Card 
+          key={card.id}
+          {...card}
+          className={index === 0 ? "mt-[700px]" : ""}
+        />
+      ))}
+      <Footer />
+      
+      {/* Contact Form Modal */}
+      {showContactForm && (
+        <ContactForm onClose={closeContactForm} />
+      )}
     </div>
   );
 };

@@ -228,3 +228,129 @@ h1, h2, h3, h4, h5, h6, p, a, button, span {
     transform: scale(0.7);
   }
 }
+/* Contact Form Animations */
+.animate-shrink {
+  animation: shrink 3s linear forwards;
+}
+
+@keyframes shrink {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+/* Form fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bg-neutral-800 {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Add styling for checkboxes */
+.form-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #6ee7b7;
+  border-radius: 4px;
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.form-checkbox:checked {
+  background-color: #6ee7b7;
+}
+
+.form-checkbox:checked::after {
+  content: '✓';
+  font-size: 0.875rem;
+  color: #111827;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+}
+
+/* Improve focus styles */
+input:focus, select:focus, textarea:focus {
+  box-shadow: 0 0 0 2px rgba(110, 231, 183, 0.3);
+}
+/* Contact Form Animations */
+.animate-shrink {
+  animation: shrink 3s linear forwards;
+}
+
+@keyframes shrink {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+/* Form fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bg-neutral-800 {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Add styling for checkboxes */
+.form-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #6ee7b7;
+  border-radius: 4px;
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.form-checkbox:checked {
+  background-color: #6ee7b7;
+}
+
+.form-checkbox:checked::after {
+  content: '✓';
+  font-size: 0.875rem;
+  color: #111827;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+}
+
+/* Improve focus styles */
+input:focus, select:focus, textarea:focus {
+  box-shadow: 0 0 0 2px rgba(110, 231, 183, 0.3);
+}
