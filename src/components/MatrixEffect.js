@@ -3,11 +3,24 @@ import React, { useEffect } from 'react';
 const MatrixEffect = () => {
   useEffect(() => {
     const matrix = document.querySelector('.matrix');
-    const columns = Math.floor(window.innerWidth / 20);
+    
+    // Aggiorna la larghezza per adattarsi al documento
+    const updateDimensions = () => {
+      const columns = Math.floor(window.innerWidth / 20);
+      return columns;
+    };
+    
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    const drops = Array(columns).fill(1);
+    let columns = updateDimensions();
+    let drops = Array(columns).fill(1);
 
     const draw = () => {
+      // Assicurati che il numero di colonne sia aggiornato in base alla dimensione della finestra
+      if (columns !== Math.floor(window.innerWidth / 20)) {
+        columns = updateDimensions();
+        drops = Array(columns).fill(1);
+      }
+      
       matrix.innerHTML = '';
       drops.forEach((y, index) => {
         const text = characters.charAt(Math.floor(Math.random() * characters.length));
@@ -17,12 +30,21 @@ const MatrixEffect = () => {
         span.textContent = text;
         matrix.appendChild(span);
 
-        drops[index] = y > window.innerHeight / 20 ? 0 : y + 1;
+        drops[index] = y > document.body.scrollHeight / 20 ? 0 : y + 1;
       });
     };
 
+    // Aggiungi event listener per il resize
+    window.addEventListener('resize', () => {
+      columns = updateDimensions();
+      drops = Array(columns).fill(1);
+    });
+
     const interval = setInterval(draw, 50);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', updateDimensions);
+    };
   }, []);
 
   return <div className="matrix"></div>;

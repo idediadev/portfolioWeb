@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Cloud, Moon } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 
 const DarkLightModeToggle = ({ isDarkMode, toggleDarkMode }) => {
   return (
@@ -14,24 +14,21 @@ const DarkLightModeToggle = ({ isDarkMode, toggleDarkMode }) => {
         dark:from-indigo-800 dark:to-indigo-600
         from-blue-300 to-blue-500"
     >
-      {/* Sole e Nuvole per Modalità Chiara */}
+      {/* Sole per Modalità Chiara */}
       <div className={`absolute transition-all duration-500 ease-in-out 
-        ${isDarkMode ? 'opacity-0 -translate-y-full' : 'opacity-100 translate-y-0'}
+        ${isDarkMode ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}
         flex items-center justify-center`}>
-        <Sun className="text-yellow-500 w-6 h-6" />
+        <Sun className="text-yellow-500 w-8 h-8" />
       </div>
 
       {/* Luna per Modalità Scura */}
       <div className={`absolute transition-all duration-500 ease-in-out 
-        ${isDarkMode ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}
+        ${isDarkMode ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
         flex items-center justify-center`}>
-        <Moon className="text-gray-200 w-6 h-6" />
+        <Moon className="text-gray-200 w-8 h-8" />
       </div>
-
-      {/* Cursore del Toggle */}
-      <div className={`absolute w-8 h-8 bg-white rounded-full shadow-md transition-all duration-500 ease-in-out
-        ${isDarkMode ? 'translate-x-5' : '-translate-x-5'}`}>
-      </div>
+      
+      {/* Rimosso il cursore bianco del toggle */}
     </button>
   );
 };

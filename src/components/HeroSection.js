@@ -1,8 +1,4 @@
-// HeroSection.js con animazione di codice come sfondo dell'intera sezione
-
 import React, { useEffect, useRef } from 'react';
-// Rimuovi l'import dell'immagine perché non la useremo più
-// import heroImage from '../assets/images/herosection01.jpg';
 
 const HeroSection = () => {
   const canvasRef = useRef(null);
@@ -12,9 +8,7 @@ const HeroSection = () => {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-    const width = canvas.width;
-    const height = canvas.height;
-
+    
     // Impostazione delle dimensioni del canvas per adattarsi al contenitore
     function resizeCanvas() {
       const container = canvas.parentElement;
@@ -40,7 +34,7 @@ const HeroSection = () => {
     class CodeColumn {
       constructor(x) {
         this.x = x;
-        this.y = Math.random() * -height;
+        this.y = Math.random() * -canvas.height;
         this.length = Math.floor(Math.random() * 15) + 5; // Lunghezza variabile
         this.speed = Math.random() * 2 + 1;
         this.characters = [];
@@ -128,7 +122,7 @@ const HeroSection = () => {
         }
         
         // Rimuovi i caratteri che escono dallo schermo
-        while (this.characters.length > 0 && this.characters[this.characters.length - 1].y > height) {
+        while (this.characters.length > 0 && this.characters[this.characters.length - 1].y > canvas.height) {
           this.characters.pop();
         }
         
@@ -176,7 +170,7 @@ const HeroSection = () => {
     // Creazione delle colonne
     const columns = [];
     const spacing = 20; // Spazio tra le colonne
-    const numColumns = Math.ceil(width / spacing);
+    const numColumns = Math.ceil(canvas.width / spacing);
     
     for (let i = 0; i < numColumns; i++) {
       columns.push(new CodeColumn(i * spacing));
@@ -186,7 +180,7 @@ const HeroSection = () => {
     function animate() {
       // Sfondo semitrasparente per l'effetto "scia"
       ctx.fillStyle = 'rgba(13, 13, 13, 0.15)'; // Aumentata trasparenza
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       for (let i = 0; i < columns.length; i++) {
         columns[i].update();
@@ -204,20 +198,20 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="w-full mx-auto mt-5 px-4">
-      <div className="w-full max-w-6xl mx-auto relative">
+    <section className="w-full mx-auto mt-5 px-4 relative">
+      <div className="w-full max-w-6xl mx-auto relative min-h-[600px]">
         {/* Canvas per l'animazione di sfondo */}
         <canvas 
           ref={canvasRef} 
           className="absolute top-0 left-0 w-full h-full z-0"
-          style={{ opacity: '0.8' }} // Ridotta l'opacità per migliorare la leggibilità
+          style={{ opacity: '0.8' }} 
         />
         
         {/* Overlay scuro per migliorare la leggibilità */}
         <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 z-10"></div>
         
         {/* Contenuto della hero section */}
-        <div className="relative z-20 flex flex-col md:flex-row">
+        <div className="relative z-20 flex flex-col md:flex-row min-h-[600px]">
           <div className="w-full md:w-1/2 mb-8 md:mb-0 flex items-center justify-center p-8">
             <div className="text-center">
               <h2 className="text-emerald-300 text-3xl md:text-4xl font-bold mb-4">Davide Taddia</h2>

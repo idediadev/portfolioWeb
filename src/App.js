@@ -63,24 +63,28 @@ const App = () => {
   ];
 
   return (
-    <div className={`transition-colors duration-300 ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}>
-      <MatrixEffect />
-      <div className="absolute bottom-4 right-4 z-50">
-        <DarkLightModeToggle 
-          isDarkMode={isDarkMode} 
-          toggleDarkMode={toggleDarkMode} 
-        />
+    <div className={`transition-colors duration-300 min-h-screen ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}>
+      <div className="relative">
+        <MatrixEffect />
+        <div className="absolute bottom-4 right-4 z-50">
+          <DarkLightModeToggle 
+            isDarkMode={isDarkMode} 
+            toggleDarkMode={toggleDarkMode} 
+          />
+        </div>
+        <Navbar />
+        <HeroSection />
+        <div className="mt-8 md:mt-16">
+          {cards.map((card, index) => (
+            <Card 
+              key={card.id}
+              {...card}
+              className={index === 0 ? "mt-8" : ""}
+            />
+          ))}
+        </div>
+        <Footer />
       </div>
-      <Navbar />
-      <HeroSection />
-      {cards.map((card, index) => (
-        <Card 
-          key={card.id}
-          {...card}
-          className={index === 0 ? "mt-[700px]" : ""}
-        />
-      ))}
-      <Footer />
     </div>
   );
 };
