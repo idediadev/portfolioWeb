@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import Card from './components/Card';
 import Footer from './components/Footer';
+import ContactForm from './components/ContactForm'; // Importo il componente ContactForm
 import useCardAnimation from './components/AnimatioHandler';
 import './styles/styles.css';
 import DarkLightModeToggle from './components/DarkLightModeToggle';
@@ -10,6 +11,7 @@ import MatrixEffect from './components/MatrixEffect';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false); // Nuovo stato per il form
 
   // Controllo delle preferenze di sistema al caricamento iniziale
   useEffect(() => {
@@ -34,6 +36,16 @@ const App = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     updateTheme(newMode);
+  };
+
+  // Funzione per gestire il click su "HIRE ME"
+  const handleHireMeClick = () => {
+    setShowContactForm(true);
+  };
+
+  // Funzione per chiudere il modulo di contatto
+  const closeContactForm = () => {
+    setShowContactForm(false);
   };
 
   useCardAnimation();
@@ -63,7 +75,7 @@ const App = () => {
   ];
 
   return (
-    <div className={`transition-colors duration-300 min-h-screen ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}> {/* Aggiunto min-h-screen per garantire che il contenitore occupi sempre almeno l'intera altezza della viewport */}
+    <div className={`transition-colors duration-300 min-h-screen ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}>
       <MatrixEffect />
       <div className="absolute bottom-4 right-4 z-50">
         <DarkLightModeToggle 
@@ -73,13 +85,13 @@ const App = () => {
       </div>
       
       {/* Layout wrapper per mantenere una struttura coerente */}
-      <div className="flex flex-col min-h-screen"> {/* Utilizzo di flex e min-h-screen per organizzare meglio il layout */}
-        <Navbar />
+      <div className="flex flex-col min-h-screen">
+        <Navbar onHireMeClick={handleHireMeClick} />
         
         {/* Main content wrapper */}
-        <main className="flex-grow"> {/* flex-grow per far sì che il contenuto principale si espanda per riempire lo spazio disponibile */}
+        <main className="flex-grow">
           <HeroSection />
-          <div className="container mx-auto px-4"> {/* Container per le card, mantenendo un po' di padding sui lati */}
+          <div className="container mx-auto px-4">
             {cards.map((card, index) => (
               <Card 
                 key={card.id}
@@ -92,6 +104,9 @@ const App = () => {
         
         <Footer />
       </div>
+
+      {/* Mostra il form di contatto quando showContactForm è true */}
+      {showContactForm && <ContactForm onClose={closeContactForm} />}
     </div>
   );
 };
