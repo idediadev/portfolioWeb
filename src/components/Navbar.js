@@ -33,16 +33,6 @@ const Navbar = ({ onHireMeClick }) => {
         </svg>
       </button>
 
-      {/* Dark mode toggle */}
-      <button 
-        className="ml-4 text-emerald-300 focus:outline-none"
-        onClick={() => setDarkMode(!darkMode)}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={darkMode ? "M12 3v1m0 16v1m8.66-8.66h-1M4.34 12H3m15.66 4.34l-.7-.7M6.34 6.34l-.7-.7m12.02 12.02l-.7-.7M6.34 17.66l-.7-.7" : "M12 3.75a8.25 8.25 0 100 16.5 8.25 8.25 0 000-16.5z"} />
-        </svg>
-      </button>
-
       {/* Desktop navigation */}
       <div className="hidden md:flex items-center gap-8">
         <div className="flex gap-4 lg:gap-6">

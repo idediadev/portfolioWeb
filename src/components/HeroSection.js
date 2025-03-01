@@ -8,14 +8,12 @@ const HeroSection = () => {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-    const width = canvas.width;
-    const height = canvas.height;
 
-    // Impostazione delle dimensioni del canvas per adattarsi al contenitore
+    // Impostazione delle dimensioni del canvas per adattarsi alla hero section completa
     function resizeCanvas() {
-      const container = canvas.parentElement;
-      canvas.width = container.offsetWidth;
-      canvas.height = container.offsetHeight;
+      const heroSection = canvas.parentElement;
+      canvas.width = heroSection.offsetWidth;
+      canvas.height = heroSection.offsetHeight;
     }
 
     window.addEventListener('resize', resizeCanvas);
@@ -36,7 +34,7 @@ const HeroSection = () => {
     class CodeColumn {
       constructor(x) {
         this.x = x;
-        this.y = Math.random() * -height;
+        this.y = Math.random() * -canvas.height;
         this.length = Math.floor(Math.random() * 15) + 5; // Lunghezza variabile
         this.speed = Math.random() * 2 + 1;
         this.characters = [];
@@ -124,7 +122,7 @@ const HeroSection = () => {
         }
         
         // Rimuovi i caratteri che escono dallo schermo
-        while (this.characters.length > 0 && this.characters[this.characters.length - 1].y > height) {
+        while (this.characters.length > 0 && this.characters[this.characters.length - 1].y > canvas.height) {
           this.characters.pop();
         }
         
@@ -172,7 +170,7 @@ const HeroSection = () => {
     // Creazione delle colonne
     const columns = [];
     const spacing = 20; // Spazio tra le colonne
-    const numColumns = Math.ceil(width / spacing);
+    const numColumns = Math.ceil(canvas.width / spacing);
     
     for (let i = 0; i < numColumns; i++) {
       columns.push(new CodeColumn(i * spacing));
@@ -181,8 +179,8 @@ const HeroSection = () => {
     // Funzione di animazione
     function animate() {
       // Sfondo semitrasparente per l'effetto "scia"
-      ctx.fillStyle = 'rgba(13, 13, 13, 0.15)'; // Aumentata trasparenza
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Ridotta opacità per un effetto più sottile
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       for (let i = 0; i < columns.length; i++) {
         columns[i].update();
@@ -200,46 +198,44 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="w-full mx-auto mt-5 px-4">
-      <div className="w-full mx-auto relative"> {/* Rimosso max-w-6xl per consentire al contenitore di espandersi alla larghezza completa */}
-        {/* Canvas per l'animazione di sfondo */}
-        <canvas 
-          ref={canvasRef} 
-          className="absolute top-0 left-0 w-full h-full z-0"
-          style={{ opacity: '0.8' }} // Ridotta l'opacità per migliorare la leggibilità
-        />
-        
-        {/* Overlay scuro per migliorare la leggibilità */}
-        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 z-10"></div>
-        
-        {/* Contenuto della hero section */}
-        <div className="relative z-20 flex flex-col md:flex-row max-w-6xl mx-auto"> {/* Aggiunto max-w-6xl e mx-auto qui per centrare il contenuto ma permettere al background di essere full-width */}
-          <div className="w-full md:w-1/2 mb-8 md:mb-0 flex items-center justify-center p-8">
-            <div className="text-center">
-              <h2 className="text-emerald-300 text-3xl md:text-4xl font-bold mb-4">Davide Taddia</h2>
-              <p className="text-white text-lg md:text-xl">Computer Science Student & Developer</p>
-              <div className="mt-6 border-t border-emerald-700 pt-4 w-3/4 mx-auto">
-                <p className="text-emerald-100 text-sm md:text-base italic">
-                  "Turning passion into code, one project at a time."
-                </p>
-              </div>
+    <section className="w-full mx-auto relative min-h-screen">
+      {/* Canvas per l'animazione di sfondo - ora a piena altezza */}
+      <canvas 
+        ref={canvasRef} 
+        className="absolute top-0 left-0 w-full h-full z-0"
+        style={{ opacity: '0.8' }}
+      />
+      
+      {/* Overlay scuro per migliorare la leggibilità */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 z-10"></div>
+      
+      {/* Contenuto della hero section */}
+      <div className="relative z-20 flex flex-col md:flex-row max-w-6xl mx-auto h-full pt-20 pb-10">
+        <div className="w-full md:w-1/2 mb-8 md:mb-0 flex items-center justify-center p-8">
+          <div className="text-center">
+            <h2 className="text-emerald-300 text-3xl md:text-4xl font-bold mb-4">Davide Taddia</h2>
+            <p className="text-white text-lg md:text-xl">Computer Science Student & Developer</p>
+            <div className="mt-6 border-t border-emerald-700 pt-4 w-3/4 mx-auto">
+              <p className="text-emerald-100 text-sm md:text-base italic">
+                "Turning passion into code, one project at a time."
+              </p>
             </div>
           </div>
-          
-          <div className="w-full md:w-1/2 flex flex-col justify-center p-4 md:p-12 slide-in-section">
-            <h1 className="text-emerald-300 text-3xl md:text-4xl mb-6">
-              About Me
-            </h1>
-            <p className="text-emerald-300 text-base md:text-lg">
-              I'm really passionate about computer science and everything related to it. Right now, I'm just a university student, but I'm working hard every day to get closer to my goals. I set up this page as a style exercise, and hopefully, one day, I'll fill it with bigger and more interesting projects.
-              <br /><br />
-              My journey into computer science started out of pure curiosity and quickly turned into a passion...
-              <br /><br />
-              Even though I'm still a student, I firmly believe that every small step counts. Every project I take on or every challenge I face pushes me closer to becoming the professional I aspire to be. That's why I see this page as more than just a showcase—it's a timeline of my growth, learning experiences, and the knowledge I gather along the way.
-              <br /><br />
-              For now, it might just be a collection of experiments and simple projects, but I hope it will gradually turn into a portfolio of more ambitious and impactful work. Stay tuned for more updates and projects as I continue learning and evolving!
-            </p>
-          </div>
+        </div>
+        
+        <div className="w-full md:w-1/2 flex flex-col justify-center p-4 md:p-12 slide-in-section">
+          <h1 className="text-emerald-300 text-3xl md:text-4xl mb-6">
+            About Me
+          </h1>
+          <p className="text-emerald-300 text-base md:text-lg">
+            I'm really passionate about computer science and everything related to it. Right now, I'm just a university student, but I'm working hard every day to get closer to my goals. I set up this page as a style exercise, and hopefully, one day, I'll fill it with bigger and more interesting projects.
+            <br /><br />
+            My journey into computer science started out of pure curiosity and quickly turned into a passion...
+            <br /><br />
+            Even though I'm still a student, I firmly believe that every small step counts. Every project I take on or every challenge I face pushes me closer to becoming the professional I aspire to be. That's why I see this page as more than just a showcase—it's a timeline of my growth, learning experiences, and the knowledge I gather along the way.
+            <br /><br />
+            For now, it might just be a collection of experiments and simple projects, but I hope it will gradually turn into a portfolio of more ambitious and impactful work. Stay tuned for more updates and projects as I continue learning and evolving!
+          </p>
         </div>
       </div>
     </section>

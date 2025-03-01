@@ -3,7 +3,8 @@ import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import Card from './components/Card';
 import Footer from './components/Footer';
-import ContactForm from './components/ContactForm'; // Importo il componente ContactForm
+import ContactForm from './components/ContactForm';
+import SEO from './components/SEO'; // Importiamo il componente SEO
 import useCardAnimation from './components/AnimatioHandler';
 import './styles/styles.css';
 import DarkLightModeToggle from './components/DarkLightModeToggle';
@@ -11,7 +12,7 @@ import MatrixEffect from './components/MatrixEffect';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [showContactForm, setShowContactForm] = useState(false); // Nuovo stato per il form
+  const [showContactForm, setShowContactForm] = useState(false);
 
   // Controllo delle preferenze di sistema al caricamento iniziale
   useEffect(() => {
@@ -76,6 +77,9 @@ const App = () => {
 
   return (
     <div className={`transition-colors duration-300 min-h-screen ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}>
+      {/* Componente SEO per i meta tag */}
+      <SEO />
+      
       <MatrixEffect />
       <div className="absolute bottom-4 right-4 z-50">
         <DarkLightModeToggle 
