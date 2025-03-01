@@ -6,19 +6,16 @@
 body {
   background-color: black;
   color: #00ff00;
+  overflow-x: hidden; /* Solo overflow-x hidden per permettere lo scroll verticale */
   margin: 0;
   padding: 0;
-  font-family: 'DotGothic16', sans-serif; /* Impostato il font principale su DotGothic16 */
-  /* Rimosso overflow: hidden; per consentire lo scorrimento */
-}
-
-/* Applica il font DotGothic16 anche a titoli e paragrafi */
-h1, h2, h3, h4, h5, h6, p, a, button, span {
-  font-family: 'DotGothic16', sans-serif;
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100vh; /* Assicura che il body occupi almeno l'intera altezza della viewport */
 }
 
 .navbar-gradient, .footer-gradient {
   background: linear-gradient(0deg, #059669 85%, rgba(5, 150, 105, 0) 100%);
+  width: 100%; /* Assicura che la navbar e il footer occupino l'intera larghezza */
 }
 
 @keyframes pulse-custom {
@@ -57,6 +54,7 @@ h1, h2, h3, h4, h5, h6, p, a, button, span {
 
 .slide-in-section {
   animation: slideInFade 1.5s ease-out forwards;
+  width: 100%; /* Assicura che la sezione occupi l'intera larghezza del contenitore */
 }
 
 .slide-in-section h1 {
@@ -90,6 +88,7 @@ h1, h2, h3, h4, h5, h6, p, a, button, span {
 
 .card-trigger {
   opacity: 0;
+  width: 100%; /* Assicura che le card occupino l'intera larghezza disponibile */
 }
 
 .card-animate {
@@ -137,7 +136,9 @@ h1, h2, h3, h4, h5, h6, p, a, button, span {
 
 .footer-gradient {
   background: linear-gradient(0deg, #059669 85%, rgba(5, 150, 105, 0) 100%);
+  width: 100%; /* Assicura che il footer occupi l'intera larghezza */
 }
+
 .overflow-y-auto::-webkit-scrollbar {
   width: 8px;
 }
@@ -162,7 +163,7 @@ h1, h2, h3, h4, h5, h6, p, a, button, span {
   left: 0;
   width: 100%;
   height: 100%;
-  /* Rimosso overflow: hidden; per consentire lo scorrimento */
+  overflow: hidden;
   z-index: -1;
 }
 
@@ -186,6 +187,7 @@ h1, h2, h3, h4, h5, h6, p, a, button, span {
   }
 }
 
+/* Media queries migliorati per il responsive design */
 @media (max-width: 768px) {
   .slide-in-section {
     animation-delay: 0.2s;
@@ -220,6 +222,12 @@ h1, h2, h3, h4, h5, h6, p, a, button, span {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
   }
+  
+  /* Aggiustamenti per i contenitori principali */
+  .navbar-gradient, .footer-gradient {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 /* Fix for very small screens */
@@ -227,130 +235,17 @@ h1, h2, h3, h4, h5, h6, p, a, button, span {
   .animated-circle, .animated-triangle, .animated-square {
     transform: scale(0.7);
   }
-}
-/* Contact Form Animations */
-.animate-shrink {
-  animation: shrink 3s linear forwards;
-}
-
-@keyframes shrink {
-  0% {
-    width: 100%;
+  
+  /* Aggiustamenti per testo e spaziatura su schermi molto piccoli */
+  h1, h2 {
+    font-size: 1.5rem;
   }
-  100% {
-    width: 0%;
+  
+  p {
+    font-size: 0.875rem;
   }
-}
-
-/* Form fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+  
+  .p-4 {
+    padding: 0.75rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.bg-neutral-800 {
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
-/* Add styling for checkboxes */
-.form-checkbox {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 1.25rem;
-  height: 1.25rem;
-  border: 2px solid #6ee7b7;
-  border-radius: 4px;
-  background-color: transparent;
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-}
-
-.form-checkbox:checked {
-  background-color: #6ee7b7;
-}
-
-.form-checkbox:checked::after {
-  content: '✓';
-  font-size: 0.875rem;
-  color: #111827;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: block;
-}
-
-/* Improve focus styles */
-input:focus, select:focus, textarea:focus {
-  box-shadow: 0 0 0 2px rgba(110, 231, 183, 0.3);
-}
-/* Contact Form Animations */
-.animate-shrink {
-  animation: shrink 3s linear forwards;
-}
-
-@keyframes shrink {
-  0% {
-    width: 100%;
-  }
-  100% {
-    width: 0%;
-  }
-}
-
-/* Form fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.bg-neutral-800 {
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
-/* Add styling for checkboxes */
-.form-checkbox {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 1.25rem;
-  height: 1.25rem;
-  border: 2px solid #6ee7b7;
-  border-radius: 4px;
-  background-color: transparent;
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-}
-
-.form-checkbox:checked {
-  background-color: #6ee7b7;
-}
-
-.form-checkbox:checked::after {
-  content: '✓';
-  font-size: 0.875rem;
-  color: #111827;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: block;
-}
-
-/* Improve focus styles */
-input:focus, select:focus, textarea:focus {
-  box-shadow: 0 0 0 2px rgba(110, 231, 183, 0.3);
 }
