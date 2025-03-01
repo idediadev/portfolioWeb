@@ -39,32 +39,50 @@ const ContactForm = ({ onClose }) => {
     });
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
     
-    // For demo/testing purposes - simulate sending email
-    setTimeout(() => {
-      console.log('Form data to be sent:', formData);
-      setIsSubmitting(false);
-      setSubmitted(true);
+    try {
+      // Prepara i dati per l'invio
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('budget', formData.budget);
+      formDataToSend.append('services', formData.services.join(', '));
       
-      // Reset form after 3 seconds and close
-      setTimeout(() => {
-        setSubmitted(false);
-        onClose();
-      }, 3000);
-    }, 1500);
-
-    // For a real implementation without EmailJS, you could use:
-    // 1. Formspree (add this form action):
-    // <form action="https://formspree.io/f/yourformid" method="POST">
-    
-    // 2. Or a simple mailto link for simple cases (not recommended for production)
-    // window.location.href = `mailto:davidetaddia95@gmail.com?subject=Hire Request from ${formData.name}&body=${encodeURIComponent(
-    //   `Name: ${formData.name}\nEmail: ${formData.email}\nServices: ${formData.services.join(', ')}\nBudget: ${formData.budget}\n\nMessage: ${formData.message}`
-    // )}`;
+      // Effettua la richiesta a Formspree con l'ID corretto "xzzdngbj"
+      const response = await fetch('https://formspree.io/f/xzzdngbj', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        // Gestione del successo
+        console.log('Form inviato con successo!');
+        setSubmitted(true);
+        
+        // Reset form after 3 seconds and close
+        setTimeout(() => {
+          setSubmitted(false);
+          onClose();
+        }, 3000);
+      } else {
+        // Gestione dell'errore
+        const data = await response.json();
+        throw new Error(data.error || 'Si è verificato un errore durante l\'invio del form');
+      }
+    } catch (error) {
+      console.error('Errore durante l\'invio del form:', error);
+      setError(error.message || 'Si è verificato un errore durante l\'invio del form');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   if (submitted) {
@@ -97,10 +115,7 @@ const ContactForm = ({ onClose }) => {
           <p className="text-white opacity-80">Let's collaborate on your next project</p>
         </div>
         
-        {/* Using Formspree as an alternative to EmailJS */}
         <form 
-          action="https://formspree.io/f/xqkvnjyj" // Replace with your Formspree form ID
-          method="POST"
           onSubmit={handleSubmit} 
           className="space-y-6"
         >
