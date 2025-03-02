@@ -31,6 +31,20 @@ const Card = ({ id, title, description, animatedShape, delay = 0 }) => {
     )
   };
 
+  // Funzione per ottenere l'URL basato sull'ID
+  const getPageUrl = (id) => {
+    switch(id) {
+      case 'masteryhub':
+        return '/masteryhub';
+      case 'madebyme':
+        return '/madebyme';
+      case 'servicehub':
+        return '/servicehub';
+      default:
+        return `#${id}`;
+    }
+  };
+
   return (
     <section id={id} className={`w-full max-w-[1440px] mx-auto px-4 ${id === 'masteryhub' ? 'mt-8 md:mt-[100px]' : 'mt-8'}`}>
       <div 
@@ -50,7 +64,7 @@ const Card = ({ id, title, description, animatedShape, delay = 0 }) => {
             </p>
           </div>
           <a 
-            href={`#${id}`}
+            href={getPageUrl(id)}
             className="text-emerald-300 hover:text-emerald-400 transition-colors text-base md:text-lg"
           >
             → {id === "madebyme" ? "View Projects" : `Explore ${id}`}

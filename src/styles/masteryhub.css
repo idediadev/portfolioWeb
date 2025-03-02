@@ -1,0 +1,154 @@
+/* Stili aggiuntivi per la pagina MasteryHub */
+
+/* Animazioni per le skill bars */
+@keyframes fillBar {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: var(--skill-level);
+    }
+  }
+  
+  .skill-bar {
+    --skill-level: 0%;
+    animation: fillBar 1.5s ease-out forwards;
+  }
+  
+  /* Slide transitions */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .slide-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  /* Card hover effects */
+  .skill-card {
+    transition: all 0.3s ease;
+  }
+  
+  .skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 255, 127, 0.15);
+  }
+  
+  /* Highlight colors for different skill categories */
+  .frontend-skill .skill-bar div {
+    background: linear-gradient(90deg, #06b6d4, #0891b2);
+  }
+  
+  .backend-skill .skill-bar div {
+    background: linear-gradient(90deg, #059669, #047857);
+  }
+  
+  .database-skill .skill-bar div {
+    background: linear-gradient(90deg, #7c3aed, #6d28d9);
+  }
+  
+  .ai-skill .skill-bar div {
+    background: linear-gradient(90deg, #db2777, #be185d);
+  }
+  
+  .devops-skill .skill-bar div {
+    background: linear-gradient(90deg, #ea580c, #c2410c);
+  }
+  
+  .language-skill .skill-bar div {
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  }
+  
+  /* Pulsing effect for highlighted skills */
+  @keyframes pulse-highlight {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+  
+  .highlight-skill {
+    position: relative;
+  }
+  
+  .highlight-skill::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: #00ff7f;
+    animation: pulse-highlight 2s infinite;
+  }
+  
+  /* Number indicator styling */
+  .slide-number {
+    font-family: 'DotGothic16', monospace;
+    color: #00ff7f;
+    opacity: 0.7;
+  }
+  
+  /* Progetti correlati cards */
+  .project-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #059669, #10b981);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+  
+  .project-card:hover::before {
+    transform: translateX(0);
+  }
+  
+  /* Media queries per responsive design */
+  @media (max-width: 768px) {
+    .skill-container {
+      flex-direction: column;
+    }
+    
+    .skill-details,
+    .skill-visualization {
+      width: 100%;
+    }
+    
+    .slide-controls {
+      bottom: 1rem;
+      right: 1rem;
+    }
+    
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Stile per gli indicatori di slide */
+  .slide-indicator {
+    transition: all 0.3s ease;
+  }
+  
+  .slide-indicator.active {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
+  }
