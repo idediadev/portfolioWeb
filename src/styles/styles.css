@@ -157,6 +157,8 @@ body {
   background: rgba(0, 255, 127, 0.5);
 }
 
+/* Rimuoviamo il vecchio codice MatrixEffect e aggiungiamo le nuove regole */
+/* 
 .matrix {
   position: absolute;
   top: 0;
@@ -185,6 +187,43 @@ body {
     opacity: 0;
     transform: translateY(100%);
   }
+}
+*/
+
+/* Aggiungiamo nuovi stili per l'effetto matrix migliorato */
+.enhanced-matrix-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none; /* Permette di cliccare attraverso il canvas */
+}
+
+/* Miglioriamo il contrasto per i contenuti con una transizione più morbida */
+.dark .text-emerald-300 {
+  text-shadow: 0 0 8px rgba(0, 255, 127, 0.3);
+}
+
+/* Aggiungiamo un effetto glowing per i titoli quando l'animazione è attiva */
+.dark h1, .dark h2, .dark h3 {
+  transition: text-shadow 0.3s ease;
+}
+
+.dark h1:hover, .dark h2:hover, .dark h3:hover {
+  text-shadow: 0 0 12px rgba(0, 255, 127, 0.6);
+}
+
+/* Rendiamo le card un po' più traslucide per far vedere l'animazione dietro */
+.dark .card-trigger {
+  background-color: rgba(38, 38, 38, 0.7); /* Sfondo più trasparente */
+  backdrop-filter: blur(5px); /* Effetto frosted glass */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dark .card-trigger:hover {
+  background-color: rgba(38, 38, 38, 0.85); /* Un po' più opaco all'hover */
 }
 
 /* Media queries migliorati per il responsive design */

@@ -8,7 +8,7 @@ import SEO from './components/SEO'; // Importiamo il componente SEO
 import useCardAnimation from './components/AnimatioHandler';
 import './styles/styles.css';
 import DarkLightModeToggle from './components/DarkLightModeToggle';
-import MatrixEffect from './components/MatrixEffect';
+import EnhancedMatrixEffect from './components/EnhancedMatrixEffect';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -80,7 +80,9 @@ const App = () => {
       {/* Componente SEO per i meta tag */}
       <SEO />
       
-      <MatrixEffect />
+      {/* Sostituiamo MatrixEffect con EnhancedMatrixEffect */}
+      <EnhancedMatrixEffect />
+      
       <div className="absolute bottom-4 right-4 z-50">
         <DarkLightModeToggle 
           isDarkMode={isDarkMode} 
