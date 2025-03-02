@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.d3a08bb7.css",
-    "main.js": "/static/js/main.df900096.js",
+    "main.css": "/static/css/main.996c9664.css",
+    "main.js": "/static/js/main.82cd8103.js",
     "static/media/logoDavideTaddia.jpeg": "/static/media/logoDavideTaddia.ed12037ac024a95dd99b.jpeg",
     "index.html": "/index.html",
-    "main.d3a08bb7.css.map": "/static/css/main.d3a08bb7.css.map",
-    "main.df900096.js.map": "/static/js/main.df900096.js.map"
+    "main.996c9664.css.map": "/static/css/main.996c9664.css.map",
+    "main.82cd8103.js.map": "/static/js/main.82cd8103.js.map"
   },
   "entrypoints": [
-    "static/css/main.d3a08bb7.css",
-    "static/js/main.df900096.js"
+    "static/css/main.996c9664.css",
+    "static/js/main.82cd8103.js"
   ]
 }
