@@ -33,12 +33,12 @@ const Navbar = ({ onHireMeClick }) => {
         </svg>
       </button>
 
-      {/* Desktop navigation */}
+      {/* Desktop navigation - Modificato per puntare alle pagine corrette */}
       <div className="hidden md:flex items-center gap-8">
         <div className="flex gap-4 lg:gap-6">
-          <a href="#masteryhub" className="text-emerald-300 hover:text-emerald-400 transition-colors">00 MasteryHub</a>
-          <a href="#madebyme" className="text-emerald-300 hover:text-emerald-400 transition-colors">01 MadebyMe</a>
-          <a href="#servicehub" className="text-emerald-300 hover:text-emerald-400 transition-colors">02 ServiceHub</a>
+          <a href="/masteryhub" className="text-emerald-300 hover:text-emerald-400 transition-colors">00 MasteryHub</a>
+          <a href="/wikidedia" className="text-emerald-300 hover:text-emerald-400 transition-colors">01 WikiDEDIA</a>
+          <a href="/servicehub" className="text-emerald-300 hover:text-emerald-400 transition-colors">02 ServiceHub</a>
         </div>
       {/* Here you find the HIRE ME button label; change it for the user, but dev side it is HIRE ME button */}
         <button 
@@ -49,26 +49,26 @@ const Navbar = ({ onHireMeClick }) => {
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - Modificato per puntare alle pagine corrette */}
       {menuOpen && (
         <div className="absolute top-16 right-4 left-4 z-50 bg-neutral-800 shadow-lg rounded-lg p-4 md:hidden">
           <div className="flex flex-col gap-4">
             <a 
-              href="#masteryhub" 
+              href="/masteryhub" 
               className="text-emerald-300 hover:text-emerald-400 py-2"
               onClick={() => setMenuOpen(false)}
             >
               00 MasteryHub
             </a>
             <a 
-              href="#madebyme" 
+              href="/wikidedia" 
               className="text-emerald-300 hover:text-emerald-400 py-2"
               onClick={() => setMenuOpen(false)}
             >
-              01 wikIDEDIA
+              01 WikiDEDIA
             </a>
             <a 
-              href="#servicehub" 
+              href="/servicehub" 
               className="text-emerald-300 hover:text-emerald-400 py-2"
               onClick={() => setMenuOpen(false)}
             >
