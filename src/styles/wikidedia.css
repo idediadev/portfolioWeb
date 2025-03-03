@@ -1,0 +1,878 @@
+/* Enhanced WikiDEDIA styling to match site theme */
+
+/* Base container */
+.wiki-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    background-color: #0a0a0a;
+    background-image: linear-gradient(to bottom, #000000, #0a0a0a 80%);
+    color: #00ff7f;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+  }
+  
+  /* Dark/light mode support */
+  .wiki-container.dark {
+    background-color: #000;
+    color: #00ff7f;
+  }
+  
+  .wiki-container.light {
+    background-color: #f0f0f0;
+    color: #059669;
+  }
+  
+  /* Header styling */
+  .wiki-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(0deg, rgba(5, 150, 105, 0.2) 0%, rgba(5, 150, 105, 0) 100%);
+    border-bottom: 1px solid rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #00ff7f;
+    text-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
+  }
+  
+  .wiki-back-button {
+    display: flex;
+    align-items: center;
+    color: #00ff7f;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+  }
+  
+  .wiki-back-button:hover {
+    background-color: rgba(0, 255, 127, 0.1);
+    text-shadow: 0 0 5px #00ff7f;
+  }
+  
+  .wiki-back-icon {
+    margin-right: 0.5rem;
+  }
+  
+  /* Main content layout */
+  .flex-1 {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+  
+  /* Sidebar styling */
+  .wiki-sidebar {
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-right: 1px solid rgba(0, 255, 127, 0.3);
+    padding: 1rem;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  
+  .wiki-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-sidebar-title {
+    font-size: 1.2rem;
+    color: #00ff7f;
+  }
+  
+  .wiki-add-chapter {
+    background: none;
+    border: none;
+    color: #00ff7f;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-add-chapter:hover {
+    background-color: rgba(0, 255, 127, 0.2);
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+  }
+  
+  /* Chapter list styling */
+  .wiki-chapter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .wiki-chapter {
+    margin-bottom: 0.75rem;
+  }
+  
+  .wiki-chapter-header {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-chapter-header:hover {
+    background-color: rgba(0, 255, 127, 0.1);
+  }
+  
+  .wiki-chapter-header.active {
+    background-color: rgba(0, 255, 127, 0.2);
+  }
+  
+  .wiki-chapter-title {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #00ff7f;
+  }
+  
+  .wiki-chapter-icon {
+    margin-right: 0.5rem;
+  }
+  
+  /* Page list styling */
+  .wiki-page-list {
+    list-style: none;
+    padding-left: 1.5rem;
+    margin: 0.5rem 0;
+  }
+  
+  .wiki-page-item {
+    margin: 0.25rem 0;
+  }
+  
+  .wiki-page-link {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: rgba(0, 255, 127, 0.8);
+  }
+  
+  .wiki-page-link:hover {
+    background-color: rgba(0, 255, 127, 0.1);
+  }
+  
+  .wiki-page-link.active {
+    background-color: rgba(0, 255, 127, 0.2);
+    color: #00ff7f;
+  }
+  
+  .wiki-page-icon {
+    margin-right: 0.5rem;
+  }
+  
+  .wiki-add-page {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    margin-left: 1.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    color: rgba(0, 255, 127, 0.7);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-add-page:hover {
+    background-color: rgba(0, 255, 127, 0.1);
+    color: #00ff7f;
+  }
+  
+  .wiki-add-page-icon {
+    margin-right: 0.5rem;
+  }
+  
+  /* Content area styling */
+  .wiki-content-area {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .wiki-page-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .wiki-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-page-title {
+    font-size: 1.75rem;
+    color: #00ff7f;
+    margin: 0;
+  }
+  
+  .wiki-page-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .wiki-page-action {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    background-color: rgba(0, 255, 127, 0.1);
+    border: 1px solid rgba(0, 255, 127, 0.3);
+    border-radius: 0.25rem;
+    color: #00ff7f;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-page-action:hover {
+    background-color: rgba(0, 255, 127, 0.2);
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-page-action-icon {
+    margin-right: 0.5rem;
+  }
+  
+  /* Markdown content styling */
+  .wiki-markdown {
+    line-height: 1.6;
+  }
+  
+  .wiki-markdown h1 {
+    font-size: 2rem;
+    border-bottom: 2px solid rgba(0, 255, 127, 0.3);
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #00ff7f;
+  }
+  
+  .wiki-markdown h2 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: #00ff7f;
+  }
+  
+  .wiki-markdown h3 {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #00ff7f;
+  }
+  
+  .wiki-markdown p {
+    margin-bottom: 1rem;
+    color: #e0e0e0;
+  }
+  
+  .wiki-markdown ul, 
+  .wiki-markdown ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: #e0e0e0;
+  }
+  
+  .wiki-markdown li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .wiki-inline-code {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-family: 'Courier New', monospace;
+    border: 1px solid rgba(0, 255, 127, 0.2);
+  }
+  
+  /* Code block styling */
+  .wiki-code-block {
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(0, 255, 127, 0.3);
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .wiki-code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 255, 127, 0.1);
+    border-bottom: 1px solid rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-code-language {
+    color: #00ff7f;
+    font-weight: 600;
+  }
+  
+  .wiki-code-run {
+    background-color: rgba(0, 255, 127, 0.2);
+    border: 1px solid rgba(0, 255, 127, 0.4);
+    border-radius: 0.25rem;
+    color: #00ff7f;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-code-run:hover {
+    background-color: rgba(0, 255, 127, 0.3);
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-code {
+    padding: 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    overflow-x: auto;
+  }
+  
+  /* Manim visualization output */
+  .wiki-code-output {
+    padding: 1rem;
+    border-top: 1px solid rgba(0, 255, 127, 0.3);
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .wiki-manim-output {
+    margin-top: 1rem;
+  }
+  
+  .wiki-manim-animation {
+    border: 1px solid rgba(0, 255, 127, 0.3);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: #000;
+  }
+  
+  /* Sources section styling */
+  .wiki-sources {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-sources-title {
+    font-size: 1.25rem;
+    color: #00ff7f;
+    margin-bottom: 1rem;
+  }
+  
+  .wiki-sources-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .wiki-source-item {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 0.75rem;
+    color: #e0e0e0;
+    font-size: 0.9rem;
+  }
+  
+  .wiki-source-number {
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+    color: #00ff7f;
+    font-weight: 600;
+  }
+  
+  .wiki-source-content {
+    flex: 1;
+  }
+  
+  .wiki-source-link {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    color: #00ff7f;
+  }
+  
+  .wiki-sources-action {
+    color: rgba(255, 99, 71, 0.7);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-sources-action:hover {
+    color: rgba(255, 99, 71, 1);
+    background-color: rgba(255, 99, 71, 0.1);
+  }
+  
+  /* Comments section styling */
+  .wiki-comments {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-comments-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    color: #00ff7f;
+    margin-bottom: 1rem;
+  }
+  
+  .wiki-comments-icon {
+    margin-right: 0.5rem;
+  }
+  
+  .wiki-comments-list {
+    margin-bottom: 1.5rem;
+  }
+  
+  .wiki-comment {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 127, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .wiki-comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .wiki-comment-author {
+    font-weight: 600;
+    color: #00ff7f;
+  }
+  
+  .wiki-comment-date {
+    color: rgba(224, 224, 224, 0.7);
+    font-size: 0.85rem;
+  }
+  
+  .wiki-comment-content {
+    color: #e0e0e0;
+  }
+  
+  .wiki-comment-form {
+    margin-top: 1.5rem;
+  }
+  
+  .wiki-comment-textarea {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 127, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    resize: vertical;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-comment-textarea:focus {
+    outline: none;
+    border-color: #00ff7f;
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-comment-submit {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 255, 127, 0.2);
+    border: 1px solid rgba(0, 255, 127, 0.4);
+    border-radius: 0.5rem;
+    color: #00ff7f;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-comment-submit:hover:not(:disabled) {
+    background-color: rgba(0, 255, 127, 0.3);
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-comment-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .wiki-comment-submit-icon {
+    margin-right: 0.5rem;
+  }
+  
+  /* Edit form styling */
+  .wiki-edit-form {
+    margin-bottom: 2rem;
+  }
+  
+  .wiki-edit-field {
+    margin-bottom: 1.5rem;
+  }
+  
+  .wiki-edit-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #00ff7f;
+    font-weight: 600;
+  }
+  
+  .wiki-edit-input {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 127, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-edit-input:focus {
+    outline: none;
+    border-color: #00ff7f;
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-edit-textarea {
+    width: 100%;
+    min-height: 400px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 127, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    resize: vertical;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-edit-textarea:focus {
+    outline: none;
+    border-color: #00ff7f;
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-edit-save {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 255, 127, 0.2);
+    border: 1px solid rgba(0, 255, 127, 0.4);
+    border-radius: 0.5rem;
+    color: #00ff7f;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-edit-save:hover:not(:disabled) {
+    background-color: rgba(0, 255, 127, 0.3);
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-edit-save:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .wiki-edit-cancel {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 99, 71, 0.1);
+    border: 1px solid rgba(255, 99, 71, 0.3);
+    border-radius: 0.5rem;
+    color: rgba(255, 99, 71, 0.9);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-edit-cancel:hover {
+    background-color: rgba(255, 99, 71, 0.2);
+    box-shadow: 0 0 10px rgba(255, 99, 71, 0.3);
+  }
+  
+  .wiki-edit-icon {
+    margin-right: 0.5rem;
+  }
+  
+  /* Admin panel styling */
+  .wiki-admin-panel {
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-left: 1px solid rgba(0, 255, 127, 0.3);
+    padding: 1rem;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  
+  .wiki-admin-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-admin-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    color: #00ff7f;
+    margin: 0;
+  }
+  
+  .wiki-admin-icon {
+    margin-right: 0.5rem;
+  }
+  
+  .wiki-admin-section {
+    margin-bottom: 2rem;
+  }
+  
+  .wiki-admin-section-title {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #00ff7f;
+    margin-bottom: 1rem;
+  }
+  
+  .wiki-admin-section-icon {
+    margin-right: 0.5rem;
+  }
+  
+  /* Pending edits styling */
+  .wiki-pending-edit {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 127, 0.2);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .wiki-pending-edit-title {
+    font-weight: 600;
+    color: #00ff7f;
+    margin-bottom: 0.5rem;
+  }
+  
+  .wiki-pending-edit-info {
+    font-size: 0.85rem;
+    color: rgba(224, 224, 224, 0.7);
+    margin-bottom: 0.75rem;
+  }
+  
+  .wiki-pending-edit-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .wiki-pending-edit-approve {
+    padding: 0.25rem 0.5rem;
+    background-color: rgba(0, 255, 127, 0.2);
+    border: 1px solid rgba(0, 255, 127, 0.4);
+    border-radius: 0.25rem;
+    color: #00ff7f;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-pending-edit-approve:hover {
+    background-color: rgba(0, 255, 127, 0.3);
+    box-shadow: 0 0 5px rgba(0, 255, 127, 0.3);
+  }
+  
+  .wiki-pending-edit-reject {
+    padding: 0.25rem 0.5rem;
+    background-color: rgba(255, 99, 71, 0.1);
+    border: 1px solid rgba(255, 99, 71, 0.3);
+    border-radius: 0.25rem;
+    color: rgba(255, 99, 71, 0.9);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-pending-edit-reject:hover {
+    background-color: rgba(255, 99, 71, 0.2);
+    box-shadow: 0 0 5px rgba(255, 99, 71, 0.3);
+  }
+  
+  .wiki-pending-edit-view {
+    padding: 0.25rem 0.5rem;
+    background-color: rgba(0, 122, 255, 0.1);
+    border: 1px solid rgba(0, 122, 255, 0.3);
+    border-radius: 0.25rem;
+    color: rgba(0, 122, 255, 0.9);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-pending-edit-view:hover {
+    background-color: rgba(0, 122, 255, 0.2);
+    box-shadow: 0 0 5px rgba(0, 122, 255, 0.3);
+  }
+  
+  /* Sources table styling */
+  .wiki-sources-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .wiki-sources-table th,
+  .wiki-sources-table td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 255, 127, 0.2);
+  }
+  
+  .wiki-sources-table th {
+    color: #00ff7f;
+    font-weight: 600;
+  }
+  
+  /* Empty state styling */
+  .wiki-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    padding: 2rem;
+  }
+  
+  .wiki-empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .wiki-empty-state-title {
+    font-size: 1.5rem;
+    color: #00ff7f;
+    margin-bottom: 1rem;
+  }
+  
+  .wiki-empty-state-text {
+    max-width: 500px;
+    margin-bottom: 2rem;
+    color: #e0e0e0;
+  }
+  
+  .wiki-empty-state-button {
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(0, 255, 127, 0.2);
+    border: 1px solid rgba(0, 255, 127, 0.4);
+    border-radius: 0.5rem;
+    color: #00ff7f;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .wiki-empty-state-button:hover {
+    background-color: rgba(0, 255, 127, 0.3);
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+  }
+  
+  /* Citations */
+  .wiki-citation {
+    color: #00ff7f;
+    cursor: help;
+    border-bottom: 1px dotted #00ff7f;
+  }
+  
+  /* No Matrix animation effects */
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .flex-1 {
+      flex-direction: column;
+    }
+    
+    .wiki-sidebar,
+    .wiki-admin-panel {
+      width: 100%;
+      max-height: 300px;
+    }
+    
+    .wiki-sidebar {
+      border-right: none;
+      border-bottom: 1px solid rgba(0, 255, 127, 0.3);
+    }
+    
+    .wiki-admin-panel {
+      border-left: none;
+      border-top: 1px solid rgba(0, 255, 127, 0.3);
+    }
+    
+    .wiki-page-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .wiki-page-actions {
+      margin-top: 1rem;
+    }
+    
+    .wiki-page-title {
+      font-size: 1.5rem;
+    }
+  }
+  
+  /* No Matrix background */
+  
+  /* Glowing effects for active elements */
+  .glow-effect {
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
+    text-shadow: 0 0 5px rgba(0, 255, 127, 0.5);
+  }
+  
+  /* Pulsing animation for buttons */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(0, 255, 127, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 15px rgba(0, 255, 127, 0.6);
+    }
+  }
+  
+  .pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }

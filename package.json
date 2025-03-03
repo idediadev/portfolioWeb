@@ -13,12 +13,18 @@
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
+    "katex": "^0.16.21",
     "lucide-react": "^0.476.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
+    "react-markdown": "^10.0.0",
     "react-router-dom": "^7.2.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "react-syntax-highlighter": "^15.6.1",
+    "rehype-katex": "^7.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import App from './App';
-import MasteryHubPage from './pages/MasteryHubPage'; // Percorso corretto
+import MasteryHubPage from './pages/MasteryHubPage';
+import WikiDEDIAPage from './pages/WikiDEDIAPage'; // Importiamo la nuova pagina
 
 // Un semplice router personalizzato per il sito
 const Router = () => {
@@ -50,24 +51,26 @@ const Router = () => {
     
     return () => {
       document.removeEventListener('click', handleLinkClick);
-      window.removeEventListener('popstate', handleLocationChange); // Corretto da addEventListener a removeEventListener
+      window.removeEventListener('popstate', handleLocationChange);
     };
   }, []);
   
   // Mappa i percorsi alle componenti corrispondenti
   const renderRoute = () => {
+    // Verifica se il percorso inizia con /wikidedia per gestire sottopercorsi
+    if (currentPath.startsWith('/wikidedia')) {
+      // Passa il percorso completo e lascia che WikiDEDIAPage gestisca internamente la navigazione
+      return <WikiDEDIAPage path={currentPath} />;
+    }
+    
+    // Gestisci gli altri percorsi
     switch (currentPath) {
       case '/masteryhub':
         return <MasteryHubPage />;
-      
-      // Qui puoi aggiungere altri percorsi in futuro
-      case '/madebyme':
-        // Avrai una pagina MadeByMe in futuro
-        return <App initialSection="madebyme" />;
-        
+      case '/masteryhub':
+        return <MasteryHubPage />;
       case '/servicehub':
-        // Avrai una pagina ServiceHub in futuro
-        return <App initialSection="servicehub" />;
+      return <App initialSection="servicehub" />;
         
       default:
         // Homepage o percorsi non riconosciuti tornano alla home

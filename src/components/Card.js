@@ -36,8 +36,8 @@ const Card = ({ id, title, description, animatedShape, delay = 0 }) => {
     switch(id) {
       case 'masteryhub':
         return '/masteryhub';
-      case 'madebyme':
-        return '/madebyme';
+        case 'wikidedia':  
+        return '/wikidedia';
       case 'servicehub':
         return '/servicehub';
       default:

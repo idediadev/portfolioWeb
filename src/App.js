@@ -51,6 +51,7 @@ const App = () => {
 
   useCardAnimation();
 
+  // Editing Cards component: 
   const cards = [
     {
       id: 'masteryhub',
@@ -60,9 +61,9 @@ const App = () => {
       delay: 0
     },
     {
-      id: 'madebyme',
-      title: '01 MadebyMe',
-      description: '-> This website ;-) ->Analysis of datasets from Fugaku, the Japanese supercomputer, with the aim of developing machine learning tasks, including predicting the exit state, duration, and computational power consumption of a job through regression problems.',
+      id: 'wikidedia',
+      title: '01 WikIDEDIA',
+      description: 'A comprehensive interactive encyclopedia platform where knowledge meets visualization. Create, explore and collaborate on topics spanning from computer science to mathematics, featuring interactive Python and Manim diagrams. Browse through chapters, contribute to articles, and engage with a community of like-minded enthusiasts.',
       animatedShape: 'animated-triangle',
       delay: 0.2
     },
