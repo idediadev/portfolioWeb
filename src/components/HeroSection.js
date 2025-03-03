@@ -33,7 +33,9 @@ const HeroSection = () => {
             <br /><br />
             Even though I'm still a student, I firmly believe that every small step counts. Every project I take on or every challenge I face pushes me closer to becoming the professional I aspire to be. That's why I see this page as more than just a showcase—it's a timeline of my growth, learning experiences, and the knowledge I gather along the way.
             <br /><br />
-            For now, it might just be a collection of experiments and simple projects, but I hope it will gradually turn into a portfolio of more ambitious and impactful work. Stay tuned for more updates and projects as I continue learning and evolving!
+            For now, it might just be a collection of experiments and simple projects, but I hope it will gradually turn into a portfolio of more ambitious work. 
+            <br /><br />
+            Stay tuned for more updates and projects as I continue learning and evolving!
           </p>
         </div>
       </div>

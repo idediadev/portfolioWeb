@@ -40,12 +40,12 @@ const Navbar = ({ onHireMeClick }) => {
           <a href="#madebyme" className="text-emerald-300 hover:text-emerald-400 transition-colors">01 MadebyMe</a>
           <a href="#servicehub" className="text-emerald-300 hover:text-emerald-400 transition-colors">02 ServiceHub</a>
         </div>
-
+      {/* Here you find the HIRE ME button label; change it for the user, but dev side it is HIRE ME button */}
         <button 
           onClick={handleHireMeClick}
           className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors pulse-animation text-xl font-bold"
         >
-          HIRE ME
+          Let's Talk
         </button>
       </div>
 
@@ -65,7 +65,7 @@ const Navbar = ({ onHireMeClick }) => {
               className="text-emerald-300 hover:text-emerald-400 py-2"
               onClick={() => setMenuOpen(false)}
             >
-              01 MadebyMe
+              01 wikIDEDIA
             </a>
             <a 
               href="#servicehub" 
@@ -78,7 +78,7 @@ const Navbar = ({ onHireMeClick }) => {
               onClick={handleHireMeClick}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors pulse-animation mt-2 text-xl font-bold"
             >
-              HIRE ME
+              Let's Talk
             </button>
           </div>
         </div>

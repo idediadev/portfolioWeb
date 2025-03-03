@@ -4,7 +4,7 @@ import HeroSection from './components/HeroSection';
 import Card from './components/Card';
 import Footer from './components/Footer';
 import ContactForm from './components/ContactForm';
-import SEO from './components/SEO'; // Importiamo il componente SEO
+import SEO from './components/SEO'; 
 import useCardAnimation from './components/AnimatioHandler';
 import './styles/styles.css';
 import DarkLightModeToggle from './components/DarkLightModeToggle';
@@ -14,7 +14,7 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
 
-  // Controllo delle preferenze di sistema al caricamento iniziale
+  // Check of system preferences at startig load for the chioce of the theme
   useEffect(() => {
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     setIsDarkMode(prefersDarkMode);
