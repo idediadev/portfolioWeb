@@ -1,3 +1,11 @@
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : Main component 
+@email        : davide.taddia2@studio.unibo.it
+*/
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
@@ -10,18 +18,18 @@ import './styles/styles.css';
 import DarkLightModeToggle from './components/DarkLightModeToggle';
 import EnhancedMatrixEffect from './components/EnhancedMatrixEffect';
 
-const App = () => {
+const App = ({ initialSection }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
 
-  // Check of system preferences at startig load for the chioce of the theme
+  // Check system preferences at load for theme choice
   useEffect(() => {
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     setIsDarkMode(prefersDarkMode);
     updateTheme(prefersDarkMode);
   }, []);
 
-  // Applica il tema al documento
+  // Apply theme to document
   const updateTheme = (dark) => {
     if (dark) {
       document.documentElement.classList.add('dark');
@@ -32,26 +40,26 @@ const App = () => {
     }
   };
 
-  // Funzione per cambiare modalità
+  // Function to toggle dark/light mode
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     updateTheme(newMode);
   };
 
-  // Funzione per gestire il click su "HIRE ME"
+  // Function to handle "HIRE ME" click
   const handleHireMeClick = () => {
     setShowContactForm(true);
   };
 
-  // Funzione per chiudere il modulo di contatto
+  // Function to close contact form
   const closeContactForm = () => {
     setShowContactForm(false);
   };
 
   useCardAnimation();
 
-  // Editing Cards component: 
+  // Card components: 
   const cards = [
     {
       id: 'masteryhub',
@@ -76,12 +84,22 @@ const App = () => {
     }
   ];
 
+  // Scroll to specific section on initial load if specified
+  useEffect(() => {
+    if (initialSection) {
+      const element = document.getElementById(initialSection);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [initialSection]);
+
   return (
     <div className={`transition-colors duration-300 min-h-screen ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}>
-      {/* Componente SEO per i meta tag */}
+      {/* SEO component for meta tags */}
       <SEO />
       
-      {/* Sostituiamo MatrixEffect con EnhancedMatrixEffect */}
+      {/* Enhanced Matrix Effect background */}
       <EnhancedMatrixEffect />
       
       <div className="absolute bottom-4 right-4 z-50">
@@ -91,7 +109,7 @@ const App = () => {
         />
       </div>
       
-      {/* Layout wrapper per mantenere una struttura coerente */}
+      {/* Layout wrapper for consistent structure */}
       <div className="flex flex-col min-h-screen">
         <Navbar onHireMeClick={handleHireMeClick} />
         
@@ -112,7 +130,7 @@ const App = () => {
         <Footer />
       </div>
 
-      {/* Mostra il form di contatto quando showContactForm è true */}
+      {/* Show contact form when showContactForm is true */}
       {showContactForm && <ContactForm onClose={closeContactForm} />}
     </div>
   );

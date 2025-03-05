@@ -1,3 +1,11 @@
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : MasteryHubPage component for the homepage. ""Another page in the home page"""
+@email        : davide.taddia2@studio.unibo.it
+*/
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ChevronRight, ChevronLeft, Search, Code, Database, Server, Terminal, Cpu, Plus, X, Edit, CheckCircle } from 'lucide-react';
 import '../styles/styles.css';

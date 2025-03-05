@@ -1,27 +1,36 @@
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : Routing for the pages created in the src/pages/.
+@email        : davide.taddia2@studio.unibo.it
+*/
 import React, { useState, useEffect } from 'react';
 import App from './App';
 import MasteryHubPage from './pages/MasteryHubPage';
-import WikiDEDIAPage from './pages/WikiDEDIAPage'; // Importiamo la nuova pagina
+import ServiceHubPage from './pages/ServiceHubPage';
+import WikiDEDIAPage from './pages/WikiDEDIAPage';  // Import WikiDEDIA page
 
-// Un semplice router personalizzato per il sito
+// A simple custom router for the site
 const Router = () => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
   
   useEffect(() => {
-    // Gestione dei cambiamenti nella history del browser
+    // Handle browser history changes
     const handleLocationChange = () => {
       setCurrentPath(window.location.pathname);
     };
     
-    // Intercetta i clic sui link per gestire la navigazione SPA
+    // Intercept link clicks to handle SPA navigation
     const handleLinkClick = (event) => {
-      // Trova il tag <a> più vicino (se esiste)
+      // Find the closest <a> tag (if it exists)
       let anchor = event.target;
       while (anchor && anchor.tagName !== 'A') {
         anchor = anchor.parentElement;
       }
       
-      // Se è un link interno, gestisci la navigazione
+      // If it's an internal link, handle the navigation
       if (
         anchor && 
         anchor.href && 
@@ -34,19 +43,19 @@ const Router = () => {
         
         const path = anchor.href.replace(window.location.origin, '');
         
-        // Usa history API per cambiare URL senza ricaricare la pagina
+        // Use history API to change URL without reloading the page
         window.history.pushState(null, '', path);
         setCurrentPath(path);
         
-        // Scroll alla cima della pagina
+        // Scroll to the top of the page
         window.scrollTo(0, 0);
       }
     };
     
-    // Ascolta i clic su tutta la pagina
+    // Listen for clicks on the entire page
     document.addEventListener('click', handleLinkClick);
     
-    // Ascolta i cambiamenti nella history (back/forward del browser)
+    // Listen for history changes (back/forward browser buttons)
     window.addEventListener('popstate', handleLocationChange);
     
     return () => {
@@ -55,25 +64,26 @@ const Router = () => {
     };
   }, []);
   
-  // Mappa i percorsi alle componenti corrispondenti
+  // Map paths to their corresponding components
   const renderRoute = () => {
-    // Verifica se il percorso inizia con /wikidedia per gestire sottopercorsi
+    // Handle WikiDEDIA routes
     if (currentPath.startsWith('/wikidedia')) {
-      // Passa il percorso completo e lascia che WikiDEDIAPage gestisca internamente la navigazione
       return <WikiDEDIAPage path={currentPath} />;
     }
     
-    // Gestisci gli altri percorsi
     switch (currentPath) {
       case '/masteryhub':
         return <MasteryHubPage />;
-      case '/masteryhub':
-        return <MasteryHubPage />;
+      
+      case '/madebyme':
+        // Future MadeByMe page
+        return <App initialSection="madebyme" />;
+        
       case '/servicehub':
-      return <App initialSection="servicehub" />;
+        return <ServiceHubPage />;
         
       default:
-        // Homepage o percorsi non riconosciuti tornano alla home
+        // Homepage or unrecognized paths return to home
         return <App />;
     }
   };

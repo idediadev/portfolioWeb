@@ -1,3 +1,11 @@
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : dark-light mode toggle button
+@email        : davide.taddia2@studio.unibo.it
+*/
 import React from 'react';
 import { Sun, Moon } from 'lucide-react';
 

@@ -1,3 +1,11 @@
+<!-- 
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : RSS implementation
+@email        : davide.taddia2@studio.unibo.it
+-->
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>

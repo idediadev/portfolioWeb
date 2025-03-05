@@ -1,3 +1,11 @@
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : WikiDEDIA Page
+@email        : davide.taddia2@studio.unibo.it
+*/
 import React, { useState, useEffect } from 'react';
 import { 
   ArrowLeft, Book, FileText, Plus, Settings, MessageSquare, 

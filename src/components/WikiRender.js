@@ -1,3 +1,11 @@
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : WikiRenderer component for rendering advanced wiki content with React Markdown and custom components
+@email        : davide.taddia2@studio.unibo.it
+*/
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';

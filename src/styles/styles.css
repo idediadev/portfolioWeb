@@ -13,15 +13,145 @@ body {
   min-height: 100vh; /* Assicura che il body occupi almeno l'intera altezza della viewport */
 }
 
+/* Reset degli stili precedenti */
 .navbar-gradient, .footer-gradient {
-  background: linear-gradient(0deg, #059669 85%, rgba(5, 150, 105, 0) 100%);
-  width: 100%; /* Assicura che la navbar e il footer occupino l'intera larghezza */
+  background: none;
+}
+
+/* Navbar con gradiente come in WikiDEDIA */
+nav {
+  background: linear-gradient(0deg, rgba(0, 255, 127, 0.15) 0%, rgba(0, 0, 0, 1) 100%) !important;
+  font-family: 'Courier New', monospace !important;
+  border-bottom: 1px solid rgba(0, 255, 127, 0.3) !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  width: 100%; /* Assicura che la navbar occupi l'intera larghezza */
+}
+
+/* Footer con gradiente speculare */
+footer {
+  background: linear-gradient(180deg, rgba(0, 255, 127, 0.15) 0%, rgba(0, 0, 0, 1) 100%) !important;
+  font-family: 'Courier New', monospace !important;
+  border-top: 1px solid rgba(0, 255, 127, 0.3) !important;
+  width: 100%; /* Assicura che il footer occupi l'intera larghezza */
+}
+
+/* Stile dei link coerente con WikiDEDIA */
+nav a, footer a {
+  color: #00ff7f !important;
+  transition: all 0.2s ease !important;
+}
+
+nav a:hover, footer a:hover {
+  color: #00ff7f !important;
+  text-shadow: 0 0 5px rgba(0, 255, 127, 0.5) !important;
+  background-color: rgba(0, 255, 127, 0.1) !important;
+}
+
+/* Stile specifico per il pulsante Let's Talk */
+.pulse-animation, 
+.lets-talk-button,
+nav button:not(.mobile-menu-button) {
+  background-color: #3b82f6 !important; /* Blu */
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7) !important;
+  animation: pulse-custom 2s infinite !important;
+  text-shadow: none !important;
+}
+
+.pulse-animation:hover, 
+.lets-talk-button:hover,
+nav button:not(.mobile-menu-button):hover {
+  background-color: #2563eb !important; /* Blu più scuro all'hover */
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.7) !important;
+  animation: none !important; /* Ferma l'animazione all'hover */
+}
+
+/* Reimplementa l'animazione pulse originale */
+@keyframes pulse-custom {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+  }
+}
+
+/* Stile back to home link (come in WikiDEDIA) */
+.back-link {
+  display: flex;
+  align-items: center;
+  color: #00ff7f;
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  background-color: rgba(0, 255, 127, 0.1);
+  text-shadow: 0 0 5px #00ff7f;
+}
+
+.back-icon {
+  margin-right: 0.5rem;
+}
+
+/* Maggiore spaziatura verticale tra card */
+.container.space-y-40 > * {
+  margin-bottom: 10rem !important;
+}
+
+/* Migliore ombra per le card */
+.card-trigger {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+             box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card-trigger:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px -5px rgba(0, 255, 127, 0.2);
+}
+
+/* Stili aggiuntivi per il primo card/masteryhub */
+#masteryhub .card-trigger {
+  margin-top: 5rem;
+}
+
+/* Stile per la transizione tra hero section e cards */
+.hero-to-cards-transition {
+  margin-top: 8rem;
+  padding-top: 2rem;
+}
+
+/* Animazione speciale per la prima card */
+@keyframes fadeInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.first-card-animate {
+  animation: fadeInFromBottom 1.5s ease-out forwards;
 }
 
 @keyframes pulse-custom {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); /* Ombra blu */
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
   }
   70% {
     transform: scale(1.05);
@@ -132,11 +262,6 @@ body {
   height: 200px;
   background: linear-gradient(45deg, #00ff7f, #4F4A4A);
   animation: gradient-spin 8s linear infinite;
-}
-
-.footer-gradient {
-  background: linear-gradient(0deg, #059669 85%, rgba(5, 150, 105, 0) 100%);
-  width: 100%; /* Assicura che il footer occupi l'intera larghezza */
 }
 
 .overflow-y-auto::-webkit-scrollbar {
