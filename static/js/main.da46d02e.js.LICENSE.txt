@@ -1,4 +1,22 @@
 /*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : Navbar component from the homepage
+@email        : davide.taddia2@studio.unibo.it
+*/
+
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : WikiDEDIA Page
+@email        : davide.taddia2@studio.unibo.it
+*/
+
+/*
 object-assign
 (c) Sindre Sorhus
 @license MIT
