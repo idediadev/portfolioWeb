@@ -1,0 +1,17 @@
+# robots.txt for davidetaddia.dev
+User-agent: *
+Allow: /
+Allow: /masteryhub/
+Allow: /servicehub/
+
+# Optional: Disallow specific private or under development sections
+# Disallow: /admin/
+# Disallow: /test/
+# Disallow: /old-pages/
+
+# Add any specific crawl-delay if needed (in seconds)
+# Some search engines respect this
+# Crawl-delay: 10
+
+# Sitemap location (add once you've created a sitemap.xml)
+Sitemap: https://davidetaddia.dev/sitemap.xml

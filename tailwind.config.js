@@ -15,6 +15,28 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        // Dark mode palette
+        'dark': {
+          'highlight': '#00FF7F',   // Testo evidenziato
+          'action': '#6DE6B6',      // Testo per azioni
+          'accent': '#02B55E',      // Verde per effetti
+          'text': '#FFFFFF',        // Testo discorsivo
+          'bg': '#080C13',          // Sfondo
+          'button': '#3B82F6',      // Pulsanti (sfondo)
+          'button-text': '#FFFFFF', // Pulsanti (testo)
+        },
+        // Light mode palette
+        'light': {
+          'highlight': '#008F4F',   // Testo evidenziato
+          'action': '#007D5B',      // Testo per azioni
+          'accent': '#A1E8D9',      // Verde per effetti
+          'text': '#222222',        // Testo discorsivo
+          'bg': '#F8F8F8',          // Sfondo
+          'button': '#1D4ED8',      // Pulsanti (sfondo)
+          'button-text': '#FFFFFF', // Pulsanti (testo)
+        },
+      },
       animation: {
         'spin-slow': 'spin 3s linear infinite',
         'float': 'float 3s ease-in-out infinite',

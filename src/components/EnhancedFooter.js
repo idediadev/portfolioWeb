@@ -6,14 +6,18 @@
 @description  : Enhanced footer component with categories and social links
 @email        : davide.taddia2@studio.unibo.it
 */
-import React from 'react';
+import React, { useState } from 'react';
 import { Github, Linkedin, Mail, MessageSquare } from 'lucide-react';
+
+// Import the logo image directly
+// Make sure the path is correct based on your project structure
 import logoImage from '../logoDavideTaddia.jpeg';
 
 const EnhancedFooter = () => {
-  // Fallback for logo in case image fails to load
-  const [logoError, setLogoError] = React.useState(false);
+  // State for logo error handling
+  const [logoError, setLogoError] = useState(false);
   
+  // Logo fallback component
   const LogoFallback = () => (
     <div className="w-16 h-16 flex items-center justify-center text-dark-highlight font-bold text-xl bg-transparent rounded-full border-2 border-dark-highlight">
       <span className="font-mono">DT</span>
@@ -32,24 +36,31 @@ const EnhancedFooter = () => {
     { 
       name: "GitHub", 
       icon: <Github size={20} />, 
-      link: "https://github.com/davidetaddia" 
+      link: "https://github.com/davidetaddia",
+      aria: "Visit Davide Taddia's GitHub profile"
     },
     { 
       name: "LinkedIn", 
       icon: <Linkedin size={20} />, 
-      link: "https://linkedin.com/in/davide-taddia" 
+      link: "https://linkedin.com/in/davide-taddia", 
+      aria: "Visit Davide Taddia's LinkedIn profile"
     },
     { 
       name: "Email", 
       icon: <Mail size={20} />, 
-      link: "mailto:davide.taddia2@studio.unibo.it" 
+      link: "mailto:davide.taddia2@studio.unibo.it",
+      aria: "Send an email to Davide Taddia" 
     },
     { 
       name: "Contact", 
       icon: <MessageSquare size={20} />, 
-      link: "#contact" 
+      link: "#contact",
+      aria: "Open contact form" 
     }
   ];
+
+  // Current year for copyright
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative bg-gradient-to-t from-black to-gray-900 text-white pt-16 pb-8">
@@ -89,6 +100,7 @@ const EnhancedFooter = () => {
                   <a 
                     href={category.link} 
                     className="text-gray-400 hover:text-dark-highlight transition-colors"
+                    aria-label={`Navigate to ${category.name}`}
                   >
                     {category.name}
                   </a>
@@ -108,6 +120,7 @@ const EnhancedFooter = () => {
                     className="text-gray-400 hover:text-dark-highlight transition-colors flex items-center gap-2"
                     target={social.name !== "Contact" ? "_blank" : undefined}
                     rel={social.name !== "Contact" ? "noopener noreferrer" : undefined}
+                    aria-label={social.aria}
                   >
                     {social.icon}
                     <span>{social.name}</span>
@@ -124,16 +137,20 @@ const EnhancedFooter = () => {
               Subscribe for updates on new projects and articles.
             </p>
             <div className="w-full">
-              <div className="flex flex-col sm:flex-row gap-2">
+              <form className="flex flex-col sm:flex-row gap-2" onSubmit={(e) => e.preventDefault()}>
                 <input 
                   type="email" 
                   placeholder="Your email" 
+                  aria-label="Your email address"
                   className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-gray-300 focus:outline-none focus:border-dark-highlight flex-grow"
                 />
-                <button className="px-4 py-2 bg-dark-accent hover:bg-dark-highlight transition-colors text-white rounded-lg font-medium">
+                <button 
+                  type="submit"
+                  className="px-4 py-2 bg-dark-accent hover:bg-dark-highlight transition-colors text-white rounded-lg font-medium"
+                >
                   Subscribe
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
@@ -144,7 +161,7 @@ const EnhancedFooter = () => {
         {/* Bottom section with copyright */}
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            © 2025 Davide Taddia. All rights reserved.
+            © {currentYear} Davide Taddia. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <a href="/privacy-policy" className="text-gray-500 hover:text-dark-highlight text-sm transition-colors">

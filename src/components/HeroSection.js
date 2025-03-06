@@ -3,7 +3,7 @@
 @version      : 0.1
 @copyrigth    : IdediaDEV (Davide Taddia) - 2025  
 @license      : GLP-3.0 
-@description  : Hero Section component of the homepage
+@description  : Hero section of the homepage
 @email        : davide.taddia2@studio.unibo.it
 */
 import React from 'react';
@@ -11,19 +11,18 @@ import React from 'react';
 const HeroSection = () => {
   return (
     <section className="w-full mx-auto relative min-h-screen">
-      {/* Rimuoviamo il canvas di animazione dalla HeroSection perché ora usiamo EnhancedMatrixEffect */}
-      
-      {/* Overlay scuro semi-trasparente per migliorare la leggibilità */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10"></div>
+      {/* Rimuoviamo qualsiasi overlay che potrebbe bloccare la trasparenza
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 dark:bg-opacity-50 light:bg-opacity-20 z-10"></div>
+      */}
       
       {/* Contenuto della hero section */}
       <div className="relative z-20 flex flex-col md:flex-row max-w-6xl mx-auto h-full pt-20 pb-10">
         <div className="w-full md:w-1/2 mb-8 md:mb-0 flex items-center justify-center p-8">
           <div className="text-center">
-            <h2 className="text-emerald-300 text-3xl md:text-4xl font-bold mb-4">Davide Taddia</h2>
-            <p className="text-white text-lg md:text-xl">Computer Science Student & Developer</p>
-            <div className="mt-6 border-t border-emerald-700 pt-4 w-3/4 mx-auto">
-              <p className="text-emerald-100 text-sm md:text-base italic">
+            <h2 className="text-primary text-3xl md:text-4xl font-bold mb-4">Davide Taddia</h2>
+            <p className="text-current text-lg md:text-xl">Computer Science Student & Developer</p>
+            <div className="mt-6 border-t border-dark-accent dark:border-dark-accent light:border-light-accent pt-4 w-3/4 mx-auto">
+              <p className="text-action text-sm md:text-base italic">
                 "Turning passion into code, one project at a time."
               </p>
             </div>
@@ -31,10 +30,10 @@ const HeroSection = () => {
         </div>
         
         <div className="w-full md:w-1/2 flex flex-col justify-center p-4 md:p-12 slide-in-section">
-          <h1 className="text-emerald-300 text-3xl md:text-4xl mb-6">
+          <h1 className="text-primary text-3xl md:text-4xl mb-6">
             About Me
           </h1>
-          <p className="text-emerald-300 text-base md:text-lg">
+          <p className="text-action text-base md:text-lg">
             I'm really passionate about computer science and everything related to it. Right now, I'm just a university student, but I'm working hard every day to get closer to my goals. I set up this page as a style exercise, and hopefully, one day, I'll fill it with bigger and more interesting projects.
             <br /><br />
             My journey into computer science started out of pure curiosity and quickly turned into a passion...

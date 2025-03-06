@@ -60,6 +60,13 @@ const EnhancedMatrixEffect = () => {
         this.age = 0;
         this.changeInterval = Math.floor(Math.random() * 20) + 10;
         this.frameCount = 0;
+        
+        // Determina il colore in base al tema (per dark/light mode)
+        const htmlElement = document.documentElement;
+        const isDarkMode = htmlElement.classList.contains('dark');
+        this.color = isDarkMode ? 
+          'rgba(0, 255, 127, ' + this.maxOpacity + ')' : // Dark mode - verde brillante 
+          'rgba(0, 143, 79, ' + this.maxOpacity + ')';   // Light mode - verde scuro
       }
 
       getRandomCharacter() {
@@ -99,7 +106,13 @@ const EnhancedMatrixEffect = () => {
         if (this.opacity <= 0) return false;
         
         ctx.font = `${this.size}px monospace`;
-        ctx.fillStyle = `rgba(0, 255, 127, ${this.opacity})`;
+        
+        // Determiniamo il colore basato sul tema
+        const htmlElement = document.documentElement;
+        const isDarkMode = htmlElement.classList.contains('dark');
+        const colorBase = isDarkMode ? '0, 255, 127' : '0, 143, 79';
+        
+        ctx.fillStyle = `rgba(${colorBase}, ${this.opacity})`;
         ctx.fillText(this.value, this.x, this.y);
         return true;
       }
@@ -146,7 +159,6 @@ const EnhancedMatrixEffect = () => {
     <canvas 
       ref={canvasRef} 
       className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"
-      style={{ opacity: 0.7 }}
     />
   );
 };

@@ -96,12 +96,12 @@ const ContactForm = ({ onClose }) => {
   if (submitted) {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
-        <div className="bg-neutral-800 p-8 rounded-lg shadow-lg max-w-md w-full text-center">
-          <div className="text-emerald-300 text-6xl mb-4">✓</div>
-          <h2 className="text-emerald-300 text-2xl mb-4">Thank You!</h2>
-          <p className="text-white mb-6">Your message has been sent successfully to davidetaddia95@gmail.com. I'll get back to you shortly.</p>
+        <div className="card-bg p-8 rounded-lg shadow-lg max-w-md w-full text-center">
+          <div className="text-primary text-6xl mb-4">✓</div>
+          <h2 className="text-primary text-2xl mb-4">Thank You!</h2>
+          <p className="text-current mb-6">Your message has been sent successfully to davidetaddia95@gmail.com. I'll get back to you shortly.</p>
           <div className="w-full bg-gray-700 h-2 rounded-full">
-            <div className="bg-emerald-300 h-2 rounded-full animate-shrink"></div>
+            <div className="bg-dark-accent dark:bg-dark-accent light:bg-light-accent h-2 rounded-full animate-shrink"></div>
           </div>
         </div>
       </div>
@@ -110,17 +110,17 @@ const ContactForm = ({ onClose }) => {
   
   return (
     <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-neutral-800 p-6 md:p-8 rounded-lg shadow-lg max-w-3xl w-full relative">
+      <div className="card-bg p-6 md:p-8 rounded-lg shadow-lg max-w-3xl w-full relative">
         <button 
           onClick={onClose}
-          className="absolute top-4 left-4 text-emerald-300 hover:text-emerald-400 transition-colors focus:outline-none"
+          className="absolute top-4 left-4 text-action hover:text-primary transition-colors focus:outline-none"
         >
           <ArrowLeft size={24} />
         </button>
         
         <div className="text-center mb-8 pt-6">
-          <h2 className="text-emerald-300 text-3xl md:text-4xl mb-2">Hire Me</h2>
-          <p className="text-white opacity-80">Let's collaborate on your next project</p>
+          <h2 className="text-primary text-3xl md:text-4xl mb-2">Hire Me</h2>
+          <p className="text-current opacity-80">Let's collaborate on your next project</p>
         </div>
         
         <form 
@@ -131,7 +131,7 @@ const ContactForm = ({ onClose }) => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="name" className="block text-emerald-300 mb-2">Name</label>
+              <label htmlFor="name" className="block text-primary mb-2">Name</label>
               <input
                 type="text"
                 id="name"
@@ -139,13 +139,13 @@ const ContactForm = ({ onClose }) => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-white focus:border-emerald-300 focus:outline-none transition-colors"
+                className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-current focus:border-dark-highlight dark:focus:border-dark-highlight light:focus:border-light-highlight focus:outline-none transition-colors"
                 placeholder="Your name"
               />
             </div>
             
             <div>
-              <label htmlFor="email" className="block text-emerald-300 mb-2">Email</label>
+              <label htmlFor="email" className="block text-primary mb-2">Email</label>
               <input
                 type="email"
                 id="email"
@@ -153,14 +153,14 @@ const ContactForm = ({ onClose }) => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-white focus:border-emerald-300 focus:outline-none transition-colors"
+                className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-current focus:border-dark-highlight dark:focus:border-dark-highlight light:focus:border-light-highlight focus:outline-none transition-colors"
                 placeholder="your.email@example.com"
               />
             </div>
           </div>
           
           <div>
-            <label className="block text-emerald-300 mb-2">Services Needed</label>
+            <label className="block text-primary mb-2">Services Needed</label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <label className="flex items-center space-x-3 p-3 bg-neutral-700 rounded-lg cursor-pointer hover:bg-neutral-600 transition-colors">
                 <input
@@ -168,9 +168,9 @@ const ContactForm = ({ onClose }) => {
                   name="services"
                   value="Web Development"
                   onChange={handleCheckboxChange}
-                  className="form-checkbox h-5 w-5 text-emerald-300 rounded focus:ring-emerald-300"
+                  className="form-checkbox h-5 w-5 text-dark-accent dark:text-dark-accent light:text-light-accent rounded focus:ring-dark-accent dark:focus:ring-dark-accent light:focus:ring-light-accent"
                 />
-                <span className="text-white">Web Development</span>
+                <span className="text-current">Web Development</span>
               </label>
               
               <label className="flex items-center space-x-3 p-3 bg-neutral-700 rounded-lg cursor-pointer hover:bg-neutral-600 transition-colors">
@@ -179,9 +179,9 @@ const ContactForm = ({ onClose }) => {
                   name="services"
                   value="Mobile App"
                   onChange={handleCheckboxChange}
-                  className="form-checkbox h-5 w-5 text-emerald-300 rounded focus:ring-emerald-300"
+                  className="form-checkbox h-5 w-5 text-dark-accent dark:text-dark-accent light:text-light-accent rounded focus:ring-dark-accent dark:focus:ring-dark-accent light:focus:ring-light-accent"
                 />
-                <span className="text-white">Mobile App</span>
+                <span className="text-current">Mobile App</span>
               </label>
               
               <label className="flex items-center space-x-3 p-3 bg-neutral-700 rounded-lg cursor-pointer hover:bg-neutral-600 transition-colors">
@@ -190,9 +190,9 @@ const ContactForm = ({ onClose }) => {
                   name="services"
                   value="UI/UX Design"
                   onChange={handleCheckboxChange}
-                  className="form-checkbox h-5 w-5 text-emerald-300 rounded focus:ring-emerald-300"
+                  className="form-checkbox h-5 w-5 text-dark-accent dark:text-dark-accent light:text-light-accent rounded focus:ring-dark-accent dark:focus:ring-dark-accent light:focus:ring-light-accent"
                 />
-                <span className="text-white">UI/UX Design</span>
+                <span className="text-current">UI/UX Design</span>
               </label>
               
               <label className="flex items-center space-x-3 p-3 bg-neutral-700 rounded-lg cursor-pointer hover:bg-neutral-600 transition-colors">
@@ -201,21 +201,21 @@ const ContactForm = ({ onClose }) => {
                   name="services"
                   value="Consultation"
                   onChange={handleCheckboxChange}
-                  className="form-checkbox h-5 w-5 text-emerald-300 rounded focus:ring-emerald-300"
+                  className="form-checkbox h-5 w-5 text-dark-accent dark:text-dark-accent light:text-light-accent rounded focus:ring-dark-accent dark:focus:ring-dark-accent light:focus:ring-light-accent"
                 />
-                <span className="text-white">Consultation</span>
+                <span className="text-current">Consultation</span>
               </label>
             </div>
           </div>
           
           <div>
-            <label htmlFor="budget" className="block text-emerald-300 mb-2">Budget Range</label>
+            <label htmlFor="budget" className="block text-primary mb-2">Budget Range</label>
             <select
               id="budget"
               name="budget"
               value={formData.budget}
               onChange={handleChange}
-              className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-white focus:border-emerald-300 focus:outline-none transition-colors"
+              className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-current focus:border-dark-highlight dark:focus:border-dark-highlight light:focus:border-light-highlight focus:outline-none transition-colors"
             >
               <option value="">Select a budget range</option>
               <option value="Less than $1,000">Less than $1,000</option>
@@ -226,7 +226,7 @@ const ContactForm = ({ onClose }) => {
           </div>
           
           <div>
-            <label htmlFor="message" className="block text-emerald-300 mb-2">Project Details</label>
+            <label htmlFor="message" className="block text-primary mb-2">Project Details</label>
             <textarea
               id="message"
               name="message"
@@ -234,13 +234,13 @@ const ContactForm = ({ onClose }) => {
               value={formData.message}
               onChange={handleChange}
               required
-              className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-white focus:border-emerald-300 focus:outline-none transition-colors"
+              className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-current focus:border-dark-highlight dark:focus:border-dark-highlight light:focus:border-light-highlight focus:outline-none transition-colors"
               placeholder="Tell me about your project..."
             ></textarea>
           </div>
           
           {error && (
-            <div className="bg-red-900/50 border border-red-500 text-white p-3 rounded-lg">
+            <div className="bg-red-900/50 border border-red-500 text-current p-3 rounded-lg">
               {error}
             </div>
           )}
@@ -249,7 +249,7 @@ const ContactForm = ({ onClose }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full ${isSubmitting ? 'bg-emerald-800' : 'bg-emerald-600 hover:bg-emerald-700'} text-white font-bold py-3 px-6 rounded-lg transition-colors ${!isSubmitting && 'pulse-animation'}`}
+              className={`w-full btn-primary font-bold py-3 px-6 rounded-lg transition-colors ${!isSubmitting && 'pulse-animation'}`}
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>

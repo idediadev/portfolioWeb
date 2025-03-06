@@ -39,9 +39,17 @@ export const ThemeProvider = ({ children }) => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
       document.documentElement.classList.remove('light');
+      
+      // Aggiorniamo anche le variabili CSS personalizzate
+      document.documentElement.style.setProperty('--accent-color', '#00FF7F');
+      document.documentElement.style.setProperty('--action-color', '#6DE6B6');
     } else {
       document.documentElement.classList.remove('dark');
       document.documentElement.classList.add('light');
+      
+      // Aggiorniamo anche le variabili CSS personalizzate
+      document.documentElement.style.setProperty('--accent-color', '#008F4F');
+      document.documentElement.style.setProperty('--action-color', '#007D5B');
     }
     
     // Salva il tema nelle preferenze

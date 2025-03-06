@@ -3,163 +3,122 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
+/* Stili di base */
 body {
-  background-color: black;
-  color: #00ff00;
-  overflow-x: hidden; /* Solo overflow-x hidden per permettere lo scroll verticale */
   margin: 0;
   padding: 0;
   font-family: 'Courier New', Courier, monospace;
-  min-height: 100vh; /* Assicura che il body occupi almeno l'intera altezza della viewport */
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Reset degli stili precedenti */
-.navbar-gradient, .footer-gradient {
-  background: none;
+/* Dark mode styles */
+.dark {
+    background-color: #080c13; /* Aggiornato il colore di sfondo della dark mode */
+    color: theme('colors.dark.text');
 }
 
-/* Navbar con gradiente come in WikiDEDIA */
-nav {
-  background: linear-gradient(0deg, rgba(0, 255, 127, 0.15) 0%, rgba(0, 0, 0, 1) 100%) !important;
-  font-family: 'Courier New', monospace !important;
-  border-bottom: 1px solid rgba(0, 255, 127, 0.3) !important;
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
-  width: 100%; /* Assicura che la navbar occupi l'intera larghezza */
+.dark h1, .dark h2, .dark h3 {
+  color: theme('colors.dark.highlight');
+  transition: text-shadow 0.3s ease;
 }
 
-/* Footer con gradiente speculare */
-footer {
-  background: linear-gradient(180deg, rgba(0, 255, 127, 0.15) 0%, rgba(0, 0, 0, 1) 100%) !important;
-  font-family: 'Courier New', monospace !important;
-  border-top: 1px solid rgba(0, 255, 127, 0.3) !important;
-  width: 100%; /* Assicura che il footer occupi l'intera larghezza */
+.dark h1:hover, .dark h2:hover, .dark h3:hover {
+  text-shadow: 0 0 12px rgba(0, 255, 127, 0.6);
 }
 
-/* Stile dei link coerente con WikiDEDIA */
-nav a, footer a {
-  color: #00ff7f !important;
-  transition: all 0.2s ease !important;
+.dark .text-primary {
+  color: theme('colors.dark.highlight');
 }
 
-nav a:hover, footer a:hover {
-  color: #00ff7f !important;
-  text-shadow: 0 0 5px rgba(0, 255, 127, 0.5) !important;
-  background-color: rgba(0, 255, 127, 0.1) !important;
+.dark .text-action {
+  color: theme('colors.dark.action');
 }
 
-/* Stile specifico per il pulsante Let's Talk */
-.pulse-animation, 
-.lets-talk-button,
-nav button:not(.mobile-menu-button) {
-  background-color: #3b82f6 !important; /* Blu */
-  color: white !important;
-  border: none !important;
-  box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7) !important;
-  animation: pulse-custom 2s infinite !important;
-  text-shadow: none !important;
+.dark .btn-primary {
+  background-color: theme('colors.dark.button');
+  color: theme('colors.dark.button-text');
 }
 
-.pulse-animation:hover, 
-.lets-talk-button:hover,
-nav button:not(.mobile-menu-button):hover {
-  background-color: #2563eb !important; /* Blu più scuro all'hover */
-  box-shadow: 0 0 10px rgba(37, 99, 235, 0.7) !important;
-  animation: none !important; /* Ferma l'animazione all'hover */
+.dark .btn-primary:hover {
+  background-color: theme('colors.dark.button');
+  filter: brightness(1.1);
 }
 
-/* Reimplementa l'animazione pulse originale */
+.dark .card-bg {
+  background-color: rgba(38, 38, 38, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.dark .card-bg:hover {
+  background-color: rgba(38, 38, 38, 0.85);
+}
+
+.dark .navbar-gradient, .dark .footer-gradient {
+  background: linear-gradient(0deg, theme('colors.dark.accent') 85%, rgba(2, 181, 94, 0) 100%);
+}
+
+/* Light mode styles */
+.light {
+  background-color: theme('colors.light.bg');
+  color: theme('colors.light.text');
+}
+
+.light h1, .light h2, .light h3 {
+  color: theme('colors.light.highlight');
+  transition: text-shadow 0.3s ease;
+}
+
+.light h1:hover, .light h2:hover, .light h3:hover {
+  text-shadow: 0 0 12px rgba(0, 143, 79, 0.3);
+}
+
+.light .text-primary {
+  color: theme('colors.light.highlight');
+}
+
+.light .text-action {
+  color: theme('colors.light.action');
+}
+
+.light .btn-primary {
+  background-color: theme('colors.light.button');
+  color: theme('colors.light.button-text');
+}
+
+.light .btn-primary:hover {
+  background-color: theme('colors.light.button');
+  filter: brightness(1.1);
+}
+
+.light .card-bg {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 143, 79, 0.1);
+}
+
+.light .card-bg:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 143, 79, 0.2);
+}
+
+.light .navbar-gradient, .light .footer-gradient {
+  background: linear-gradient(0deg, theme('colors.light.accent') 85%, rgba(161, 232, 217, 0) 100%);
+}
+
+/* Animazioni */
 @keyframes pulse-custom {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
   }
   70% {
     transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
-  }
-}
-
-/* Stile back to home link (come in WikiDEDIA) */
-.back-link {
-  display: flex;
-  align-items: center;
-  color: #00ff7f;
-  text-decoration: none;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  transition: all 0.3s ease;
-}
-
-.back-link:hover {
-  background-color: rgba(0, 255, 127, 0.1);
-  text-shadow: 0 0 5px #00ff7f;
-}
-
-.back-icon {
-  margin-right: 0.5rem;
-}
-
-/* Maggiore spaziatura verticale tra card */
-.container.space-y-40 > * {
-  margin-bottom: 10rem !important;
-}
-
-/* Migliore ombra per le card */
-.card-trigger {
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
-             box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.card-trigger:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 35px -5px rgba(0, 255, 127, 0.2);
-}
-
-/* Stili aggiuntivi per il primo card/masteryhub */
-#masteryhub .card-trigger {
-  margin-top: 5rem;
-}
-
-/* Stile per la transizione tra hero section e cards */
-.hero-to-cards-transition {
-  margin-top: 8rem;
-  padding-top: 2rem;
-}
-
-/* Animazione speciale per la prima card */
-@keyframes fadeInFromBottom {
-  0% {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.first-card-animate {
-  animation: fadeInFromBottom 1.5s ease-out forwards;
-}
-
-@keyframes pulse-custom {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
-  }
-  70% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
   }
 }
 
@@ -184,7 +143,7 @@ nav button:not(.mobile-menu-button):hover {
 
 .slide-in-section {
   animation: slideInFade 1.5s ease-out forwards;
-  width: 100%; /* Assicura che la sezione occupi l'intera larghezza del contenitore */
+  width: 100%;
 }
 
 .slide-in-section h1 {
@@ -218,7 +177,7 @@ nav button:not(.mobile-menu-button):hover {
 
 .card-trigger {
   opacity: 0;
-  width: 100%; /* Assicura che le card occupino l'intera larghezza disponibile */
+  width: 100%;
 }
 
 .card-animate {
@@ -234,15 +193,11 @@ nav button:not(.mobile-menu-button):hover {
   animation: float 3s ease-in-out infinite;
 }
 
-@keyframes gradient-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
+/* Animated shapes updated with new colors */
 .animated-circle {
   width: 200px;
   height: 200px;
-  background: linear-gradient(45deg, #00ff7f, #4F4A4A);
+  background: linear-gradient(45deg, var(--accent-color, #00FF7F), #4F4A4A);
   border-radius: 50%;
   animation: gradient-spin 8s linear infinite;
 }
@@ -252,7 +207,7 @@ nav button:not(.mobile-menu-button):hover {
   height: 0;
   border-left: 100px solid transparent;
   border-right: 100px solid transparent;
-  border-bottom: 173.2px solid #00ff7f;
+  border-bottom: 173.2px solid var(--accent-color, #00FF7F);
   position: relative;
   animation: gradient-spin 8s linear infinite;
 }
@@ -260,62 +215,27 @@ nav button:not(.mobile-menu-button):hover {
 .animated-square {
   width: 200px;
   height: 200px;
-  background: linear-gradient(45deg, #00ff7f, #4F4A4A);
+  background: linear-gradient(45deg, var(--accent-color, #00FF7F), #4F4A4A);
   animation: gradient-spin 8s linear infinite;
 }
 
-.overflow-y-auto::-webkit-scrollbar {
-  width: 8px;
+@keyframes gradient-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-.overflow-y-auto::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+/* Set color variables based on theme */
+.dark {
+  --accent-color: theme('colors.dark.highlight');
+  --action-color: theme('colors.dark.action');
 }
 
-.overflow-y-auto::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 127, 0.3);
-  border-radius: 4px;
+.light {
+  --accent-color: theme('colors.light.highlight');
+  --action-color: theme('colors.light.action');
 }
 
-.overflow-y-auto::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 127, 0.5);
-}
-
-/* Rimuoviamo il vecchio codice MatrixEffect e aggiungiamo le nuove regole */
-/* 
-.matrix {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.matrix span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 20px;
-  opacity: 0;
-  animation: fall linear infinite;
-}
-
-@keyframes fall {
-  0% {
-    opacity: 1;
-    transform: translateY(-100%);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-}
-*/
-
-/* Aggiungiamo nuovi stili per l'effetto matrix migliorato */
+/* Enhanced matrix effect */
 .enhanced-matrix-effect {
   position: fixed;
   top: 0;
@@ -323,35 +243,18 @@ nav button:not(.mobile-menu-button):hover {
   width: 100%;
   height: 100%;
   z-index: 0;
-  pointer-events: none; /* Permette di cliccare attraverso il canvas */
+  pointer-events: none;
 }
 
-/* Miglioriamo il contrasto per i contenuti con una transizione più morbida */
-.dark .text-emerald-300 {
-  text-shadow: 0 0 8px rgba(0, 255, 127, 0.3);
+.dark .enhanced-matrix-effect canvas {
+  opacity: 0.7;
 }
 
-/* Aggiungiamo un effetto glowing per i titoli quando l'animazione è attiva */
-.dark h1, .dark h2, .dark h3 {
-  transition: text-shadow 0.3s ease;
+.light .enhanced-matrix-effect canvas {
+  opacity: 0.3;
 }
 
-.dark h1:hover, .dark h2:hover, .dark h3:hover {
-  text-shadow: 0 0 12px rgba(0, 255, 127, 0.6);
-}
-
-/* Rendiamo le card un po' più traslucide per far vedere l'animazione dietro */
-.dark .card-trigger {
-  background-color: rgba(38, 38, 38, 0.7); /* Sfondo più trasparente */
-  backdrop-filter: blur(5px); /* Effetto frosted glass */
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.dark .card-trigger:hover {
-  background-color: rgba(38, 38, 38, 0.85); /* Un po' più opaco all'hover */
-}
-
-/* Media queries migliorati per il responsive design */
+/* Media queries for responsive design */
 @media (max-width: 768px) {
   .slide-in-section {
     animation-delay: 0.2s;
@@ -387,20 +290,119 @@ nav button:not(.mobile-menu-button):hover {
     50% { transform: translateY(-10px); }
   }
   
-  /* Aggiustamenti per i contenitori principali */
   .navbar-gradient, .footer-gradient {
     padding-left: 1rem;
     padding-right: 1rem;
   }
 }
+/* Aggiungi questi stili al tuo file styles.css */
 
+/* Stili per la navbar fissa e arrotondata */
+.navbar-gradient {
+  position: relative;
+  background: linear-gradient(0deg, var(--accent-color, #00FF7F) 85%, rgba(5, 150, 105, 0) 100%);
+  border-radius: 0.75rem;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+/* Transizione durante lo scroll */
+.navbar-scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(15px);
+}
+
+/* Aggiunta di un effetto glossy in dark mode */
+.dark .navbar-gradient {
+  background: linear-gradient(0deg, rgba(2, 181, 94, 0.8) 85%, rgba(2, 181, 94, 0) 100%);
+  border: 1px solid rgba(0, 255, 127, 0.1);
+}
+
+/* Aggiunta di un effetto glossy in light mode */
+.light .navbar-gradient {
+  background: linear-gradient(0deg, rgba(161, 232, 217, 0.8) 85%, rgba(161, 232, 217, 0) 100%);
+  border: 1px solid rgba(0, 143, 79, 0.1);
+}
+
+/* Media query per dispositivi più piccoli */
+@media (max-width: 1440px) {
+  .navbar-gradient {
+    border-radius: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    width: calc(100% - 1rem);
+  }
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+  .navbar-gradient {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+/* Stile per la navbar con sfumatura verde-nero */
+.navbar-green-black {
+  background: linear-gradient(to right, #00FF7F, #080C13);
+  border-radius: 0.75rem;
+  backdrop-filter: blur(5px);
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+/* Media query per dispositivi più piccoli */
+@media (max-width: 1440px) {
+  .navbar-green-black {
+    border-radius: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    width: calc(100% - 1rem);
+  }
+}
+/* Stile di base per il body */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #080c13; /* Impostazione del colore di sfondo scuro */
+  color: #FFFFFF;
+}
+/* Stili per il container del toggle tema */
+.theme-toggle-container {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0.8;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+/* Effetto hover per il toggle */
+.theme-toggle-container:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.2));
+}
+
+/* Stile per il toggle su scroll */
+.theme-toggle-scrolled {
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+/* Media query per dispositivi più piccoli */
+@media (max-width: 768px) {
+  .theme-toggle-container {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
 /* Fix for very small screens */
 @media (max-width: 480px) {
   .animated-circle, .animated-triangle, .animated-square {
     transform: scale(0.7);
   }
   
-  /* Aggiustamenti per testo e spaziatura su schermi molto piccoli */
   h1, h2 {
     font-size: 1.5rem;
   }
@@ -412,4 +414,71 @@ nav button:not(.mobile-menu-button):hover {
   .p-4 {
     padding: 0.75rem;
   }
+}
+/* Cookie banner styles */
+.cookie-banner {
+  --banner-accent: var(--accent-color, #00FF7F);
+}
+
+.dark .cookie-banner {
+  --banner-accent: theme('colors.dark.highlight');
+}
+
+.light .cookie-banner {
+  --banner-accent: theme('colors.light.highlight');
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Cookie consent floating button hover effect */
+.cookie-settings-button {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0.7;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.cookie-settings-button:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Slide toggle animation */
+.cookie-toggle-switch .toggle-slider {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cookie-toggle-switch.active .toggle-slider {
+  transform: translateX(1.5rem);
+}
+
+/* Ensure higher z-index for cookie banner than other page elements except modals */
+.cookie-banner-container {
+  z-index: 40; /* Less than the contact form (z-50) but more than most other elements */
 }

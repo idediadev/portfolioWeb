@@ -3,14 +3,14 @@
 @version      : 0.1
 @copyrigth    : IdediaDEV (Davide Taddia) - 2025  
 @license      : GLP-3.0 
-@description  : Main component 
+@description  : footer component of the homepage
 @email        : davide.taddia2@studio.unibo.it
 */
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import Card from './components/Card';
-import Footer from './components/Footer';
+import EnhancedFooter from './components/EnhancedFooter'; // Import del nuovo EnhancedFooter
 import ContactForm from './components/ContactForm';
 import SEO from './components/SEO'; 
 import useCardAnimation from './components/AnimatioHandler';
@@ -18,48 +18,52 @@ import './styles/styles.css';
 import DarkLightModeToggle from './components/DarkLightModeToggle';
 import EnhancedMatrixEffect from './components/EnhancedMatrixEffect';
 
-const App = ({ initialSection }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const App = () => {
+  const [isDarkMode, setIsDarkMode] = useState(true); // Impostato su true per avere il tema scuro di default
   const [showContactForm, setShowContactForm] = useState(false);
 
-  // Check system preferences at load for theme choice
+  // Check of system preferences at startig load for the chioce of the theme
   useEffect(() => {
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setIsDarkMode(prefersDarkMode);
-    updateTheme(prefersDarkMode);
+    // Manteniamo sempre il tema scuro per avere lo sfondo #080c13
+    setIsDarkMode(true);
+    updateTheme(true);
   }, []);
 
-  // Apply theme to document
+  // Applica il tema al documento
   const updateTheme = (dark) => {
     if (dark) {
       document.documentElement.classList.add('dark');
       document.documentElement.classList.remove('light');
+      // Imposta direttamente il colore di sfondo su #080c13
+      document.body.style.backgroundColor = '#080c13';
     } else {
       document.documentElement.classList.remove('dark');
       document.documentElement.classList.add('light');
+      // Se si passa al tema chiaro, si ripristina il colore di sfondo predefinito
+      document.body.style.backgroundColor = '#F8F8F8';
     }
   };
 
-  // Function to toggle dark/light mode
+  // Funzione per cambiare modalità
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     updateTheme(newMode);
   };
 
-  // Function to handle "HIRE ME" click
+  // Funzione per gestire il click su "HIRE ME"
   const handleHireMeClick = () => {
     setShowContactForm(true);
   };
 
-  // Function to close contact form
+  // Funzione per chiudere il modulo di contatto
   const closeContactForm = () => {
     setShowContactForm(false);
   };
 
   useCardAnimation();
 
-  // Card components: 
+  // Editing Cards component: 
   const cards = [
     {
       id: 'masteryhub',
@@ -84,37 +88,28 @@ const App = ({ initialSection }) => {
     }
   ];
 
-  // Scroll to specific section on initial load if specified
-  useEffect(() => {
-    if (initialSection) {
-      const element = document.getElementById(initialSection);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  }, [initialSection]);
-
   return (
-    <div className={`transition-colors duration-300 min-h-screen ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}>
-      {/* SEO component for meta tags */}
+    <div className="transition-colors duration-300 min-h-screen dark bg-[#080c13] text-white">
+      {/* Componente SEO per i meta tag */}
       <SEO />
       
-      {/* Enhanced Matrix Effect background */}
+      {/* Sostituiamo MatrixEffect con EnhancedMatrixEffect */}
       <EnhancedMatrixEffect />
       
-      <div className="absolute bottom-4 right-4 z-50">
+      {/* Il toggle è ora in un div fixed, senza absolute, per seguire lo scrolling */}
+      <div className="fixed bottom-4 right-4 z-50 theme-toggle-container">
         <DarkLightModeToggle 
           isDarkMode={isDarkMode} 
           toggleDarkMode={toggleDarkMode} 
         />
       </div>
       
-      {/* Layout wrapper for consistent structure */}
+      {/* Layout wrapper per mantenere una struttura coerente */}
       <div className="flex flex-col min-h-screen">
         <Navbar onHireMeClick={handleHireMeClick} />
         
-        {/* Main content wrapper */}
-        <main className="flex-grow">
+        {/* Main content wrapper con padding-top per compensare la navbar fissa */}
+        <main className="flex-grow pt-24 md:pt-28">
           <HeroSection />
           <div className="container mx-auto px-4">
             {cards.map((card, index) => (
@@ -127,10 +122,11 @@ const App = ({ initialSection }) => {
           </div>
         </main>
         
-        <Footer />
+        {/* Utilizziamo il nuovo EnhancedFooter al posto del vecchio Footer */}
+        <EnhancedFooter />
       </div>
 
-      {/* Show contact form when showContactForm is true */}
+      {/* Mostra il form di contatto quando showContactForm è true */}
       {showContactForm && <ContactForm onClose={closeContactForm} />}
     </div>
   );
