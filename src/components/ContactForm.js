@@ -119,7 +119,7 @@ const ContactForm = ({ onClose }) => {
         </button>
         
         <div className="text-center mb-8 pt-6">
-          <h2 className="text-primary text-3xl md:text-4xl mb-2">Hire Me</h2>
+          <h2 className="text-primary text-3xl md:text-4xl mb-2">Contact Me</h2>
           <p className="text-current opacity-80">Let's collaborate on your next project</p>
         </div>
         
@@ -166,6 +166,17 @@ const ContactForm = ({ onClose }) => {
                 <input
                   type="checkbox"
                   name="services"
+                  value="Backend Development"
+                  onChange={handleCheckboxChange}
+                  className="form-checkbox h-5 w-5 text-dark-accent dark:text-dark-accent light:text-light-accent rounded focus:ring-dark-accent dark:focus:ring-dark-accent light:focus:ring-light-accent"
+                />
+                <span className="text-current">Backend Development</span>
+              </label>
+              
+              <label className="flex items-center space-x-3 p-3 bg-neutral-700 rounded-lg cursor-pointer hover:bg-neutral-600 transition-colors">
+                <input
+                  type="checkbox"
+                  name="services"
                   value="Web Development"
                   onChange={handleCheckboxChange}
                   className="form-checkbox h-5 w-5 text-dark-accent dark:text-dark-accent light:text-light-accent rounded focus:ring-dark-accent dark:focus:ring-dark-accent light:focus:ring-light-accent"
@@ -177,22 +188,11 @@ const ContactForm = ({ onClose }) => {
                 <input
                   type="checkbox"
                   name="services"
-                  value="Mobile App"
+                  value="Machine Learning model training"
                   onChange={handleCheckboxChange}
                   className="form-checkbox h-5 w-5 text-dark-accent dark:text-dark-accent light:text-light-accent rounded focus:ring-dark-accent dark:focus:ring-dark-accent light:focus:ring-light-accent"
                 />
-                <span className="text-current">Mobile App</span>
-              </label>
-              
-              <label className="flex items-center space-x-3 p-3 bg-neutral-700 rounded-lg cursor-pointer hover:bg-neutral-600 transition-colors">
-                <input
-                  type="checkbox"
-                  name="services"
-                  value="UI/UX Design"
-                  onChange={handleCheckboxChange}
-                  className="form-checkbox h-5 w-5 text-dark-accent dark:text-dark-accent light:text-light-accent rounded focus:ring-dark-accent dark:focus:ring-dark-accent light:focus:ring-light-accent"
-                />
-                <span className="text-current">UI/UX Design</span>
+                <span className="text-current">Machine Learning model training</span>
               </label>
               
               <label className="flex items-center space-x-3 p-3 bg-neutral-700 rounded-lg cursor-pointer hover:bg-neutral-600 transition-colors">

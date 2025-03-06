@@ -3,164 +3,27 @@
 @version      : 0.1
 @copyrigth    : IdediaDEV (Davide Taddia) - 2025  
 @license      : GLP-3.0 
-@description  : Enhanced footer component with categories and social links
+@description  : footer component of the homepage
 @email        : davide.taddia2@studio.unibo.it
 */
 import React from 'react';
-import { Github, Linkedin, Mail, MessageSquare } from 'lucide-react';
-import logoImage from '../logoDavideTaddia.jpeg';
 
-const EnhancedFooter = () => {
-  // Fallback for logo in case image fails to load
-  const [logoError, setLogoError] = React.useState(false);
-  
-  const LogoFallback = () => (
-    <div className="w-16 h-16 flex items-center justify-center text-dark-highlight font-bold text-xl bg-transparent rounded-full border-2 border-dark-highlight">
-      <span className="font-mono">DT</span>
-    </div>
-  );
-
-  // Categories for the footer
-  const categories = [
-    { name: "00 MasteryHub", link: "/masteryhub" },
-    { name: "01 WikiDEDIA", link: "/wikidedia" },
-    { name: "02 ServiceHub", link: "/servicehub" }
-  ];
-
-  // Social links
-  const socialLinks = [
-    { 
-      name: "GitHub", 
-      icon: <Github size={20} />, 
-      link: "https://github.com/davidetaddia" 
-    },
-    { 
-      name: "LinkedIn", 
-      icon: <Linkedin size={20} />, 
-      link: "https://linkedin.com/in/davide-taddia" 
-    },
-    { 
-      name: "Email", 
-      icon: <Mail size={20} />, 
-      link: "mailto:davide.taddia2@studio.unibo.it" 
-    },
-    { 
-      name: "Contact", 
-      icon: <MessageSquare size={20} />, 
-      link: "#contact" 
-    }
-  ];
-
+const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-t from-black to-gray-900 text-white pt-16 pb-8">
-      {/* Green accent line at the top */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-dark-accent to-dark-highlight"></div>
-      
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Logo and about section */}
-          <div className="flex flex-col items-center md:items-start">
-            <div className="mb-4">
-              {!logoError ? (
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-dark-highlight flex items-center justify-center">
-                  <img 
-                    src={logoImage}
-                    alt="Logo Davide Taddia"
-                    className="w-full h-full object-cover"
-                    onError={() => setLogoError(true)}
-                  />
-                </div>
-              ) : (
-                <LogoFallback />
-              )}
-            </div>
-            <h3 className="text-xl font-bold text-dark-highlight mb-2">Davide Taddia</h3>
-            <p className="text-gray-400 text-sm text-center md:text-left">
-              Computer Science Student & Developer specializing in web development, AI, and data analysis.
-            </p>
-          </div>
-          
-          {/* Categories */}
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-lg font-semibold text-dark-highlight mb-4">Explore</h3>
-            <ul className="space-y-2">
-              {categories.map((category, index) => (
-                <li key={index}>
-                  <a 
-                    href={category.link} 
-                    className="text-gray-400 hover:text-dark-highlight transition-colors"
-                  >
-                    {category.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Connect */}
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-lg font-semibold text-dark-highlight mb-4">Connect</h3>
-            <ul className="space-y-2">
-              {socialLinks.map((social, index) => (
-                <li key={index}>
-                  <a 
-                    href={social.link} 
-                    className="text-gray-400 hover:text-dark-highlight transition-colors flex items-center gap-2"
-                    target={social.name !== "Contact" ? "_blank" : undefined}
-                    rel={social.name !== "Contact" ? "noopener noreferrer" : undefined}
-                  >
-                    {social.icon}
-                    <span>{social.name}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Newsletter/Contact */}
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-lg font-semibold text-dark-highlight mb-4">Stay Updated</h3>
-            <p className="text-gray-400 text-sm mb-4">
-              Subscribe for updates on new projects and articles.
-            </p>
-            <div className="w-full">
-              <div className="flex flex-col sm:flex-row gap-2">
-                <input 
-                  type="email" 
-                  placeholder="Your email" 
-                  className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-gray-300 focus:outline-none focus:border-dark-highlight flex-grow"
-                />
-                <button className="px-4 py-2 bg-dark-accent hover:bg-dark-highlight transition-colors text-white rounded-lg font-medium">
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          </div>
+    <footer className="w-full mx-auto mt-5 footer-gradient">
+      <div className="w-full h-full flex flex-col justify-center items-center text-current px-4 py-8 md:py-0 md:h-[150px]">
+        <div className="text-center">
+          <p className="text-base md:text-lg mb-2">Thanks for visiting my portfolio</p>
+          <p className="text-xs md:text-sm">© 2025 Davide Taddia - All rights reserved</p>
         </div>
-        
-        {/* Divider */}
-        <div className="border-t border-gray-800 my-8"></div>
-        
-        {/* Bottom section with copyright */}
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            © 2025 Davide Taddia. All rights reserved.
-          </p>
-          <div className="flex space-x-6">
-            <a href="/privacy-policy" className="text-gray-500 hover:text-dark-highlight text-sm transition-colors">
-              Privacy Policy
-            </a>
-            <a href="/terms" className="text-gray-500 hover:text-dark-highlight text-sm transition-colors">
-              Terms of Service
-            </a>
-            <a href="/cookies" className="text-gray-500 hover:text-dark-highlight text-sm transition-colors">
-              Cookie Policy
-            </a>
-          </div>
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6 mt-4">
+          <a href="#masteryhub" className="text-action hover:text-primary transition-colors">MasteryHub</a>
+          <a href="#madebyme" className="text-action hover:text-primary transition-colors">MadebyMe</a>
+          <a href="#servicehub" className="text-action hover:text-primary transition-colors">ServiceHub</a>
         </div>
       </div>
     </footer>
   );
 };
 
-export default EnhancedFooter;
+export default Footer;
