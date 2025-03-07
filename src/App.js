@@ -10,13 +10,14 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import Card from './components/Card';
-import EnhancedFooter from './components/EnhancedFooter'; // Import del nuovo EnhancedFooter
+import EnhancedFooter from './components/EnhancedFooter'; 
 import ContactForm from './components/ContactForm';
 import SEO from './components/SEO'; 
 import useCardAnimation from './components/AnimatioHandler';
 import './styles/styles.css';
 import DarkLightModeToggle from './components/DarkLightModeToggle';
 import EnhancedMatrixEffect from './components/EnhancedMatrixEffect';
+import CookieBanner from './components/CookieBanner'; 
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true); // Impostato su true per avere il tema scuro di default
@@ -128,6 +129,9 @@ const App = () => {
 
       {/* Mostra il form di contatto quando showContactForm è true */}
       {showContactForm && <ContactForm onClose={closeContactForm} />}
+      
+      {/* Banner per i cookie */}
+      <CookieBanner />
     </div>
   );
 };
