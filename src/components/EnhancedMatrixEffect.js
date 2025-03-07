@@ -18,7 +18,7 @@ const EnhancedMatrixEffect = () => {
     const ctx = canvas.getContext('2d');
     let animationFrameId;
 
-    // Adatta il canvas alle dimensioni della finestra
+    // Canvas full screen
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -26,26 +26,24 @@ const EnhancedMatrixEffect = () => {
 
     window.addEventListener('resize', resize);
     resize();
-
-    // Raccolta di caratteri da utilizzare (alfabeti e numeri di diverse lingue)
-    // Escludiamo icone ed emoji come richiesto
+    // CHAR base set for the matrix like effect
     const characterSets = [
-      // Alfabeto latino (inglese, italiano, ecc.)
+      // Latin Alphabet
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
-      // Alfabeto cirillico
+      // Cyrillic characters
       'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя',
-      // Caratteri greci
+      // Greek characters
       'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψω',
-      // Numeri arabi
+      // Arabian Numbers
       '٠١٢٣٤٥٦٧٨٩',
-      // Caratteri speciali comuni
+      // Metacharacters
       '!@#$%^&*()_+-=[]{}|;:,./<>?'
     ];
 
-    // Unisci tutti i set di caratteri
+    // Join at all 
     const allCharacters = characterSets.join('');
     
-    // Classe per gestire i singoli caratteri
+    // Random class for pooping up the characters
     class MatrixCharacter {
       constructor() {
         this.x = Math.random() * canvas.width;
@@ -61,7 +59,7 @@ const EnhancedMatrixEffect = () => {
         this.changeInterval = Math.floor(Math.random() * 20) + 10;
         this.frameCount = 0;
         
-        // Determina il colore in base al tema (per dark/light mode)
+        // Dark Light mode management for the matrix like effect
         const htmlElement = document.documentElement;
         const isDarkMode = htmlElement.classList.contains('dark');
         this.color = isDarkMode ? 
@@ -77,7 +75,7 @@ const EnhancedMatrixEffect = () => {
         this.frameCount++;
         this.age++;
 
-        // Cambia il carattere occasionalmente
+        // Change character randomly
         if (this.frameCount >= this.changeInterval) {
           this.frameCount = 0;
           if (Math.random() > 0.7) {
@@ -85,7 +83,7 @@ const EnhancedMatrixEffect = () => {
           }
         }
 
-        // Gestione fade in/out
+        // fade in/out
         if (this.fadeIn) {
           this.opacity += this.fadeSpeed;
           if (this.opacity >= this.maxOpacity) {
@@ -93,7 +91,7 @@ const EnhancedMatrixEffect = () => {
             this.fadeIn = false;
           }
         } else {
-          // Inizia a svanire dopo un certo periodo
+          // fade out timer 
           if (this.age > this.lifeTime) {
             this.opacity -= this.fadeSpeed;
           }
@@ -107,7 +105,7 @@ const EnhancedMatrixEffect = () => {
         
         ctx.font = `${this.size}px monospace`;
         
-        // Determiniamo il colore basato sul tema
+        // Color section
         const htmlElement = document.documentElement;
         const isDarkMode = htmlElement.classList.contains('dark');
         const colorBase = isDarkMode ? '0, 255, 127' : '0, 143, 79';
@@ -118,23 +116,23 @@ const EnhancedMatrixEffect = () => {
       }
     }
 
-    // Array per memorizzare i caratteri attivi
+    // Array saving the active characters 
     let characters = [];
     
-    // Numero target di caratteri basato sull'area del canvas (regola la densità)
+    // density of characters in an Area (POV)
     const targetCharacterCount = Math.floor((canvas.width * canvas.height) / 15000);
 
-    // Funzione di animazione
+    // animation
     const animate = () => {
-      // Pulisci il canvas con uno sfondo trasparente
+      // clean the canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Aggiungi nuovi caratteri se necessario
+      // add new characters if needed
       while (characters.length < targetCharacterCount) {
         characters.push(new MatrixCharacter());
       }
       
-      // Aggiorna e disegna tutti i caratteri
+      // update and draw characters
       characters = characters.filter(char => {
         const isAlive = char.update();
         if (isAlive) {
@@ -148,7 +146,7 @@ const EnhancedMatrixEffect = () => {
 
     animate();
 
-    // Pulizia quando il componente viene smontato
+    // Cleaning up when the component is unmounted
     return () => {
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animationFrameId);

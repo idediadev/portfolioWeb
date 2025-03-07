@@ -7,7 +7,7 @@
 @email        : davide.taddia2@studio.unibo.it
 */
 import React from "react";
-
+// Card component
 const Card = ({ id, title, description, animatedShape, delay = 0 }) => {
   const icons = {
     masteryhub: (
@@ -39,7 +39,7 @@ const Card = ({ id, title, description, animatedShape, delay = 0 }) => {
     )
   };
 
-  // Funzione per ottenere l'URL basato sull'ID
+  // function to get the page url
   const getPageUrl = (id) => {
     switch(id) {
       case 'masteryhub':
@@ -52,7 +52,7 @@ const Card = ({ id, title, description, animatedShape, delay = 0 }) => {
         return `#${id}`;
     }
   };
-
+// return the card component
   return (
     <section id={id} className={`w-full max-w-[1440px] mx-auto px-4 ${id === 'masteryhub' ? 'mt-8 md:mt-[100px]' : 'mt-8'}`}>
       <div 

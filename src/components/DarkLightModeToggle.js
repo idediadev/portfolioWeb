@@ -12,7 +12,7 @@ import { Sun, Moon } from 'lucide-react';
 const DarkLightModeToggle = ({ isDarkMode, toggleDarkMode }) => {
   const [scrolled, setScrolled] = useState(false);
   
-  // Aggiunto effect per rilevare lo scroll
+  // effect for the scroll event
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -23,10 +23,10 @@ const DarkLightModeToggle = ({ isDarkMode, toggleDarkMode }) => {
       }
     };
 
-    // Aggiungi event listener
+    // listener for the scroll event
     window.addEventListener('scroll', handleScroll);
     
-    // Rimuovi event listener al cleanup
+    // remove the listener when the component is unmounted (cleanup)
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -45,14 +45,14 @@ const DarkLightModeToggle = ({ isDarkMode, toggleDarkMode }) => {
         from-blue-300 to-blue-500
         ${scrolled ? 'theme-toggle-scrolled' : ''}`}
     >
-      {/* Sole per Modalità Chiara */}
+      {/* Sun in light mode */}
       <div className={`absolute transition-all duration-500 ease-in-out 
         ${isDarkMode ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}
         flex items-center justify-center`}>
         <Sun className="text-yellow-500 w-8 h-8" />
       </div>
 
-      {/* Luna per Modalità Scura */}
+      {/* Moon in dark mode */}
       <div className={`absolute transition-all duration-500 ease-in-out 
         ${isDarkMode ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
         flex items-center justify-center`}>

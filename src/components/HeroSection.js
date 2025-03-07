@@ -11,11 +11,7 @@ import React from 'react';
 const HeroSection = () => {
   return (
     <section className="w-full mx-auto relative min-h-screen">
-      {/* Rimuoviamo qualsiasi overlay che potrebbe bloccare la trasparenza
-      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 dark:bg-opacity-50 light:bg-opacity-20 z-10"></div>
-      */}
-      
-      {/* Contenuto della hero section */}
+      {/* Inside the Hero Section  */}
       <div className="relative z-20 flex flex-col md:flex-row max-w-6xl mx-auto h-full pt-20 pb-10">
         <div className="w-full md:w-1/2 mb-8 md:mb-0 flex items-center justify-center p-8">
           <div className="text-center">

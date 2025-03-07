@@ -15,7 +15,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
 
-// Componente per il rendering avanzato del contenuto wiki
+// Component for rendering wiki content with custom components
 const WikiRenderer = ({ content, sources = [] }) => {
   const [showPythonOutput, setShowPythonOutput] = useState({});
   

@@ -12,6 +12,7 @@ const useCardAnimation = () => {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
+        // if the card is in the viewport, add the class to animate it
         if (entry.isIntersecting) {
           setTimeout(() => {
             entry.target.classList.add('card-animate');
@@ -20,7 +21,7 @@ const useCardAnimation = () => {
         }
       });
     }, { threshold: 0.2 });
-
+// select all the cards and observe them
     document.querySelectorAll('.card-trigger').forEach((card) => {
       observer.observe(card);
     });

@@ -36,13 +36,13 @@ const EnhancedFooter = () => {
     { 
       name: "GitHub", 
       icon: <Github size={20} />, 
-      link: "https://github.com/davidetaddia",
+      link: "https://github.com/idediadev",
       aria: "Visit Davide Taddia's GitHub profile"
     },
     { 
       name: "LinkedIn", 
       icon: <Linkedin size={20} />, 
-      link: "https://linkedin.com/in/davide-taddia", 
+      link: "https://www.linkedin.com/in/davidetaddia/", 
       aria: "Visit Davide Taddia's LinkedIn profile"
     },
     { 
@@ -51,12 +51,7 @@ const EnhancedFooter = () => {
       link: "mailto:davide.taddia2@studio.unibo.it",
       aria: "Send an email to Davide Taddia" 
     },
-    { 
-      name: "Contact", 
-      icon: <MessageSquare size={20} />, 
-      link: "#contact",
-      aria: "Open contact form" 
-    }
+   
   ];
 
   // Current year for copyright

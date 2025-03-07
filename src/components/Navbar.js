@@ -8,8 +8,6 @@
 */
 import React, { useState, useEffect } from 'react';
 import '../styles/styles.css';
-
-// Importa l'immagine direttamente
 import logoImage from '../../src/logoDavideTaddia.jpeg';
 
 const Navbar = ({ onHireMeClick }) => {
@@ -17,7 +15,7 @@ const Navbar = ({ onHireMeClick }) => {
   const [scrolled, setScrolled] = useState(false);
   const [logoError, setLogoError] = useState(false);
 
-  // Gestione dello scroll
+  // Scroll Management
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -28,21 +26,21 @@ const Navbar = ({ onHireMeClick }) => {
       }
     };
 
-    // Aggiungi event listener
+    // Listener for the scroll event
     window.addEventListener('scroll', handleScroll);
     
-    // Rimuovi event listener al cleanup
+    // Remove event listener when the cleanup is true
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   const handleHireMeClick = () => {
-    setMenuOpen(false);  // Close mobile menu if open
+    setMenuOpen(false);  
     onHireMeClick();
   };
 
-  // Componente fallback in caso di errore caricamento immagine
+  // Fallback logo
   const LogoFallback = () => (
     <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-dark-highlight font-bold text-xl bg-transparent rounded-full border-2 border-dark-highlight">
       <span className="font-mono">ED</span>

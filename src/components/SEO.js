@@ -10,13 +10,13 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 const SEO = () => {
-  // Meta informazioni principali
+  // Main meta tags
   const title = "Davide Taddia | Computer Science Student & Developer";
   const description = "Portfolio di Davide Taddia, studente di Computer Science e developer specializzato in React, AI, Machine Learning e Data Analysis. Progetti e servizi di sviluppo web, analisi dati e soluzioni di AI.";
   
-  // Parole chiave (importante per alcuni motori di ricerca)
+  // keywords 
   const keywords = [
-    // Professione
+    // Professional Title
     "Computer Science Student",
     "Web Developer",
     "React Developer",
@@ -25,7 +25,7 @@ const SEO = () => {
     "Software Engineer",
     "Data Analyst",
     
-    // Competenze AI e ML
+    // AI e ML
     "AI",
     "LLM",
     "Context Window",
@@ -35,7 +35,7 @@ const SEO = () => {
     "Artificial Intelligence",
     "Deep Learning",
     
-    // Competenze tecniche
+    // Skills
     "JavaScript development",
     "React.js expert",
     "TailwindCSS developer",
@@ -45,7 +45,7 @@ const SEO = () => {
     "Data Science",
     "Python Programming",
     
-    // Servizi
+    // Services
     "Web application development",
     "Portfolio website design",
     "Custom software solutions",
@@ -54,7 +54,7 @@ const SEO = () => {
     "AI solutions",
     "Data analysis services",
     
-    // Valore unico
+    // Unique Selling Points
     "Innovative web solutions",
     "Creative coding",
     "Computer science expertise",
@@ -63,15 +63,16 @@ const SEO = () => {
     "Cutting-edge technology"
   ].join(", ");
 
-  // URL del sito (modificalo con il tuo dominio quando sarà online)
+  // URL
   const siteUrl = "https://davidetaddia.dev";
   
-  // Immagine per social media sharing (OG image)
-  const ogImage = `${siteUrl}/og-image.jpg`; // Assicurati di creare e aggiungere questa immagine alla cartella public
-
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  // Immagine for the Open Graph
+  const ogImage = `${siteUrl}/public/og-image.jpg`; 
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   return (
     <Helmet>
-      {/* Meta tag essenziali */}
+      {/* Meta tag  */}
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
@@ -80,30 +81,30 @@ const SEO = () => {
       {/* Canonical URL */}
       <link rel="canonical" href={siteUrl} />
       
-      {/* Meta tag per i social media - Open Graph */}
+      {/* Meta tag  for the social- Open Graph */}
       <meta property="og:type" content="website" />
       <meta property="og:url" content={siteUrl} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
       
-      {/* Meta tag per Twitter */}
+      {/* Meta tag for Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={siteUrl} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
       
-      {/* Meta tag per controllo della viewport */}
+      {/* Meta tag for manageviewport */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       
-      {/* Meta tag per il colore del tema */}
+      {/* Meta tag theme control */}
       <meta name="theme-color" content="#00ff7f" />
       
-      {/* Meta tag per robots */}
+      {/* Meta tag ofr robots */}
       <meta name="robots" content="index, follow" />
       
-      {/* Structured Data (Schema.org) per Google */}
+      {/* Structured Data (Schema.org) --> Google */}
       <script type="application/ld+json">
         {`
           {

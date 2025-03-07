@@ -9,6 +9,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 
+// ContactForm component
 const ContactForm = ({ onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -17,11 +18,13 @@ const ContactForm = ({ onClose }) => {
     budget: '',
     services: []
   });
-  
+
+  // State management
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
   
+  // Event handlers
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -30,6 +33,7 @@ const ContactForm = ({ onClose }) => {
     }));
   };
   
+  // Checkbox handler
   const handleCheckboxChange = (e) => {
     const { value, checked } = e.target;
     setFormData(prev => {
@@ -53,7 +57,7 @@ const ContactForm = ({ onClose }) => {
     setError(null);
     
     try {
-      // Prepara i dati per l'invio
+      // Prepare sending data
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
       formDataToSend.append('email', formData.email);
@@ -61,7 +65,7 @@ const ContactForm = ({ onClose }) => {
       formDataToSend.append('budget', formData.budget);
       formDataToSend.append('services', formData.services.join(', '));
       
-      // Effettua la richiesta a Formspree con l'ID corretto "xzzdngbj"
+      // Request at Formspree "xzzdngbj"
       const response = await fetch('https://formspree.io/f/xzzdngbj', {
         method: 'POST',
         body: formDataToSend,
@@ -71,7 +75,7 @@ const ContactForm = ({ onClose }) => {
       });
       
       if (response.ok) {
-        // Gestione del successo
+        // Success Management
         console.log('Form inviato con successo!');
         setSubmitted(true);
         
@@ -81,7 +85,7 @@ const ContactForm = ({ onClose }) => {
           onClose();
         }, 3000);
       } else {
-        // Gestione dell'errore
+        // Error Management
         const data = await response.json();
         throw new Error(data.error || 'Si è verificato un errore durante l\'invio del form');
       }
@@ -93,6 +97,7 @@ const ContactForm = ({ onClose }) => {
     }
   };
   
+  // Return the component
   if (submitted) {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
@@ -108,7 +113,9 @@ const ContactForm = ({ onClose }) => {
     );
   }
   
+  // Return the form
   return (
+    
     <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4 overflow-y-auto">
       <div className="card-bg p-6 md:p-8 rounded-lg shadow-lg max-w-3xl w-full relative">
         <button 
@@ -117,7 +124,7 @@ const ContactForm = ({ onClose }) => {
         >
           <ArrowLeft size={24} />
         </button>
-        
+        {/* Form title */}
         <div className="text-center mb-8 pt-6">
           <h2 className="text-primary text-3xl md:text-4xl mb-2">Contact Me</h2>
           <p className="text-current opacity-80">Let's collaborate on your next project</p>
@@ -183,7 +190,6 @@ const ContactForm = ({ onClose }) => {
                 />
                 <span className="text-current">Web Development</span>
               </label>
-              
               <label className="flex items-center space-x-3 p-3 bg-neutral-700 rounded-lg cursor-pointer hover:bg-neutral-600 transition-colors">
                 <input
                   type="checkbox"
@@ -194,7 +200,7 @@ const ContactForm = ({ onClose }) => {
                 />
                 <span className="text-current">Machine Learning model training</span>
               </label>
-              
+              {/* Add more services here */}
               <label className="flex items-center space-x-3 p-3 bg-neutral-700 rounded-lg cursor-pointer hover:bg-neutral-600 transition-colors">
                 <input
                   type="checkbox"
@@ -207,7 +213,7 @@ const ContactForm = ({ onClose }) => {
               </label>
             </div>
           </div>
-          
+          {/* Budget Range */}
           <div>
             <label htmlFor="budget" className="block text-primary mb-2">Budget Range</label>
             <select
@@ -224,7 +230,7 @@ const ContactForm = ({ onClose }) => {
               <option value="More than $10,000">More than $10,000</option>
             </select>
           </div>
-          
+          {/* Message */}
           <div>
             <label htmlFor="message" className="block text-primary mb-2">Project Details</label>
             <textarea
@@ -238,19 +244,20 @@ const ContactForm = ({ onClose }) => {
               placeholder="Tell me about your project..."
             ></textarea>
           </div>
-          
+          {/* Error message */}
           {error && (
             <div className="bg-red-900/50 border border-red-500 text-current p-3 rounded-lg">
               {error}
             </div>
           )}
-          
+          {/* Submit button */}
           <div className="pt-4">
             <button
               type="submit"
               disabled={isSubmitting}
               className={`w-full btn-primary font-bold py-3 px-6 rounded-lg transition-colors ${!isSubmitting && 'pulse-animation'}`}
             >
+              {/* Button text */}
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
           </div>
