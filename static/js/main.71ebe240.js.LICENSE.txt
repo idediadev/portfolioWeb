@@ -9,10 +9,10 @@
 
 /*
 @author       : Davide Taddia
-@version      : 0.1
+@version      : 0.2
 @copyrigth    : IdediaDEV (Davide Taddia) - 2025  
 @license      : GLP-3.0 
-@description  : WikiDEDIA Page
+@description  : Enhanced WikiDEDIA Page with Homepage Style
 @email        : davide.taddia2@studio.unibo.it
 */
 
