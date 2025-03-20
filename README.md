@@ -181,7 +181,7 @@ This project is licensed under the GPL-3.0 License - see the LICENSE file for de
 
 **Davide Taddia**
 - Email: davide.taddia2@studio.unibo.it
-- GitHub: [@davidetaddia](https://github.com/davidetaddia)
+- GitHub: [@davidetaddia](https://github.com/idediadev)
 
 ## 🙏 Acknowledgments
 
