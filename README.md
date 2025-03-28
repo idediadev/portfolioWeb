@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website built with React and TailwindCSS, featuring a  Matrix-style animation background and comprehensive content sections.
 
-## 🚀 Features
+## Features
 
 - **Responsive Design**: Fully responsive layout that works on all devices
 - **Dark Mode Support**: Built-in dark/light mode with smooth transitions
@@ -16,7 +16,7 @@ A modern, responsive portfolio website built with React and TailwindCSS, featuri
 - **Cookie Consent**: GDPR-compliant cookie consent management
 - **Contact Form**: Interactive form with form validation
 
-## 📋 Project Structure
+##  Project Structure
 
 ```
 portfolioweb_davidetaddia/
@@ -56,7 +56,7 @@ portfolioweb_davidetaddia/
 └── README.md
 ```
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 - [React](https://reactjs.org/) - JavaScript library for building the UI
 - [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework
@@ -67,7 +67,7 @@ portfolioweb_davidetaddia/
 - [Katex](https://katex.org/) - Math rendering library
 - [Rehype/Remark](https://github.com/rehypejs/rehype) - Markdown processing
 
-## 🧩 Core Components
+##  Core Components
 
 ### EnhancedMatrixEffect
 
@@ -88,7 +88,7 @@ Three main content sections showcasing different aspects of the portfolio:
 - **WikiDEDIA**: Knowledge wiki with advanced markdown and code visualization
 - **ServiceHub**: Service offerings with animated cards and detailed descriptions
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -139,7 +139,7 @@ npm run deploy
 yarn deploy
 ```
 
-## 🎨 Customization
+##  Customization
 
 ### Styling
 
@@ -173,17 +173,17 @@ To update the content:
 - For services: Edit the `services` array in `ServiceHubPage.js`
 - For wiki pages: Edit the `chapters` array in `WikiDEDIAPage.js`
 
-## 📄 License
+##  License
 
 This project is licensed under the GPL-3.0 License - see the LICENSE file for details.
 
-## 👤 Author
+##  Author
 
 **Davide Taddia**
 - Email: davide.taddia2@studio.unibo.it
 - GitHub: [@davidetaddia](https://github.com/idediadev)
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Design inspiration from various modern portfolio websites
 - Matrix animation inspired by the movie "The Matrix"
