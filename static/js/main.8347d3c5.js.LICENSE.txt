@@ -3,16 +3,61 @@
 @version      : 0.1
 @copyrigth    : IdediaDEV (Davide Taddia) - 2025  
 @license      : GLP-3.0 
-@description  : Navbar component from the homepage
+@description  : Contact form component to send email to the owner
 @email        : davide.taddia2@studio.unibo.it
 */
 
 /*
 @author       : Davide Taddia
-@version      : 0.2
+@version      : 0.1
 @copyrigth    : IdediaDEV (Davide Taddia) - 2025  
 @license      : GLP-3.0 
-@description  : Enhanced WikiDEDIA Page with Homepage Style
+@description  : Login modal component for admin authentication
+@email        : davide.taddia2@studio.unibo.it
+*/
+
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : Main entry point for the application with Auth provider
+@email        : davide.taddia2@studio.unibo.it
+*/
+
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : Navbar component from the homepage with admin login
+@email        : davide.taddia2@studio.unibo.it
+*/
+
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : Password change modal for first login and password updates
+@email        : davide.taddia2@studio.unibo.it
+*/
+
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : This is a custom hook that uses the IntersectionObserver API to animate the cards when they are in the viewport
+@email        : davide.taddia2@studio.unibo.it
+*/
+
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : Utility functions for authentication management
 @email        : davide.taddia2@studio.unibo.it
 */
 
@@ -67,13 +112,4 @@ object-assign
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
- */
-
-/**
- * Prism: Lightweight, robust, elegant syntax highlighting
- *
- * @license MIT <https://opensource.org/licenses/MIT>
- * @author Lea Verou <https://lea.verou.me>
- * @namespace
- * @public
  */

@@ -1,0 +1,15 @@
+/*
+@author       : Davide Taddia
+@version      : 0.1
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : MasteryHubPage component for the homepage. ""Another page in the home page"""
+@email        : davide.taddia2@studio.unibo.it
+*/
+
+/**
+ * @license lucide-react v0.476.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
