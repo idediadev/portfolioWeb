@@ -3,16 +3,16 @@
 @version      : 0.1
 @copyrigth    : IdediaDEV (Davide Taddia) - 2025  
 @license      : GLP-3.0 
-@description  : Properly centered Login component with full size
+@description  : WikiDEDIA Page
 @email        : davide.taddia2@studio.unibo.it
 */
 
 /*
-@author       : Davide Taddia
-@version      : 0.1
+@author       : Davide Taddia (Enhanced by AI Assistant)
+@version      : 0.2
 @copyrigth    : IdediaDEV (Davide Taddia) - 2025  
 @license      : GLP-3.0 
-@description  : WikiDEDIA Page
+@description  : Improved Authentication Context with session persistence
 @email        : davide.taddia2@studio.unibo.it
 */
 
