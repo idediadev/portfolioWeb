@@ -1,36 +1,67 @@
 {
-  "name": "portfolioweb_davidetaddia",
+  "name": "davide-taddia-portfolio",
   "version": "1.0.0",
+  "description": "Portfolio website for Davide Taddia - Computer Science Student & Developer",
+  "author": "Davide Taddia <davide.taddia2@studio.unibo.it>",
+  "license": "GPL-3.0",
+  "private": true,
   "homepage": "https://davidetaddia.dev",
-  "description": "",
-  "main": "App.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/idediadev/portfolio"
+  },
+  "keywords": [
+    "portfolio",
+    "react",
+    "computer-science",
+    "web-development",
+    "ai",
+    "machine-learning"
+  ],
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.1",
+    "react-scripts": "5.0.1",
+    "lucide-react": "^0.263.1",
+    "framer-motion": "^10.12.4",
+    "intersection-observer": "^0.12.2",
+    "web-vitals": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/node": "^18.15.11",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.0",
+    "eslint": "^8.36.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.8.7"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md}",
+    "analyze": "npm run build && npx bundle-analyzer build/static/js/*.js",
+    "deploy": "npm run build && npm run deploy:gh-pages",
+    "deploy:gh-pages": "gh-pages -d build"
   },
-  "dependencies": {
-    "katex": "^0.16.21",
-    "lucide-react": "^0.476.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0",
-    "react-markdown": "^10.0.0",
-    "react-router-dom": "^7.2.0",
-    "react-scripts": "5.0.1",
-    "react-syntax-highlighter": "^15.6.1",
-    "rehype-katex": "^7.0.1",
-    "remark-gfm": "^4.0.1",
-    "remark-math": "^6.0.0"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.16",
-    "gh-pages": "^6.3.0",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.0"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "no-unused-vars": "warn",
+      "no-console": "warn",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "browserslist": {
     "production": [
@@ -43,5 +74,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
   }
 }

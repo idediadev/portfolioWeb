@@ -1,154 +1,408 @@
-/* Stili aggiuntivi per la pagina MasteryHub */
+/*
+@author       : Davide Taddia
+@version      : 1.0
+@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GLP-3.0 
+@description  : Stili specifici per MasteryHub presentation
+@email        : davide.taddia2@studio.unibo.it
+*/
 
-/* Animazioni per le skill bars */
-@keyframes fillBar {
-    0% {
-      width: 0;
-    }
-    100% {
-      width: var(--skill-level);
-    }
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Floating navbar animations */
+.floating-navbar {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-navbar.scrolled {
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+}
+
+/* Hero section background effects */
+.hero-background {
+  background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.1) 0%, rgba(0, 0, 0, 0.8) 70%);
+}
+
+/* Particle animations */
+.particle {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.1;
   }
-  
-  .skill-bar {
-    --skill-level: 0%;
-    animation: fillBar 1.5s ease-out forwards;
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 0.3;
   }
-  
-  /* Slide transitions */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+}
+
+/* Section gradient backgrounds */
+.section-ai-ml {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.05) 0%, 
+    rgba(0, 0, 0, 0.8) 50%, 
+    rgba(147, 51, 234, 0.05) 100%);
+}
+
+.section-web-dev {
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.05) 0%, 
+    rgba(0, 0, 0, 0.8) 50%, 
+    rgba(59, 130, 246, 0.05) 100%);
+}
+
+.section-backend {
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.05) 0%, 
+    rgba(0, 0, 0, 0.8) 50%, 
+    rgba(236, 72, 153, 0.05) 100%);
+}
+
+/* Skill card hover effects */
+.skill-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.skill-card:hover {
+  transform: scale(1.05) translateY(-8px);
+}
+
+/* Progress bar animations */
+.progress-bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
   }
-  
-  .slide-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
+  100% {
+    left: 100%;
   }
-  
-  /* Card hover effects */
-  .skill-card {
-    transition: all 0.3s ease;
+}
+
+/* Color-specific skill bar styles */
+.skill-bar-blue .progress-bar {
+  background: linear-gradient(90deg, #60a5fa, #3b82f6);
+}
+
+.skill-bar-orange .progress-bar {
+  background: linear-gradient(90deg, #fb923c, #ea580c);
+}
+
+.skill-bar-purple .progress-bar {
+  background: linear-gradient(90deg, #c084fc, #9333ea);
+}
+
+.skill-bar-cyan .progress-bar {
+  background: linear-gradient(90deg, #67e8f9, #0891b2);
+}
+
+.skill-bar-pink .progress-bar {
+  background: linear-gradient(90deg, #f472b6, #ec4899);
+}
+
+.skill-bar-yellow .progress-bar {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+}
+
+.skill-bar-red .progress-bar {
+  background: linear-gradient(90deg, #f87171, #ef4444);
+}
+
+.skill-bar-green .progress-bar {
+  background: linear-gradient(90deg, #4ade80, #22c55e);
+}
+
+.skill-bar-indigo .progress-bar {
+  background: linear-gradient(90deg, #818cf8, #6366f1);
+}
+
+.skill-bar-violet .progress-bar {
+  background: linear-gradient(90deg, #a78bfa, #8b5cf6);
+}
+
+.skill-bar-teal .progress-bar {
+  background: linear-gradient(90deg, #5eead4, #14b8a6);
+}
+
+/* Project card animations */
+.project-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.project-card:hover::before {
+  left: 100%;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+}
+
+/* Tag hover effects */
+.project-tag {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+}
+
+.project-tag:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* Navigation link active states */
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #10b981;
+  transition: width 0.3s ease;
+}
+
+.nav-link.active::after,
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Scroll indicator animation */
+.scroll-indicator {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translateY(0);
   }
-  
-  .skill-card:hover {
+  40%, 43% {
+    transform: translateY(-10px);
+  }
+  70% {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(0, 255, 127, 0.15);
+  }
+  90% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Hero text gradient animation */
+.hero-title {
+  background: linear-gradient(270deg, #10b981, #3b82f6, #8b5cf6, #10b981);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Section entrance animations */
+.section-enter {
+  animation: slideInUp 0.8s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Footer link hover effects */
+.footer-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.footer-link::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #10b981;
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::before {
+  width: 100%;
+}
+
+/* Admin controls styling */
+.admin-controls {
+  backdrop-filter: blur(10px);
+  background: rgba(17, 24, 39, 0.8);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.admin-button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 3rem;
   }
   
-  /* Highlight colors for different skill categories */
-  .frontend-skill .skill-bar div {
-    background: linear-gradient(90deg, #06b6d4, #0891b2);
+  .section-title {
+    font-size: 2.5rem;
   }
   
-  .backend-skill .skill-bar div {
-    background: linear-gradient(90deg, #059669, #047857);
+  .skill-card {
+    margin-bottom: 1rem;
   }
   
-  .database-skill .skill-bar div {
-    background: linear-gradient(90deg, #7c3aed, #6d28d9);
+  .floating-navbar {
+    padding: 0.75rem 1rem;
   }
   
-  .ai-skill .skill-bar div {
-    background: linear-gradient(90deg, #db2777, #be185d);
+  .floating-navbar.scrolled {
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 2.5rem;
   }
   
-  .devops-skill .skill-bar div {
-    background: linear-gradient(90deg, #ea580c, #c2410c);
+  .section-title {
+    font-size: 2rem;
   }
   
-  .language-skill .skill-bar div {
-    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  .skill-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
-  /* Pulsing effect for highlighted skills */
-  @keyframes pulse-highlight {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.7;
-    }
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark theme specific adjustments */
+.dark .skill-card {
+  background: rgba(31, 41, 55, 0.3);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+.dark .project-card {
+  background: rgba(31, 41, 55, 0.5);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+}
+
+/* Print styles */
+@media print {
+  .floating-navbar,
+  .scroll-indicator,
+  .admin-controls {
+    display: none !important;
   }
   
-  .highlight-skill {
-    position: relative;
-  }
-  
-  .highlight-skill::after {
-    content: '';
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    background-color: #00ff7f;
-    animation: pulse-highlight 2s infinite;
-  }
-  
-  /* Number indicator styling */
-  .slide-number {
-    font-family: 'DotGothic16', monospace;
-    color: #00ff7f;
-    opacity: 0.7;
-  }
-  
-  /* Progetti correlati cards */
+  .skill-card,
   .project-card {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    position: relative;
-    overflow: hidden;
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
   }
   
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #059669, #10b981);
-    transform: translateX(-100%);
-    transition: transform 0.4s ease;
+  .hero-title {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .skill-card,
+  .project-card {
+    border-width: 2px;
   }
   
-  .project-card:hover::before {
-    transform: translateX(0);
+  .progress-bar {
+    border: 1px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
   
-  /* Media queries per responsive design */
-  @media (max-width: 768px) {
-    .skill-container {
-      flex-direction: column;
-    }
-    
-    .skill-details,
-    .skill-visualization {
-      width: 100%;
-    }
-    
-    .slide-controls {
-      bottom: 1rem;
-      right: 1rem;
-    }
-    
-    .project-grid {
-      grid-template-columns: 1fr;
-    }
+  .scroll-indicator {
+    animation: none;
   }
   
-  /* Stile per gli indicatori di slide */
-  .slide-indicator {
-    transition: all 0.3s ease;
+  .particle {
+    animation: none;
   }
-  
-  .slide-indicator.active {
-    transform: scale(1.2);
-    box-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
-  }
+}

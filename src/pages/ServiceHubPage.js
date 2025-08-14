@@ -1,915 +1,759 @@
 /*
 @author       : Davide Taddia
-@version      : 0.1
-@copyrigth    : IdediaDEV (Davide Taddia) - 2025  
-@license      : GLP-3.0 
-@description  : ServiceHubPage component for the homepage. Must be edited
+@version      : 1.2
+@copyright    : IdediaDEV (Davide Taddia) - 2025  
+@license      : GPL-3.0 
+@description  : ServiceHub - Professional Services Page (FIXED)
 @email        : davide.taddia2@studio.unibo.it
 */
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Search, ChevronRight, ChevronLeft, Plus, Edit, Trash, X, Save, Check, Clock, Users, Database, Code, Brain } from 'lucide-react';
-import '../styles/styles.css';
-import useCardAnimation from '../components/AnimatioHandler';
+import { ArrowLeft, Settings, Edit3, Save, X, Github, Linkedin, Mail, ChevronDown, Code, Brain, Database, Users, Clock, Search, Plus, Trash2, Eye, EyeOff } from 'lucide-react';
 
 const ServiceHubPage = () => {
-  // Use the card animation hook
-  useCardAnimation();
-  
+  // Stati per gestione tema e admin
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(true); // For testing purposes
-  const [services, setServices] = useState([
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showPrices, setShowPrices] = useState(false);
+  const [showAdminPanel, setShowAdminPanel] = useState(false);
+  const [editingServiceId, setEditingServiceId] = useState(null);
+
+  // Stati per contenuti modificabili
+  const [editableContent, setEditableContent] = useState({
+    heroTitle: "Professional Services",
+    heroSubtitle: "Explore the professional services I offer, from web development to machine learning solutions.",
+    footerText: "Need a custom service? Let's discuss your project"
+  });
+
+  // Servizi organizzati per categorie (ora modificabile)
+  const [serviceCategories, setServiceCategories] = useState([
     {
-      id: 1,
-      title: "Web Development",
-      description: "Custom website and web application development using modern frameworks like React, TailwindCSS, and Node.js. Fully responsive, optimized for performance and search engines.",
-      longDescription: "From concept to deployment, I offer end-to-end web development services tailored to your specific needs. Using React for interactive front-ends, TailwindCSS for beautiful, responsive designs, and Node.js for robust back-end functionality, I create web solutions that stand out.\n\nServices include:\n- Single Page Applications (SPAs)\n- Progressive Web Apps (PWAs)\n- E-commerce websites\n- Content Management Systems\n- Portfolio websites\n- Web-based dashboards and tools",
-      icon: <Code size={32} className="text-emerald-300" />,
-      price: "2000",
-      currency: "USD",
-      timeframe: "2-8 weeks",
-      featured: true,
-      technologies: ["React", "TailwindCSS", "Node.js", "Express", "MongoDB", "Firebase"],
-      animatedShape: "animated-code-shape"
+      id: 'development',
+      title: 'Development Services',
+      icon: '💻',
+      description: 'Custom web development and application solutions using modern technologies and frameworks.',
+      services: [
+        {
+          id: 'web-dev',
+          title: 'Web Development',
+          description: 'Custom website and web application development using modern frameworks like React, Node.js, and TailwindCSS.',
+          price: '$2000',
+          timeframe: '2-8 weeks',
+          technologies: ['React', 'Node.js', 'TailwindCSS', 'TypeScript', 'PostgreSQL'],
+          featured: true,
+          color: 'blue',
+          icon: '🌐'
+        },
+        {
+          id: 'mobile-dev',
+          title: 'Mobile Development',
+          description: 'Cross-platform mobile applications with React Native for iOS and Android.',
+          price: '$3000',
+          timeframe: '4-12 weeks',
+          technologies: ['React Native', 'Expo', 'Firebase', 'Redux'],
+          featured: false,
+          color: 'green',
+          icon: '📱'
+        }
+      ]
     },
     {
-      id: 2,
-      title: "Machine Learning Solutions",
-      description: "Custom machine learning models for prediction, classification, and data analysis. Specializing in Python-based solutions with TensorFlow, PyTorch, and scikit-learn.",
-      longDescription: "Leverage the power of artificial intelligence and machine learning to gain insights from your data and automate complex tasks. I specialize in developing custom machine learning models that solve real business problems.\n\nServices include:\n- Predictive analytics\n- Data classification and clustering\n- Natural Language Processing (NLP)\n- Computer Vision applications\n- Time series forecasting\n- Recommendation systems\n- Dataset preparation and cleaning",
-      icon: <Brain size={32} className="text-emerald-300" />,
-      price: "3500",
-      currency: "USD",
-      timeframe: "3-10 weeks",
-      featured: true,
-      technologies: ["Python", "TensorFlow", "PyTorch", "scikit-learn", "Pandas", "NumPy", "Jupyter"],
-      animatedShape: "animated-brain-shape"
+      id: 'ai-ml',
+      title: 'AI & Machine Learning',
+      icon: '🤖',
+      description: 'Custom machine learning models and AI solutions for prediction, classification, and data analysis.',
+      services: [
+        {
+          id: 'ml-models',
+          title: 'Machine Learning Models',
+          description: 'Custom machine learning models for prediction, classification, and data analysis using Python and TensorFlow.',
+          price: '$2500',
+          timeframe: '3-10 weeks',
+          technologies: ['Python', 'TensorFlow', 'Scikit-Learn', 'Pandas', 'Jupyter'],
+          featured: true,
+          color: 'purple',
+          icon: '🧠'
+        },
+        {
+          id: 'data-viz',
+          title: 'Data Visualization',
+          description: 'Transform complex data into clear, interactive visualizations using D3.js, Chart.js, and modern libraries.',
+          price: '$1800',
+          timeframe: '1-6 weeks',
+          technologies: ['D3.js', 'Chart.js', 'React', 'Python', 'R'],
+          featured: false,
+          color: 'cyan',
+          icon: '📊'
+        }
+      ]
     },
     {
-      id: 3,
-      title: "Data Visualization",
-      description: "Transform complex data into clear, interactive visualizations that tell a story. Using D3.js, Chart.js, and other modern visualization libraries to create impactful dashboards.",
-      longDescription: "Data is only valuable when it can be understood. I create custom data visualizations that transform complex information into clear, actionable insights. Whether for internal dashboards or public-facing reports, my visualizations help you communicate data effectively.\n\nServices include:\n- Interactive dashboards\n- Real-time data visualization\n- Statistical charts and graphs\n- Geographic mapping\n- Infographics\n- Custom visualization libraries",
-      icon: <Database size={32} className="text-emerald-300" />,
-      price: "1800",
-      currency: "USD",
-      timeframe: "1-6 weeks",
-      featured: false,
-      technologies: ["D3.js", "Chart.js", "React", "SVG", "Canvas", "Python", "R"],
-      animatedShape: "animated-data-shape"
-    },
-    {
-      id: 4,
-      title: "Technical Consulting",
-      description: "Expert advice on technology selection, architecture design, and implementation strategies. Help with technical decisions, code reviews, and best practices.",
-      longDescription: "Navigate the complex landscape of modern technology with expert guidance. Whether you're starting a new project, scaling an existing system, or addressing technical challenges, I provide clear, practical advice tailored to your specific situation.\n\nServices include:\n- Technology stack selection\n- System architecture design\n- Code reviews and quality assessment\n- Performance optimization\n- Technical strategy development\n- Team training and mentoring",
-      icon: <Users size={32} className="text-emerald-300" />,
-      price: "120",
-      currency: "USD",
-      timeframe: "Ongoing",
-      featured: false,
-      technologies: ["Architecture Design", "Code Review", "DevOps", "Security", "Performance", "Technical Documentation"],
-      animatedShape: "animated-consulting-shape"
+      id: 'consulting',
+      title: 'Technical Consulting',
+      icon: '👥',
+      description: 'Expert advice on technology selection, architecture design, and implementation strategies.',
+      services: [
+        {
+          id: 'tech-consulting',
+          title: 'Technical Consulting',
+          description: 'Expert advice on technology selection, architecture design, code reviews, and best practices.',
+          price: '$120/hour',
+          timeframe: 'Ongoing',
+          technologies: ['Architecture Design', 'Code Review', 'DevOps', 'Security'],
+          featured: false,
+          color: 'orange',
+          icon: '💡'
+        }
+      ]
     }
   ]);
-  
-  const [searchTerm, setSearchTerm] = useState('');
-  const [showAddServiceForm, setShowAddServiceForm] = useState(false);
-  const [editingService, setEditingService] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [servicesPerPage] = useState(4);
-  
-  // New service template
-  const emptyService = {
-    id: null,
-    title: "",
-    description: "",
-    longDescription: "",
-    icon: <Code size={32} className="text-emerald-300" />,
-    price: "",
-    currency: "USD",
-    timeframe: "",
-    featured: false,
-    technologies: [],
-    animatedShape: "animated-code-shape"
-  };
-  
-  // Form state for adding/editing services
-  const [formData, setFormData] = useState(emptyService);
-  const [newTechnology, setNewTechnology] = useState('');
-  
-  // Icons mapping for services
-  const iconOptions = [
-    { value: "code", label: "Code", icon: <Code size={24} className="text-emerald-300" /> },
-    { value: "brain", label: "AI/ML", icon: <Brain size={24} className="text-emerald-300" /> },
-    { value: "database", label: "Database", icon: <Database size={24} className="text-emerald-300" /> },
-    { value: "users", label: "Collaboration", icon: <Users size={24} className="text-emerald-300" /> },
-    { value: "clock", label: "Time/Scheduling", icon: <Clock size={24} className="text-emerald-300" /> }
-  ];
-  
-  // Animation shape options
-  const animationOptions = [
-    { value: "animated-code-shape", label: "Code Block", preview: "⬜" },
-    { value: "animated-brain-shape", label: "Brain/AI", preview: "⭕" },
-    { value: "animated-data-shape", label: "Data Bars", preview: "📊" },
-    { value: "animated-consulting-shape", label: "Consulting", preview: "🔄" }
-  ];
-  
-  // Currency options
-  const currencyOptions = [
-    { value: "USD", label: "USD ($)", symbol: "$" },
-    { value: "EUR", label: "EUR (€)", symbol: "€" },
-    { value: "GBP", label: "GBP (£)", symbol: "£" },
-    { value: "JPY", label: "JPY (¥)", symbol: "¥" },
-    { value: "CAD", label: "CAD (C$)", symbol: "C$" },
-    { value: "AUD", label: "AUD (A$)", symbol: "A$" },
-    { value: "CHF", label: "CHF (Fr)", symbol: "Fr" },
-    { value: "CNY", label: "CNY (¥)", symbol: "¥" },
-  ];
-  
-  // Apply theme and check system preferences on load
+
+  // Gestione scroll per navbar
   useEffect(() => {
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setIsDarkMode(prefersDarkMode);
-    updateTheme(prefersDarkMode);
-  }, []);
-  
-  // Apply theme to document
-  const updateTheme = (dark) => {
-    if (dark) {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    }
-  };
-  
-  // Filter services based on search term
-  const filteredServices = services.filter(service => 
-    service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    service.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    service.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
-  
-  // Get current services for pagination
-  const indexOfLastService = currentPage * servicesPerPage;
-  const indexOfFirstService = indexOfLastService - servicesPerPage;
-  const currentServices = filteredServices.slice(indexOfFirstService, indexOfLastService);
-  
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const nextPage = () => {
-    if (currentPage < Math.ceil(filteredServices.length / servicesPerPage)) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-  
-  // Handle form field changes
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value
-    });
-  };
-  
-  // Handle icon selection
-  const handleIconSelect = (iconValue) => {
-    const selectedIcon = iconOptions.find(option => option.value === iconValue);
-    if (selectedIcon) {
-      setFormData({
-        ...formData,
-        iconType: iconValue,
-        icon: selectedIcon.icon
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100);
+      
+      const sections = ['hero', 'development', 'ai-ml', 'consulting'];
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 200 && rect.bottom >= 200;
+        }
+        return false;
       });
       
-      // Suggest a matching animation shape based on icon
-      if (iconValue === "code" && !formData.animatedShape) {
-        setFormData(prev => ({
-          ...prev,
-          animatedShape: "animated-code-shape"
-        }));
-      } else if (iconValue === "brain" && !formData.animatedShape) {
-        setFormData(prev => ({
-          ...prev,
-          animatedShape: "animated-brain-shape"
-        }));
-      } else if (iconValue === "database" && !formData.animatedShape) {
-        setFormData(prev => ({
-          ...prev,
-          animatedShape: "animated-data-shape"
-        }));
-      } else if (iconValue === "users" && !formData.animatedShape) {
-        setFormData(prev => ({
-          ...prev,
-          animatedShape: "animated-consulting-shape"
-        }));
+      if (currentSection) {
+        setActiveSection(currentSection);
       }
-    }
-  };
-  
-  // Handle animation shape selection
-  const handleAnimationSelect = (animationValue) => {
-    setFormData({
-      ...formData,
-      animatedShape: animationValue
-    });
-  };
-  
-  // Add a technology to the service
-  const handleAddTechnology = () => {
-    if (newTechnology.trim() && !formData.technologies.includes(newTechnology.trim())) {
-      setFormData({
-        ...formData,
-        technologies: [...formData.technologies, newTechnology.trim()]
-      });
-      setNewTechnology('');
-    }
-  };
-  
-  // Remove a technology from the service
-  const handleRemoveTechnology = (tech) => {
-    setFormData({
-      ...formData,
-      technologies: formData.technologies.filter(t => t !== tech)
-    });
-  };
-  
-  // Set up form for editing a service
-  const handleEditService = (service) => {
-    // Find iconType based on service.icon
-    const iconType = Object.keys(iconOptions).find(key => 
-      iconOptions[key].icon.type === service.icon.type
-    ) || 'code';
-    
-    setFormData({
-      ...service,
-      iconType
-    });
-    setEditingService(service.id);
-    setShowAddServiceForm(true);
-  };
-  
-  // Handle form submission
-  const handleSubmitService = () => {
-    if (formData.title.trim() && formData.description.trim()) {
-      if (editingService) {
-        // Update existing service
-        setServices(services.map(service => 
-          service.id === editingService ? { ...formData, id: service.id } : service
-        ));
-      } else {
-        // Add new service
-        const newService = {
-          ...formData,
-          id: Date.now()
-        };
-        setServices([...services, newService]);
-      }
-      handleCloseForm();
-    }
-  };
-  
-  // Handle service deletion
-  const handleDeleteService = (serviceId) => {
-    if (window.confirm('Are you sure you want to delete this service?')) {
-      setServices(services.filter(service => service.id !== serviceId));
-    }
-  };
-  
-  // Reset and close form
-  const handleCloseForm = () => {
-    setFormData(emptyService);
-    setEditingService(null);
-    setShowAddServiceForm(false);
-    setNewTechnology('');
-  };
-  
-  // Function to get icon based on service type
-  const getServiceIcon = (service) => {
-    return service.icon || <Code size={32} className="text-emerald-300" />;
-  };
-  
-  // Function to format price with currency
-  const formatPrice = (price, currency, timeframe) => {
-    const currencyInfo = currencyOptions.find(option => option.value === currency) || currencyOptions[0];
-    const symbol = currencyInfo.symbol;
-    
-    // For Technical Consulting which is per hour
-    if (price && timeframe === "Ongoing") {
-      return `${symbol}${price}/hour`;
-    }
-    
-    // For regular services
-    return price ? `From ${symbol}${price}` : '';
-  };
-  
-  // Function to render the data visualization bars
-  const renderDataBars = () => {
-    const bars = [];
-    for (let i = 0; i < 8; i++) {
-      const height = 30 + Math.random() * 70; // Random height between 30% and 100%
-      bars.push(
-        <div 
-          key={i} 
-          className="bar" 
-          style={{ 
-            height: `${height}%`, 
-            '--delay': i 
-          }}
-        />
-      );
-    }
-    return bars;
-  };
-  
-  // CSS for custom animated shapes
-  const serviceStyles = `
-    /* Animated Shapes for Services */
-    @keyframes gradient-spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    @keyframes pulse-glow {
-      0%, 100% { opacity: 0.8; filter: brightness(1); }
-      50% { opacity: 1; filter: brightness(1.3); }
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-    
-    @keyframes data-wave {
-      0% { transform: scaleY(0.5); }
-      50% { transform: scaleY(1.2); }
-      100% { transform: scaleY(0.5); }
-    }
-    
-    .floating-element {
-      animation: float 3s ease-in-out infinite;
-    }
-    
-    .animated-code-shape {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(45deg, #00ff7f, #4F4A4A);
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: gradient-spin 8s linear infinite;
-      overflow: hidden;
-    }
-    
-    .animated-code-shape::before {
-      content: '';
-      position: absolute;
-      width: 70%;
-      height: 70%;
-      background-color: rgba(0, 0, 0, 0.4);
-      border-radius: 8px;
-      z-index: 1;
-    }
-    
-    .animated-code-shape::after {
-      content: '<>';
-      position: absolute;
-      color: #00ff7f;
-      font-size: 28px;
-      font-weight: bold;
-      z-index: 2;
-      animation: pulse-glow 2s infinite;
-    }
-    
-    .animated-brain-shape {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, #00ff7f, #4F4A4A);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: pulse-glow 4s ease-in-out infinite;
-      box-shadow: 0 0 20px rgba(0, 255, 127, 0.4);
-    }
-    
-    .animated-brain-shape::before {
-      content: '';
-      position: absolute;
-      width: 80%;
-      height: 80%;
-      border: 3px solid rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      animation: gradient-spin 10s linear infinite;
-    }
-    
-    .animated-data-shape {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      background: transparent;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-    }
-    
-    .animated-data-shape::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background-color: #00ff7f;
-      bottom: 0;
-    }
-    
-    .animated-data-shape::after {
-      content: '';
-      position: absolute;
-      width: 2px;
-      height: 100%;
-      background-color: #00ff7f;
-      left: 0;
-    }
-    
-    .animated-data-shape .bar {
-      width: 8px;
-      height: 100%;
-      background-color: #00ff7f;
-      animation: data-wave 2s ease-in-out infinite;
-      animation-delay: calc(var(--delay) * 0.2s);
-      opacity: 0.7;
-    }
-    
-    .animated-consulting-shape {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .animated-consulting-shape::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border: 3px solid #00ff7f;
-      border-radius: 10px;
-      animation: gradient-spin 8s linear infinite;
-    }
-    
-    .animated-consulting-shape::after {
-      content: '';
-      position: absolute;
-      width: 70%;
-      height: 70%;
-      border: 3px dashed rgba(0, 255, 127, 0.7);
-      border-radius: 10px;
-      animation: gradient-spin 8s linear infinite reverse;
-    }
-  `;
-  
-  // Add the styles to the document
-  useEffect(() => {
-    const styleElement = document.createElement('style');
-    styleElement.innerHTML = serviceStyles;
-    document.head.appendChild(styleElement);
-    
-    return () => {
-      document.head.removeChild(styleElement);
     };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
+  // Scroll to section con easing personalizzato
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      const startPosition = window.pageYOffset;
+      const distance = offsetPosition - startPosition;
+      const duration = 1200;
+      let startTime = null;
+
+      const easeInOutCubic = (t) => {
+        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+      };
+
+      const animation = (currentTime) => {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        const ease = easeInOutCubic(progress);
+        
+        window.scrollTo(0, startPosition + distance * ease);
+        
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation);
+        }
+      };
+      
+      requestAnimationFrame(animation);
+    }
+  };
+
+  // Funzioni per editing
+  const updateService = (categoryId, serviceId, updates) => {
+    setServiceCategories(categories => 
+      categories.map(category => 
+        category.id === categoryId 
+          ? {
+              ...category,
+              services: category.services.map(service =>
+                service.id === serviceId ? { ...service, ...updates } : service
+              )
+            }
+          : category
+      )
+    );
+  };
+
+  const addNewService = (categoryId) => {
+    const newService = {
+      id: `service-${Date.now()}`,
+      title: 'New Service',
+      description: 'Service description',
+      price: '$0',
+      timeframe: '1 week',
+      technologies: ['Technology'],
+      featured: false,
+      color: 'blue',
+      icon: '⚡'
+    };
+
+    setServiceCategories(categories =>
+      categories.map(category =>
+        category.id === categoryId
+          ? { ...category, services: [...category.services, newService] }
+          : category
+      )
+    );
+  };
+
+  const deleteService = (categoryId, serviceId) => {
+    setServiceCategories(categories =>
+      categories.map(category =>
+        category.id === categoryId
+          ? {
+              ...category,
+              services: category.services.filter(service => service.id !== serviceId)
+            }
+          : category
+      )
+    );
+  };
+
+  // Color mapping
+  const getColorClasses = (color) => {
+    const colorMap = {
+      blue: { bg: "bg-blue-900/30", text: "text-blue-300", border: "border-blue-500/30", accent: "bg-blue-600" },
+      green: { bg: "bg-green-900/30", text: "text-green-300", border: "border-green-500/30", accent: "bg-green-600" },
+      purple: { bg: "bg-purple-900/30", text: "text-purple-300", border: "border-purple-500/30", accent: "bg-purple-600" },
+      cyan: { bg: "bg-cyan-900/30", text: "text-cyan-300", border: "border-cyan-500/30", accent: "bg-cyan-600" },
+      orange: { bg: "bg-orange-900/30", text: "text-orange-300", border: "border-orange-500/30", accent: "bg-orange-600" }
+    };
+    return colorMap[color] || colorMap.blue;
+  };
+
+  // Filtra servizi in base alla ricerca
+  const filteredServices = serviceCategories.map(category => ({
+    ...category,
+    services: category.services.filter(service =>
+      service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      service.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      service.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()))
+    )
+  })).filter(category => category.services.length > 0);
+
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'dark bg-gray-900 text-white' : 'light bg-white text-gray-900'}`}>
-      {/* Matrix effect background */}
-      <div className="matrix"></div>
-      
-      {/* Header with navigation */}
-      <header className="w-full navbar-gradient py-4 px-6 flex justify-between items-center">
-        <a 
-          href="/" 
-          className="flex items-center text-emerald-300 hover:text-emerald-400 transition-colors"
-        >
-          <ArrowLeft className="mr-2" />
-          <span>Back to Home</span>
-        </a>
-        <h1 className="text-2xl md:text-3xl font-bold text-emerald-300">ServiceHub</h1>
-        <div className="w-24">
-          {/* Admin toggle button (visible only for test purposes) */}
-          {isAdmin && (
-            <button
-              onClick={() => setIsAdmin(!isAdmin)}
-              className="text-emerald-300 hover:bg-emerald-900/30 p-2 rounded-lg"
-              title="Toggle Admin Mode"
-            >
-              {isAdmin ? <Check size={20} /> : <Edit size={20} />}
-            </button>
-          )}
-        </div>
-      </header>
-      
-      {/* Main content container */}
-      <main className="container mx-auto px-4 py-8">
-        {/* Section title */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl text-emerald-300 mb-4">Services Offered</h2>
-          <p className="text-lg text-emerald-100 max-w-2xl mx-auto">
-            Explore the professional services I offer, from web development to machine learning solutions.
-          </p>
-        </div>
-        
-        {/* Search and Admin Controls */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-          {/* Search bar */}
-          <div className="relative mb-4 md:mb-0">
-            <input
-              type="text"
-              placeholder="Search services..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 rounded-lg bg-neutral-800/50 text-white border border-neutral-700 focus:outline-none focus:border-emerald-500 w-full md:w-64"
-            />
-            <Search className="absolute left-3 top-2.5 text-emerald-300 w-5 h-5" />
-          </div>
-          
-          {/* Admin controls */}
-          {isAdmin && (
-            <button
-              onClick={() => {
-                setFormData(emptyService);
-                setEditingService(null);
-                setShowAddServiceForm(true);
-              }}
-              className="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 rounded-lg transition-colors"
-            >
-              <Plus size={18} />
-              <span>Add Service</span>
-            </button>
-          )}
-        </div>
-        
-        {/* Services grid */}
-        {currentServices.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {currentServices.map((service) => (
-              <div 
-                key={service.id} 
-                className="service-card bg-neutral-800/30 rounded-lg overflow-hidden hover:transform hover:scale-105 transition-transform flex flex-col md:flex-row card-trigger"
-              >
-                <div className="p-6 flex-1">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex items-center">
-                      {getServiceIcon(service)}
-                      <h3 className="text-emerald-300 text-xl ml-3">{service.title}</h3>
-                    </div>
-                    
-                    {/* Admin actions */}
-                    {isAdmin && (
-                      <div className="flex space-x-2">
-                        <button
-                          onClick={() => handleEditService(service)}
-                          className="p-1.5 bg-blue-500/20 rounded-md hover:bg-blue-500/30 transition-colors"
-                          title="Edit Service"
-                        >
-                          <Edit size={16} className="text-blue-400" />
-                        </button>
-                        <button
-                          onClick={() => handleDeleteService(service.id)}
-                          className="p-1.5 bg-red-500/20 rounded-md hover:bg-red-500/30 transition-colors"
-                          title="Delete Service"
-                        >
-                          <Trash size={16} className="text-red-400" />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                  
-                  <p className="text-white text-sm mb-4">
-                    {service.description}
-                  </p>
-                  
-                  <div className="flex justify-between text-sm text-emerald-100 mb-4">
-                    <div className="flex items-center">
-                      <Clock size={14} className="mr-1" />
-                      <span>{service.timeframe}</span>
-                    </div>
-                    <div>
-                      <span className="font-semibold">{formatPrice(service.price, service.currency, service.timeframe)}</span>
-                    </div>
-                  </div>
-                  
-                  {/* Technologies used */}
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {service.technologies.slice(0, 5).map((tech, index) => (
-                      <span 
-                        key={index} 
-                        className="bg-emerald-900/50 text-emerald-300 text-xs px-2 py-1 rounded"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {service.technologies.length > 5 && (
-                      <span className="bg-emerald-900/50 text-emerald-300 text-xs px-2 py-1 rounded">
-                        +{service.technologies.length - 5} more
-                      </span>
-                    )}
-                  </div>
-                  
-                  {/* View more details button */}
-                  <button className="w-full mt-4 py-2 text-center border border-emerald-500 text-emerald-300 rounded-md hover:bg-emerald-900/30 transition-colors text-sm">
-                    View Service Details
-                  </button>
-                </div>
-                
-                <div className="service-animation-container md:w-1/3 flex items-center justify-center p-4 md:p-6 floating-element">
-                  {service.animatedShape === 'animated-data-shape' ? (
-                    <div className={service.animatedShape}>
-                      {renderDataBars()}
-                    </div>
-                  ) : (
-                    <div className={service.animatedShape}></div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="bg-neutral-800/30 rounded-lg p-8 text-center">
-            <p className="text-emerald-100">No services match your search criteria.</p>
-          </div>
-        )}
-        
-        {/* Pagination */}
-        {filteredServices.length > servicesPerPage && (
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={prevPage}
-              disabled={currentPage === 1}
-              className={`p-2 rounded-l-md ${
-                currentPage === 1 
-                  ? 'bg-neutral-700 text-neutral-500 cursor-not-allowed' 
-                  : 'bg-emerald-900/50 text-emerald-300 hover:bg-emerald-900/70'
-              }`}
-            >
-              <ChevronLeft size={20} />
-            </button>
-            
-            {Array.from({ length: Math.ceil(filteredServices.length / servicesPerPage) }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => paginate(index + 1)}
-                className={`px-3 py-1 ${
-                  currentPage === index + 1
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-emerald-900/50 text-emerald-300 hover:bg-emerald-900/70'
-                }`}
-              >
-                {index + 1}
-              </button>
-            ))}
-            
-            <button
-              onClick={nextPage}
-              disabled={currentPage === Math.ceil(filteredServices.length / servicesPerPage)}
-              className={`p-2 rounded-r-md ${
-                currentPage === Math.ceil(filteredServices.length / servicesPerPage)
-                  ? 'bg-neutral-700 text-neutral-500 cursor-not-allowed'
-                  : 'bg-emerald-900/50 text-emerald-300 hover:bg-emerald-900/70'
-              }`}
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
-        )}
-      </main>
-      
-      {/* Add/Edit Service Modal */}
-      {showAddServiceForm && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 overflow-y-auto">
-          <div className="bg-neutral-800 rounded-lg shadow-lg max-w-2xl w-full p-6">
+    <div className="min-h-screen bg-gray-900 text-white">
+      {/* Admin Panel Overlay */}
+      {showAdminPanel && isAdmin && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-800 rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl text-emerald-300">
-                {editingService ? 'Edit Service' : 'Add New Service'}
-              </h3>
-              <button 
-                onClick={handleCloseForm}
-                className="text-gray-400 hover:text-white"
+              <h2 className="text-2xl font-bold text-green-400">Admin Panel</h2>
+              <button
+                onClick={() => setShowAdminPanel(false)}
+                className="text-gray-400 hover:text-white transition-colors"
               >
-                <X size={20} />
+                <X size={24} />
               </button>
             </div>
-            
-            <form onSubmit={(e) => { e.preventDefault(); handleSubmitService(); }}>
-              {/* Title */}
-              <div className="mb-4">
-                <label className="block text-emerald-300 mb-2">Service Title</label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-white focus:border-emerald-300 focus:outline-none"
-                  placeholder="Enter a detailed description"
-                  rows="5"
-                />
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                {/* Price */}
-                <div>
-                  <label className="block text-emerald-300 mb-2">Price</label>
-                  <div className="flex">
-                    <div className="w-2/3 mr-2">
-                      <input
-                        type="number"
-                        name="price"
-                        value={formData.price}
-                        onChange={handleInputChange}
-                        min="0"
-                        step="1"
-                        className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-white focus:border-emerald-300 focus:outline-none"
-                        placeholder="e.g. 2000"
-                      />
-                    </div>
-                    <div className="w-1/3">
-                      <select
-                        name="currency"
-                        value={formData.currency}
-                        onChange={handleInputChange}
-                        className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-white focus:border-emerald-300 focus:outline-none"
-                      >
-                        {currencyOptions.map(option => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+
+            {/* Content Management */}
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-4">Hero Section</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Title</label>
+                    <input
+                      type="text"
+                      value={editableContent.heroTitle}
+                      onChange={(e) => setEditableContent(prev => ({ ...prev, heroTitle: e.target.value }))}
+                      className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-400 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Subtitle</label>
+                    <textarea
+                      value={editableContent.heroSubtitle}
+                      onChange={(e) => setEditableContent(prev => ({ ...prev, heroSubtitle: e.target.value }))}
+                      className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-400 focus:outline-none"
+                      rows={3}
+                    />
                   </div>
                 </div>
-                
-                {/* Timeframe */}
-                <div>
-                  <label className="block text-emerald-300 mb-2">Timeframe</label>
-                  <input
-                    type="text"
-                    name="timeframe"
-                    value={formData.timeframe}
-                    onChange={handleInputChange}
-                    className="w-full bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-white focus:border-emerald-300 focus:outline-none"
-                    placeholder="e.g. 2-8 weeks"
-                  />
-                </div>
               </div>
-              
-              {/* Featured Service */}
-              <div className="mb-4 flex items-center">
-                <input
-                  type="checkbox"
-                  id="featured"
-                  name="featured"
-                  checked={formData.featured}
-                  onChange={handleInputChange}
-                  className="w-4 h-4 text-emerald-600 bg-neutral-700 border-neutral-600 rounded focus:ring-emerald-500"
-                />
-                <label htmlFor="featured" className="ml-2 text-emerald-300">
-                  Featured Service (appears first)
-                </label>
-              </div>
-              
-              {/* Icon Selection */}
-              <div className="mb-4">
-                <label className="block text-emerald-300 mb-2">Service Icon</label>
-                <div className="flex flex-wrap gap-3">
-                  {iconOptions.map((option) => (
-                    <button
-                      key={option.value}
-                      type="button"
-                      onClick={() => handleIconSelect(option.value)}
-                      className={`p-3 rounded-lg flex flex-col items-center justify-center ${
-                        formData.iconType === option.value
-                          ? 'bg-emerald-900/50 border-2 border-emerald-500'
-                          : 'bg-neutral-700 border border-neutral-600 hover:bg-neutral-600'
-                      }`}
-                    >
-                      {option.icon}
-                      <span className="text-xs mt-1 text-emerald-100">{option.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Animation Shape Selection */}
-              <div className="mb-4">
-                <label className="block text-emerald-300 mb-2">Animation Style</label>
-                <div className="flex flex-wrap gap-3">
-                  {animationOptions.map((option) => (
-                    <button
-                      key={option.value}
-                      type="button"
-                      onClick={() => handleAnimationSelect(option.value)}
-                      className={`p-3 rounded-lg flex flex-col items-center justify-center ${
-                        formData.animatedShape === option.value
-                          ? 'bg-emerald-900/50 border-2 border-emerald-500'
-                          : 'bg-neutral-700 border border-neutral-600 hover:bg-neutral-600'
-                      }`}
-                    >
-                      <span className="text-2xl mb-1">{option.preview}</span>
-                      <span className="text-xs text-emerald-100">{option.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Technologies */}
-              <div className="mb-6">
-                <label className="block text-emerald-300 mb-2">Technologies Used</label>
-                <div className="flex items-center gap-2 mb-2">
-                  <input
-                    type="text"
-                    value={newTechnology}
-                    onChange={(e) => setNewTechnology(e.target.value)}
-                    className="flex-grow bg-neutral-700 border border-neutral-600 rounded-lg p-3 text-white focus:border-emerald-300 focus:outline-none"
-                    placeholder="Add a technology"
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        handleAddTechnology();
-                      }
-                    }}
-                  />
+
+              {/* Price Visibility Control */}
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-4">Display Settings</h3>
+                <div className="flex items-center justify-between p-4 bg-gray-700 rounded-lg">
+                  <div>
+                    <span className="text-white font-medium">Show Prices</span>
+                    <p className="text-gray-400 text-sm">Toggle price visibility for all services</p>
+                  </div>
                   <button
-                    type="button"
-                    onClick={handleAddTechnology}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white p-3 rounded-lg"
+                    onClick={() => setShowPrices(!showPrices)}
+                    className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+                      showPrices ? 'bg-green-600 text-white' : 'bg-gray-600 text-gray-300'
+                    }`}
                   >
-                    <Plus size={20} />
+                    {showPrices ? <Eye size={16} /> : <EyeOff size={16} />}
+                    <span>{showPrices ? 'Hide' : 'Show'}</span>
                   </button>
                 </div>
-                
-                {/* Display added technologies */}
-                <div className="flex flex-wrap gap-2">
-                  {formData.technologies.map((tech, index) => (
-                    <div 
-                      key={index} 
-                      className="bg-emerald-900/50 text-emerald-300 text-sm px-2 py-1 rounded flex items-center gap-2"
-                    >
-                      {tech}
-                      <button 
-                        type="button"
-                        onClick={() => handleRemoveTechnology(tech)}
-                        className="text-emerald-300 hover:text-white"
+              </div>
+
+              {/* Services Management */}
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-4">Services Management</h3>
+                {serviceCategories.map((category) => (
+                  <div key={category.id} className="mb-4 p-4 bg-gray-700 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-white">{category.title}</span>
+                      <button
+                        onClick={() => addNewService(category.id)}
+                        className="flex items-center space-x-1 px-3 py-1 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 transition-colors"
                       >
-                        <X size={14} />
+                        <Plus size={14} />
+                        <span>Add Service</span>
                       </button>
                     </div>
-                  ))}
-                </div>
+                    <p className="text-gray-400 text-sm mb-3">{category.services.length} services</p>
+                    
+                    <div className="space-y-2">
+                      {category.services.map((service) => (
+                        <div key={service.id} className="flex items-center justify-between p-2 bg-gray-600 rounded">
+                          <span className="text-white text-sm">{service.title}</span>
+                          <div className="flex space-x-2">
+                            <button
+                              onClick={() => setEditingServiceId(editingServiceId === service.id ? null : service.id)}
+                              className="text-blue-400 hover:text-blue-300"
+                            >
+                              <Edit3 size={14} />
+                            </button>
+                            <button
+                              onClick={() => deleteService(category.id, service.id)}
+                              className="text-red-400 hover:text-red-300"
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-              
-              {/* Submit Button */}
-              <div className="flex justify-end">
+
+              {/* Save Changes */}
+              <div className="flex space-x-4">
+                <button className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium transition-colors">
+                  Save All Changes
+                </button>
                 <button
-                  type="button"
-                  onClick={handleCloseForm}
-                  className="mr-2 px-4 py-2 border border-neutral-600 rounded-lg text-white hover:bg-neutral-700 transition-colors"
+                  onClick={() => setShowAdminPanel(false)}
+                  className="px-6 bg-gray-600 hover:bg-gray-700 text-white py-3 rounded-lg font-medium transition-colors"
                 >
                   Cancel
                 </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors"
-                >
-                  {editingService ? 'Update Service' : 'Add Service'}
-                </button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       )}
-      
-      {/* Footer */}
-      <footer className="w-full mx-auto mt-12 footer-gradient">
-        <div className="w-full h-full flex flex-col justify-center items-center text-white px-4 py-8 md:py-0 md:h-[150px]">
-          <div className="text-center">
-            <p className="text-base md:text-lg mb-2">Need a custom service? Let's discuss your project</p>
-            <p className="text-xs md:text-sm">© 2025 Davide Taddia - All rights reserved</p>
+
+      {/* Floating Navbar */}
+      <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-gray-900/95 backdrop-blur-lg border-b border-gray-700/50 py-3' 
+          : 'bg-transparent py-6'
+      }`}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <a href="/" className="flex items-center space-x-3 text-green-400 hover:text-green-300 transition-colors duration-200"> {/* ✅ LINK CORRETTO */}
+                <ArrowLeft size={20} strokeWidth={1.5} />
+                <span className="text-sm font-medium">Home</span>
+              </a>
+              
+              <div className="hidden md:flex items-center space-x-3">
+                <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-gradient-to-br from-green-400 to-blue-500">
+                  <span className="text-white text-sm font-semibold">S</span>
+                </div>
+                <div>
+                  <h1 className="text-lg font-semibold text-white">ServiceHub</h1>
+                  <p className="text-xs text-gray-400">Professional Services</p>
+                </div>
+              </div>
+            </div>
+
+            {scrolled && (
+              <div className="hidden lg:flex items-center space-x-8">
+                {serviceCategories.map((category) => (
+                  <button
+                    key={category.id}
+                    onClick={() => scrollToSection(category.id)}
+                    className={`text-sm font-medium transition-colors duration-200 ${
+                      activeSection === category.id 
+                        ? 'text-green-400' 
+                        : 'text-gray-300 hover:text-green-400'
+                    }`}
+                  >
+                    <span className="mr-2">{category.icon}</span>
+                    {category.title}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div className="flex items-center space-x-3">
+              {isAdmin && (
+                <button
+                  onClick={() => setShowPrices(!showPrices)}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-200 ${
+                    showPrices 
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' 
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  }`}
+                >
+                  {showPrices ? <Eye size={16} /> : <EyeOff size={16} />}
+                  <span className="text-sm font-medium hidden sm:inline">Prices</span>
+                </button>
+              )}
+
+              <button
+                onClick={() => setIsAdmin(!isAdmin)}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-200 ${
+                  isAdmin 
+                    ? 'bg-green-600 text-white shadow-lg shadow-green-500/25' 
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                }`}
+              >
+                <Settings size={16} strokeWidth={1.5} />
+                <span className="text-sm font-medium hidden sm:inline">Admin</span>
+              </button>
+            </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6 mt-4">
-            <a href="/" className="hover:text-emerald-200 transition-colors">Home</a>
-            <a href="/masteryhub" className="hover:text-emerald-200 transition-colors">MasteryHub</a>
-            <a href="#top" className="hover:text-emerald-200 transition-colors">Back to Top</a>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute opacity-10 animate-pulse"
+              style={{
+                width: Math.random() * 40 + 20 + 'px',
+                height: Math.random() * 40 + 20 + 'px',
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+                background: [
+                  '#60a5fa', '#10b981', '#c084fc', '#06b6d4', '#f59e0b'
+                ][Math.floor(Math.random() * 5)],
+                borderRadius: Math.random() > 0.5 ? '50%' : '8px',
+                animationDelay: Math.random() * 3 + 's',
+                animationDuration: (Math.random() * 4 + 3) + 's'
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <div className="mb-8">
+            {isEditing ? (
+              <div className="space-y-4 mb-6">
+                <input
+                  type="text"
+                  value={editableContent.heroTitle}
+                  onChange={(e) => setEditableContent(prev => ({ ...prev, heroTitle: e.target.value }))}
+                  className="w-full text-5xl md:text-7xl font-bold bg-transparent border-2 border-green-400 rounded-lg px-4 py-2 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent"
+                />
+                <textarea
+                  value={editableContent.heroSubtitle}
+                  onChange={(e) => setEditableContent(prev => ({ ...prev, heroSubtitle: e.target.value }))}
+                  className="w-full text-xl md:text-2xl bg-transparent border-2 border-green-400 rounded-lg px-4 py-2 text-center text-gray-300"
+                  rows={3}
+                />
+              </div>
+            ) : (
+              <>
+                <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                  {editableContent.heroTitle}
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+                  {editableContent.heroSubtitle}
+                </p>
+              </>
+            )}
+
+            <div className="max-w-md mx-auto mb-8">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search services..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-800/50 backdrop-blur-sm text-white border border-gray-600 focus:outline-none focus:border-green-400 transition-colors"
+                />
+                <Search className="absolute left-4 top-4 text-green-400 w-5 h-5" />
+              </div>
+            </div>
+          </div>
+
+          {isAdmin && (
+            <div className="flex justify-center gap-4 mb-8">
+              <button
+                onClick={() => setIsEditing(!isEditing)}
+                className="flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-500/25"
+              >
+                <Edit3 size={16} strokeWidth={1.5} />
+                <span>{isEditing ? 'Save' : 'Edit Hero'}</span>
+              </button>
+              <button
+                onClick={() => setShowAdminPanel(true)}
+                className="flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/25"
+              >
+                <Settings size={16} strokeWidth={1.5} />
+                <span>Admin Panel</span>
+              </button>
+            </div>
+          )}
+
+          <div className="flex flex-col items-center">
+            <p className="text-gray-400 text-sm mb-4">Explore our services</p>
+            <button 
+              onClick={() => scrollToSection('development')}
+              className="animate-bounce"
+            >
+              <ChevronDown size={24} className="text-green-400" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Service Categories Sections */}
+      {filteredServices.map((category, categoryIndex) => (
+        <section 
+          key={category.id} 
+          id={category.id} 
+          className="min-h-screen py-20 relative"
+          style={{
+            background: `linear-gradient(135deg, 
+              rgba(${categoryIndex === 0 ? '59, 130, 246' : categoryIndex === 1 ? '139, 92, 246' : '16, 185, 129'}, 0.05) 0%, 
+              rgba(0, 0, 0, 0.8) 50%, 
+              rgba(${categoryIndex === 0 ? '16, 185, 129' : categoryIndex === 1 ? '59, 130, 246' : '139, 92, 246'}, 0.05) 100%)`
+          }}
+        >
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <div className="flex items-center justify-center mb-6">
+                <div className="text-6xl mr-4">{category.icon}</div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
+                  {category.title}
+                </h2>
+                {isAdmin && (
+                  <button
+                    onClick={() => addNewService(category.id)}
+                    className="ml-4 p-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                  >
+                    <Plus size={20} />
+                  </button>
+                )}
+              </div>
+              <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                {category.description}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {category.services.map((service) => {
+                const colors = getColorClasses(service.color);
+                const isEditingThis = editingServiceId === service.id;
+                
+                return (
+                  <div
+                    key={service.id}
+                    className={`${colors.bg} rounded-2xl p-8 border ${colors.border} hover:scale-105 transition-all duration-300 backdrop-blur-sm hover:shadow-2xl relative overflow-hidden`}
+                  >
+                    {service.featured && (
+                      <div className="absolute top-4 right-4 bg-purple-600 text-white text-xs px-3 py-1 rounded-full font-medium">
+                        Featured
+                      </div>
+                    )}
+
+                    {isAdmin && (
+                      <div className="absolute top-4 left-4 flex space-x-2">
+                        <button
+                          onClick={() => setEditingServiceId(isEditingThis ? null : service.id)}
+                          className="p-1 bg-blue-600 hover:bg-blue-700 text-white rounded"
+                        >
+                          <Edit3 size={14} />
+                        </button>
+                        <button
+                          onClick={() => deleteService(category.id, service.id)}
+                          className="p-1 bg-red-600 hover:bg-red-700 text-white rounded"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    )}
+
+                    <div className="text-4xl mb-4">{service.icon}</div>
+
+                    <div className="mb-6">
+                      {isEditingThis ? (
+                        <div className="space-y-3">
+                          <input
+                            type="text"
+                            value={service.title}
+                            onChange={(e) => updateService(category.id, service.id, { title: e.target.value })}
+                            className="w-full text-2xl font-bold bg-gray-700 text-white rounded px-3 py-2"
+                          />
+                          <textarea
+                            value={service.description}
+                            onChange={(e) => updateService(category.id, service.id, { description: e.target.value })}
+                            className="w-full bg-gray-700 text-white rounded px-3 py-2"
+                            rows={3}
+                          />
+                          <div className="flex space-x-2">
+                            <input
+                              type="text"
+                              value={service.price}
+                              onChange={(e) => updateService(category.id, service.id, { price: e.target.value })}
+                              className="flex-1 bg-gray-700 text-white rounded px-3 py-2"
+                              placeholder="Price"
+                            />
+                            <input
+                              type="text"
+                              value={service.timeframe}
+                              onChange={(e) => updateService(category.id, service.id, { timeframe: e.target.value })}
+                              className="flex-1 bg-gray-700 text-white rounded px-3 py-2"
+                              placeholder="Timeframe"
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <h3 className={`text-2xl font-bold ${colors.text} mb-3`}>{service.title}</h3>
+                          <p className="text-gray-300 leading-relaxed mb-4">
+                            {service.description}
+                          </p>
+                          
+                          <div className="flex justify-between items-center mb-4">
+                            <div className="flex items-center text-gray-400">
+                              <Clock size={16} className="mr-2" />
+                              <span className="text-sm">{service.timeframe}</span>
+                            </div>
+                            <div className={`text-2xl font-bold ${colors.text}`}>
+                              {showPrices || isAdmin ? service.price : '••••••'}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wide">Technologies Used</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {service.technologies.map((tech) => (
+                          <span 
+                            key={tech} 
+                            className={`${colors.bg} ${colors.text} text-xs px-3 py-1 rounded-full border ${colors.border} font-medium`}
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <button className={`w-full py-3 rounded-xl font-medium transition-all duration-200 ${colors.accent} hover:opacity-90 text-white shadow-lg`}>
+                      Get Started
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* Footer */}
+      <footer className="relative bg-gradient-to-t from-black to-gray-900 text-white pt-16 pb-8">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-600 to-green-400"></div>
+        
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="flex flex-col items-center md:items-start">
+              <div className="mb-4">
+                <div className="w-16 h-16 flex items-center justify-center text-green-400 font-bold text-xl bg-transparent rounded-full border-2 border-green-400">
+                  <span className="font-mono">DT</span>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-green-400">Davide Taddia</h3>
+              <p className="text-gray-300 text-sm text-center md:text-left">
+                Professional development services from web applications to AI solutions.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-green-400">Services</h3>
+              <ul className="space-y-2">
+                <li><a href="#development" className="text-gray-300 hover:text-green-400 transition-colors">💻 Development</a></li>
+                <li><a href="#ai-ml" className="text-gray-300 hover:text-green-400 transition-colors">🤖 AI & ML</a></li>
+                <li><a href="#consulting" className="text-gray-300 hover:text-green-400 transition-colors">👥 Consulting</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-green-400">Connect</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#" className="text-gray-300 hover:text-green-400 transition-colors flex items-center gap-2">
+                    <Github size={16} />GitHub
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-300 hover:text-green-400 transition-colors flex items-center gap-2">
+                    <Linkedin size={16} />LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-300 hover:text-green-400 transition-colors flex items-center gap-2">
+                    <Mail size={16} />Email
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-green-400">Get Started</h3>
+              <p className="text-gray-300 text-sm mb-4">Ready to discuss your project?</p>
+              <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors w-full font-medium">
+                Contact Me
+              </button>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+            {isEditing ? (
+              <input
+                type="text"
+                value={editableContent.footerText}
+                onChange={(e) => setEditableContent(prev => ({ ...prev, footerText: e.target.value }))}
+                className="w-full max-w-md mx-auto bg-transparent border-2 border-green-400 rounded-lg px-4 py-2 text-center text-white mb-2"
+              />
+            ) : (
+              <p className="text-base md:text-lg mb-2">{editableContent.footerText}</p>
+            )}
+            <p className="text-xs md:text-sm text-gray-400">© 2025 Davide Taddia - All rights reserved</p>
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 mt-4">
+              <a href="#" className="hover:text-green-400 transition-colors">Home</a>
+              <a href="#hero" className="hover:text-green-400 transition-colors">Back to Top</a>
+              <a href="#" className="hover:text-green-400 transition-colors">Terms of Service</a>
+            </div>
           </div>
         </div>
       </footer>
@@ -917,4 +761,4 @@ const ServiceHubPage = () => {
   );
 };
 
-export default ServiceHubPage;
+export default ServiceHubPage; 

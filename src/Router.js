@@ -10,7 +10,8 @@ import React, { useState, useEffect } from 'react';
 import App from './App';
 import MasteryHubPage from './pages/MasteryHubPage';
 import ServiceHubPage from './pages/ServiceHubPage';
-import WikiDEDIAPage from './pages/WikiDEDIAPage';  // Import WikiDEDIA page
+import WikiTADD from './pages/WikiTADDpage'; 
+import AdminRoutes from './AdminRoutes';
 
 // A simple custom router for the site
 const Router = () => {
@@ -66,14 +67,18 @@ const Router = () => {
   
   // Map paths to their corresponding components
   const renderRoute = () => {
-    // Handle WikiDEDIA routes
-    if (currentPath.startsWith('/wikidedia')) {
-      return <WikiDEDIAPage path={currentPath} />;
+    // Admin routes
+    if (currentPath.startsWith('/admin')) {
+      return <AdminRoutes />;
     }
     
+    // Handle specific routes
     switch (currentPath) {
       case '/masteryhub':
         return <MasteryHubPage />;
+      
+      case '/wikitadd':
+        return <WikiTADD />;
       
       case '/madebyme':
         // Future MadeByMe page

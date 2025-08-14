@@ -1,29 +1,35 @@
 /*
 @author       : Davide Taddia
-@version      : 0.1
+@version      : 1.0
 @copyrigth    : IdediaDEV (Davide Taddia) - 2025  
 @license      : GLP-3.0 
-@description  : footer component of the homepage
+@description  : Main App component with routing configuration
 @email        : davide.taddia2@studio.unibo.it
 */
+
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import Card from './components/Card';
-import EnhancedFooter from './components/EnhancedFooter'; 
+import Footer from './components/Footer'; 
 import ContactForm from './components/ContactForm';
 import SEO from './components/SEO'; 
+import MasteryHubPage from './pages/MasteryHubPage'; // Import della nuova pagina
 import useCardAnimation from './components/AnimatioHandler';
 import './styles/styles.css';
+import './styles/masteryhub.css'; // Import del nuovo CSS
 import DarkLightModeToggle from './components/DarkLightModeToggle';
-import EnhancedMatrixEffect from './components/EnhancedMatrixEffect';
-import CookieBanner from './components/CookieBanner'; 
+import MatrixEffect from './components/MatrixEffect';
+import CookieBanner from './components/CookieBanner';
+import ServiceHubPage from './pages/ServiceHubPage'; 
+
 
 const App = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true); // Impostato su true per avere il tema scuro di default
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [showContactForm, setShowContactForm] = useState(false);
 
-  // Check of system preferences at startig load for the chioce of the theme
+  // Check of system preferences at starting load for the choice of the theme
   useEffect(() => {
     // Manteniamo sempre il tema scuro per avere lo sfondo #080c13
     setIsDarkMode(true);
@@ -64,75 +70,112 @@ const App = () => {
 
   useCardAnimation();
 
-  // Editing Cards component: 
-  const cards = [
-    {
-      id: 'masteryhub',
-      title: '00 MasteryHub',
-      description: 'My skills span both front-end and back-end development, making me a versatile candidate for your computer engineering team. On the back end, I excel at addressing concurrency challenges and ensuring mutual exclusion—skills that are essential when developing components of operating systems and establishing reliable server-client communications over the TCP/IP protocol. I have a proven track record with server technologies such as Tomcat and Node.js, which enable me to build robust, scalable, and responsive web applications. On the front end, I leverage modern frameworks like React and TailwindCSS to develop complex, user-friendly, and seamless applications. My experience extends to developing solutions that run in both local and remote runtime environments. I am proficient in a variety of programming languages and tools. My core languages include C, C++, C#, Java, and Python for object-oriented programming—enhanced by extensive use of Python libraries such as Manim, PyTorch, Pandas, NumPy, and TensorFlow. In addition, I work effectively with JavaScript and TypeScript, and I utilize Microsoft SQL for managing IBM databases. I also have strong scripting skills with Bash for Linux/Mac systems and Microsoft PowerShell, and I regularly employ advanced programming constructs such as lambda expressions and regular expressions (RegEx).Furthermore, I possess a solid foundation in artificial intelligence, with a particular focus on machine learning. I have developed AI solutions that harness dataset-driven approaches to tackle specialized tasks, demonstrating my capability to integrate AI into practical applications.',
-      animatedShape: 'animated-circle',
-      delay: 0
-    },
-    {
-      id: 'wikidedia',
-      title: '01 WikIDEDIA',
-      description: 'A comprehensive interactive encyclopedia platform where knowledge meets visualization. Create, explore and collaborate on topics spanning from computer science to mathematics, featuring interactive Python and Manim diagrams. Browse through chapters, contribute to articles, and engage with a community of like-minded enthusiasts.',
-      animatedShape: 'animated-triangle',
-      delay: 0.2
-    },
-    {
-      id: 'servicehub',
-      title: '02 ServiceHub',
-      description: 'The services currently offered are still being defined; for now, our hamsters are hard at work.',
-      animatedShape: 'animated-square',
-      delay: 0.4
-    }
-  ];
+  // Home Page Component
+  const HomePage = () => {
+    // Editing Cards component: 
+    const cards = [
+      {
+        id: 'masteryhub',
+        title: '00 MasteryHub',
+        description: 'My skills span both front-end and back-end development, making me a versatile candidate for your computer engineering team. Explore my technical competencies in AI, web development, and system architecture.',
+        animatedShape: 'animated-circle',
+        delay: 0
+      },
+      {
+        id: 'wikidedia',
+        title: '01 WikIDEDIA',
+        description: 'Create, explore and collaborate on topics spanning from computer science to mathematics, featuring interactive Python and Manim diagrams. Browse through chapters, contribute to articles, and engage with a community of like-minded enthusiasts.',
+        animatedShape: 'animated-triangle',
+        delay: 0.2
+      },
+      
+      
+      {
+        id: 'servicehub',
+        title: '02 ServiceHub',
+        description:  'Providing a suite of services to enhance your digital experience, from cloud computing solutions to data analytics and AI-driven insights. Explore how our services can transform your business operations.',
+        animatedShape: 'animated-square',
+        delay: 0.4
+      }
+    ];
+
+    return (
+      <div className="transition-colors duration-300 min-h-screen dark bg-[#080c13] text-white">
+        {/* Componente SEO per i meta tag */}
+        <SEO />
+        
+        {/* Matrix effect background */}
+        <MatrixEffect />
+        
+        {/* Il toggle è ora in un div fixed, senza absolute, per seguire lo scrolling */}
+        <div className="fixed bottom-4 right-4 z-50 theme-toggle-container">
+          <DarkLightModeToggle 
+            isDarkMode={isDarkMode} 
+            toggleDarkMode={toggleDarkMode} 
+          />
+        </div>
+        
+        {/* Layout wrapper per mantenere una struttura coerente */}
+        <div className="flex flex-col min-h-screen">
+          <Navbar onHireMeClick={handleHireMeClick} />
+          
+          {/* Main content wrapper con padding-top per compensare la navbar fissa */}
+          <main className="flex-grow pt-24 md:pt-28">
+            <HeroSection />
+            <div className="container mx-auto px-4">
+              {cards.map((card, index) => (
+                <Card 
+                  key={card.id}
+                  {...card}
+                  className={index === 0 ? "mt-[700px]" : ""}
+                />
+              ))}
+            </div>
+          </main>
+          
+          {/* Footer component */}
+          <Footer />
+        </div>
+
+        {/* Mostra il form di contatto quando showContactForm è true */}
+        {showContactForm && <ContactForm onClose={closeContactForm} />}
+        
+        {/* Banner per i cookie */}
+        <CookieBanner />
+      </div>
+    );
+  };
 
   return (
-    <div className="transition-colors duration-300 min-h-screen dark bg-[#080c13] text-white">
-      {/* Componente SEO per i meta tag */}
-      <SEO />
-      
-      {/* Sostituiamo MatrixEffect con EnhancedMatrixEffect */}
-      <EnhancedMatrixEffect />
-      
-      {/* Il toggle è ora in un div fixed, senza absolute, per seguire lo scrolling */}
-      <div className="fixed bottom-4 right-4 z-50 theme-toggle-container">
-        <DarkLightModeToggle 
-          isDarkMode={isDarkMode} 
-          toggleDarkMode={toggleDarkMode} 
-        />
-      </div>
-      
-      {/* Layout wrapper per mantenere una struttura coerente */}
-      <div className="flex flex-col min-h-screen">
-        <Navbar onHireMeClick={handleHireMeClick} />
+    <Router>
+      <Routes>
+        {/* Route per la home page */}
+        <Route path="/" element={<HomePage />} />
         
-        {/* Main content wrapper con padding-top per compensare la navbar fissa */}
-        <main className="flex-grow pt-24 md:pt-28">
-          <HeroSection />
-          <div className="container mx-auto px-4">
-            {cards.map((card, index) => (
-              <Card 
-                key={card.id}
-                {...card}
-                className={index === 0 ? "mt-[700px]" : ""}
-              />
-            ))}
+        {/* Route per MasteryHub */}
+        <Route path="/masteryhub" element={<MasteryHubPage />} />
+        
+        {/* Route per altre pagine (aggiungi qui le altre route) */}
+        <Route path="/wikidedia" element={<div>WikiDEDIA Page - Coming Soon</div>} />
+        <Route path="/servicehub" element={<ServiceHubPage />} />
+        
+        {/* Route di fallback per 404 */}
+        <Route path="*" element={
+          <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+            <div className="text-center">
+              <h1 className="text-6xl font-bold text-green-400 mb-4">404</h1>
+              <p className="text-xl text-gray-300 mb-8">Page not found</p>
+              <a 
+                href="/" 
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors"
+              >
+                Go Home
+              </a>
+            </div>
           </div>
-        </main>
-        
-        {/* Utilizziamo il nuovo EnhancedFooter al posto del vecchio Footer */}
-        <EnhancedFooter />
-      </div>
-
-      {/* Mostra il form di contatto quando showContactForm è true */}
-      {showContactForm && <ContactForm onClose={closeContactForm} />}
-      
-      {/* Banner per i cookie */}
-      <CookieBanner />
-    </div>
+        } />
+      </Routes>
+    </Router>
   );
 };
 
